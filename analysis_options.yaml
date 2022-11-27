@@ -1,0 +1,164 @@
+analyzer:
+  plugins:
+    - dart_code_metrics
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.graphql.dart"
+    - "**/*.gr.dart"
+    - "**/*.freezed.dart"
+    - "**/*.config.dart"
+    - "**/*.gen.dart"
+    # - "**/test/**/*.dart"
+    # - "**/test/*.dart"
+    - "resources/lib/src/generated/intl/*.dart"
+    - "resources/lib/src/generated/*.dart"
+  strong-mode:
+    implicit-casts: true
+    implicit-dynamic: false
+  errors:
+    unused_import: warning
+    # invalid_annotation_target: ignore
+
+dart_code_metrics:
+  anti-patterns:
+  #    - long-method
+  #    - long-parameter-list
+  metrics:
+    # cyclomatic-complexity: 20
+    maximum-nesting-level: 8
+    #    number-of-parameters: 4
+    # source-lines-of-code: 50
+  rules:
+    - member-ordering-extended:
+        #        alphabetize: true
+        order:
+          - constructors
+          - public-fields
+          - private-fields
+          - getters-setters
+          - public-methods
+          - private-methods
+    - always-remove-listener
+    - no-boolean-literal-compare
+    - newline-before-return
+    # - no-empty-block
+    - no-magic-number:
+      allowed: [-1, 0, 1, 2, 3]
+    - no-equal-then-else
+    # - no-object-declaration
+    - prefer-conditional-expressions
+    # - prefer-extracting-callbacks
+    - prefer-trailing-comma
+    # - avoid-dynamic
+#    - avoid-unused-parameters
+    - double-literal-format
+    - prefer-first
+    - prefer-last
+    - avoid-unnecessary-setstate
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true
+    # - prefer-const-border-radius
+    - avoid-wrapping-in-padding
+    - prefer-correct-identifier-length:
+        max-identifier-length: 70
+        min-identifier-length: 2
+    - prefer-correct-type-name:
+        min-length: 3
+        max-length: 70
+    - avoid-nested-conditional-expressions:
+        acceptable-level: 8
+    # - avoid-returning-widgets:
+    #     ignored-names:
+    #       - testFunction
+    #       - buildPage
+    #       - buildPageLoading
+    #       - buildPageListeners
+    #       - _buildBlocProvider
+        ignored-annotations:
+          - allowedAnnotation
+
+linter:
+  rules:
+    - always_declare_return_types
+    - always_put_control_body_on_new_line
+    - always_put_required_named_parameters_first
+    - always_require_non_null_named_parameters
+    - annotate_overrides
+    #    - avoid_dynamic_calls
+    - avoid_empty_else
+    - avoid_init_to_null
+    - avoid_multiple_declarations_per_line
+    - avoid_null_checks_in_equality_operators
+    - avoid_print
+    #    - avoid_redundant_argument_values
+    - avoid_return_types_on_setters
+    - avoid_shadowing_type_parameters
+    - avoid_types_as_parameter_names
+    - avoid_unnecessary_containers
+    - avoid_unused_constructor_parameters
+    - avoid_void_async
+    - prefer_void_to_null
+    - void_checks
+    - await_only_futures
+    - cancel_subscriptions
+    - curly_braces_in_flow_control_structures
+    - directives_ordering
+    - empty_constructor_bodies
+    - exhaustive_cases
+    - file_names
+    - library_names
+    - library_prefixes
+    - list_remove_unrelated_type
+    - literal_only_boolean_expressions
+    - missing_whitespace_between_adjacent_strings
+    - no_duplicate_case_values
+    - null_closures
+    # - omit_local_variable_types
+    - prefer_adjacent_string_concatenation
+    - prefer_collection_literals
+    - prefer_conditional_assignment
+    - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    - prefer_const_declarations
+    - prefer_contains
+    - prefer_equal_for_default_values
+    - prefer_final_fields
+    - prefer_final_locals
+    - prefer_for_elements_to_map_fromIterable
+    - prefer_generic_function_type_aliases
+    - prefer_if_null_operators
+    - prefer_interpolation_to_compose_strings
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - prefer_iterable_whereType
+    - prefer_single_quotes
+    - prefer_spread_collections
+    - recursive_getters
+    - sized_box_for_whitespace
+    - slash_for_doc_comments
+    - sort_child_properties_last
+    - sort_pub_dependencies
+    - throw_in_finally
+    - type_init_formals
+    - unawaited_futures
+    - unnecessary_const
+    - unnecessary_new
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_parenthesis
+    - unnecessary_string_escapes
+    - unnecessary_string_interpolations
+    - unnecessary_this
+    - unrelated_type_equality_checks
+    - use_full_hex_values_for_flutter_colors
+    - use_function_type_syntax_for_parameters
+    - use_key_in_widget_constructors
+    - use_rethrow_when_possible
+    - valid_regexps
+    - close_sinks
+    - flutter_style_todos
+    - eol_at_end_of_file
+    - camel_case_extensions
+    - camel_case_types
+    - constant_identifier_names
+    - non_constant_identifier_names
+    - prefer_relative_imports

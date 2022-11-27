@@ -1,0 +1,5 @@
+#include "Generated.xcconfig"
+FLUTTER_BUILD_NAME=1.0.4
+FLUTTER_BUILD_NUMBER=2
+PRODUCT_BUNDLE_IDENTIFIER=jp.flutter.app.stg
+APP_DISPLAY_NAME=Staging

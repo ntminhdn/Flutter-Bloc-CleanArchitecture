@@ -1,0 +1,47 @@
+image: cirrusci/flutter:3.3.9
+
+definitions:
+  steps:
+    - step: &running-ci
+        name: Check format, lint & commit message
+        script:
+          - make check_commit_message
+          - flutter doctor -v
+          - echo "Install melos"
+          - dart pub global activate melos 2.8.0
+          - export PATH="$PATH":"$HOME/.pub-cache/bin"
+          - echo "Run build_runner"
+          - make sync
+          # - echo "Run Unit Test"
+          # - make test
+          - echo "Check format"
+          - make format
+          - echo "Run analyze app"
+          - make analyze_app
+          - echo "Run analyze data"
+          - make analyze_data
+          - echo "Run analyze domain"
+          - make analyze_domain
+          - echo "Run analyze shared"
+          - make analyze_shared
+          - echo "Run dart_code_metrics"
+          - make dart_code_metrics
+          # - echo "Run metrics_app"
+          # - make metrics_app
+          # - echo "Run metrics_data"
+          # - make metrics_data
+          # - echo "Run metrics_domain"
+          # - make metrics_domain
+          # - echo "Run metrics_shared"
+          # - make metrics_shared
+
+pipelines:
+  pull-requests:
+    'feature/NFT-*':
+      - step: *running-ci
+    'bugfix/NFT-*':
+      - step: *running-ci
+    'hotfix/NFT-*':
+      - step: *running-ci
+    'release/NFT-*':
+      - step: *running-ci

@@ -1,0 +1,157 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Develop",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "toolArgs": [
+                "--flavor",
+                "develop",
+                "--dart-define",
+                "FLAVOR=develop"
+            ]
+        },
+        {
+            "name": "Debug Qa",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "toolArgs": [
+                "--flavor",
+                "qa",
+                "--dart-define",
+                "FLAVOR=qa"
+            ]
+        },
+        {
+            "name": "Debug Staging",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "toolArgs": [
+                "--flavor",
+                "staging",
+                "--dart-define",
+                "FLAVOR=staging"
+            ]
+        },
+        {
+            "name": "Debug Production",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "toolArgs": [
+                "--flavor",
+                "production",
+                "--dart-define",
+                "FLAVOR=production"
+            ]
+        },
+        {
+            "name": "Profile Develop",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--flavor",
+                "develop",
+                "--dart-define",
+                "FLAVOR=develop"
+            ]
+        },
+        {
+            "name": "Profile Qa",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--flavor",
+                "qa",
+                "--dart-define",
+                "FLAVOR=qa"
+            ]
+        },
+        {
+            "name": "Profile Staging",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--flavor",
+                "staging",
+                "--dart-define",
+                "FLAVOR=staging"
+            ]
+        },
+        {
+            "name": "Profile Production",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--flavor",
+                "production",
+                "--dart-define",
+                "FLAVOR=production"
+            ]
+        },
+        {
+            "name": "Release Develop",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "toolArgs": [
+                "--flavor",
+                "develop",
+                "--release",
+                "--dart-define",
+                "FLAVOR=develop"
+            ]
+        },
+        {
+            "name": "Release Qa",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "toolArgs": [
+                "--flavor",
+                "qa",
+                "--release",
+                "--dart-define",
+                "FLAVOR=qa"
+            ]
+        },
+        {
+            "name": "Release Staging",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "toolArgs": [
+                "--flavor",
+                "staging",
+                "--release",
+                "--dart-define",
+                "FLAVOR=staging"
+            ]
+        },
+        {
+            "name": "Release Production",
+            "request": "launch",
+            "type": "dart",
+            "program": "app/lib/main.dart",
+            "toolArgs": [
+                "--flavor",
+                "production",
+                "--release",
+                "--dart-define",
+                "FLAVOR=production"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+name: initializer
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependency_overrides:
+  analyzer: 4.7.0
+  build_resolvers: 2.0.9
+  dart_style: 2.2.3
+  sqflite: 2.0.2+1
+
+dependencies:
+  data:
+    path: ../data
+  domain:
+    path: ../domain
+  flutter:
+    sdk: flutter
+  shared:
+    path: ../shared
+
+dev_dependencies:
+  dart_code_metrics: 4.17.0
+  flutter_lints: 2.0.1

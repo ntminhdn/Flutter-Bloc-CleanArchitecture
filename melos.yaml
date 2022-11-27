@@ -1,0 +1,210 @@
+name: basecleanflutter
+
+packages:
+  - domain/**
+  - data/**
+  - initializer/**
+  - resources/**
+  - shared/**
+  - app/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  # build runner build
+  build_all:
+    run: dart pub global run melos exec --depends-on="build_runner" "flutter packages pub run build_runner build"
+    description: build_runner build all modules.
+
+  build_data:
+    run: dart pub global run melos exec --fail-fast --scope="*data*" --depends-on="build_runner" "flutter packages pub run build_runner build"
+    description: build_runner build data module.
+
+  build_domain:
+    run: dart pub global run melos exec --fail-fast --scope="*domain*" --depends-on="build_runner" "flutter packages pub run build_runner build"
+    description: build_runner build domain module.
+
+  build_app:
+    run: dart pub global run melos exec --fail-fast --scope="*app*" --depends-on="build_runner" "flutter packages pub run build_runner build"
+    description: build_runner build app module.
+
+  build_shared:
+    run: dart pub global run melos exec --fail-fast --scope="*shared*" --depends-on="build_runner" "flutter packages pub run build_runner build"
+    description: build_runner build shared module.
+
+  # build runner watch
+  watch_all:
+    run: dart pub global run melos exec --depends-on="build_runner" "flutter packages pub run build_runner watch"
+    description: build_runner watch all modules.
+
+  watch_data:
+    run: dart pub global run melos exec --fail-fast --scope="*data*" --depends-on="build_runner" "flutter packages pub run build_runner watch"
+    description: build_runner watch data module.
+
+  watch_domain:
+    run: dart pub global run melos exec --fail-fast --scope="*domain*" --depends-on="build_runner" "flutter packages pub run build_runner watch"
+    description: build_runner watch domain module.
+
+  watch_app:
+    run: dart pub global run melos exec --fail-fast --scope="*app*" --depends-on="build_runner" "flutter packages pub run build_runner watch"
+    description: build_runner watch app module.
+
+  watch_shared:
+    run: dart pub global run melos exec --fail-fast --scope="*shared*" --depends-on="build_runner" "flutter packages pub run build_runner watch"
+    description: build_runner watch shared module.
+
+  # build runner build --delete-conflicting-outputs
+  force_build_all:
+    run: dart pub global run melos exec --depends-on="build_runner" "flutter packages pub run build_runner build --delete-conflicting-outputs"
+    description: build_runner build all modules.
+
+  force_build_data:
+    run: dart pub global run melos exec --fail-fast --scope="*data*" --depends-on="build_runner" "flutter packages pub run build_runner build --delete-conflicting-outputs"
+    description: build_runner build data module.
+
+  force_build_domain:
+    run: dart pub global run melos exec --fail-fast --scope="*domain*" --depends-on="build_runner" "flutter packages pub run build_runner build --delete-conflicting-outputs"
+    description: build_runner build domain module.
+
+  force_build_app:
+    run: dart pub global run melos exec --fail-fast --scope="*app*" --depends-on="build_runner" "flutter packages pub run build_runner build --delete-conflicting-outputs"
+    description: build_runner build app module.
+
+  force_build_shared:
+    run: dart pub global run melos exec --fail-fast --scope="*shared*" --depends-on="build_runner" "flutter packages pub run build_runner build --delete-conflicting-outputs"
+    description: build_runner build shared module.
+
+  # build runner watch --delete-conflicting-outputs
+  force_watch_all:
+    run: dart pub global run melos exec --depends-on="build_runner" "flutter packages pub run build_runner watch --delete-conflicting-outputs"
+    description: build_runner watch all modules.
+
+  force_watch_data:
+    run: dart pub global run melos exec --fail-fast --scope="*data*" --depends-on="build_runner" "flutter packages pub run build_runner watch --delete-conflicting-outputs"
+    description: build_runner watch data module.
+
+  force_watch_domain:
+    run: dart pub global run melos exec --fail-fast --scope="*domain*" --depends-on="build_runner" "flutter packages pub run build_runner watch --delete-conflicting-outputs"
+    description: build_runner watch domain module.
+
+  force_watch_app:
+    run: dart pub global run melos exec --fail-fast --scope="*app*" --depends-on="build_runner" "flutter packages pub run build_runner watch --delete-conflicting-outputs"
+    description: build_runner watch app module.
+
+  force_watch_shared:
+    run: dart pub global run melos exec --fail-fast --scope="*shared*" --depends-on="build_runner" "flutter packages pub run build_runner watch --delete-conflicting-outputs"
+    description: build_runner watch shared module.
+
+  l10n:
+    run: dart pub global run melos exec --fail-fast --scope="*resources*" --flutter -- flutter pub run intl_utils:generate
+    description: Generates l10n for all app packages.
+
+  test:
+    run: dart pub global run melos exec --fail-fast --dir-exists="test" "flutter test"
+    description: Run all tests.
+
+  pub_upgrade:
+    run: dart pub global run melos exec --fail-fast "flutter pub upgrade"
+    description: Run pub upgrade on all module.
+
+  test_app:
+    run: dart pub global run melos exec --fail-fast --scope="*app*" "flutter test"
+    description: Run test app module.
+  
+  test_domain:
+    run: dart pub global run melos exec --fail-fast --scope="*domain*" "flutter test"
+    description: Run test domain module.
+  
+  test_data:
+    run: dart pub global run melos exec --fail-fast --scope="*data*" "flutter test"
+    description: Run test data module.
+  
+  test_shared:
+    run: dart pub global run melos exec --fail-fast --scope="*shared*" "flutter test"
+    description: Run test shared module.
+
+  format:
+    run: dart pub global run melos exec --fail-fast --flutter -- "find . -name "*.dart" ! -name "*.g.dart" ! -name "*.freezed.dart" ! -name "*.gr.dart" ! -name "*.config.dart" ! -name "*.mocks.dart" ! -path '*/generated/*' ! -path '*/.dart_tool/*' | tr '\n' ' ' | xargs flutter format --set-exit-if-changed -l 100"
+    description: Run format.
+
+  metrics:
+    run: dart pub global run melos exec --flutter -- "flutter pub run dart_code_metrics:metrics analyze lib"
+    description: Run metrics.
+
+  metrics_app:
+    run: dart pub global run melos exec --scope="*app*" --flutter -- "flutter pub run dart_code_metrics:metrics analyze lib"
+    description: Run metrics app.
+
+  metrics_data:
+    run: dart pub global run melos exec --scope="*data*" --flutter -- "flutter pub run dart_code_metrics:metrics analyze lib"
+    description: Run metrics data.
+
+  metrics_domain:
+    run: dart pub global run melos exec --scope="*domain*" --flutter -- "flutter pub run dart_code_metrics:metrics analyze lib"
+    description: Run metrics domain.
+
+  metrics_shared:
+    run: dart pub global run melos exec --scope="*shared*" --flutter -- "flutter pub run dart_code_metrics:metrics analyze lib"
+    description: Run metrics shared.
+    
+  analyze:
+    run: dart pub global run melos exec --flutter -- "flutter analyze --no-pub --suppress-analytics"
+    description: Run analyze.
+
+  analyze_app:
+    run: dart pub global run melos exec --scope="*app*" --flutter -- "flutter analyze --no-pub --suppress-analytics"
+    description: Run analyze app.
+
+  analyze_data:
+    run: dart pub global run melos exec --scope="*data*" --flutter -- "flutter analyze --no-pub --suppress-analytics"
+    description: Run analyze data.
+
+  analyze_domain:
+    run: dart pub global run melos exec --scope="*domain*" --flutter -- "flutter analyze --no-pub --suppress-analytics"
+    description: Run analyze domain.
+
+  analyze_shared:
+    run: dart pub global run melos exec --scope="*shared*" --flutter -- "flutter analyze --no-pub --suppress-analytics"
+    description: Run analyze shared.
+
+  lint:
+    run: dart pub global run melos run analyze && dart pub global run melos run metrics
+    description: Run metrics and analyze.
+
+  format_lint:
+    run: dart pub global run melos run format && dart pub global run melos run lint
+    description: Run format & analyze.
+
+  test_coverage:
+    run: dart pub global run melos exec --fail-fast --dir-exists="test" "flutter test --coverage && lcov --remove coverage/lcov.info '**/*.freezed.dart' '**/*.g.dart' '**/*.graphql.dart' '**/*.part.dart' '**/*.config.dart' '**/*_event.dart' '**/*_state.dart' '**/generated/*' '**/routes/*' '**/l10n/*' '**/config/*' '**/di/*' -o coverage/lcov.info && genhtml coverage/lcov.info --output=coverage && open coverage/index.html"
+    description: Run test coverage.
+
+  check_unused_files:
+    run: dart pub global run melos exec "flutter pub run dart_code_metrics:metrics check-unused-files lib"
+    description: Run check unused files.
+
+  pub_get_data:
+    run: dart pub global run melos exec --fail-fast --scope="*data*" "flutter pub get"
+    description: pub get data module.
+    
+  pub_get_domain:
+    run: dart pub global run melos exec --fail-fast --scope="*domain*" "flutter pub get"
+    description: pub get domain module.
+
+  pub_get_app:
+    run: dart pub global run melos exec --fail-fast --scope="*app*" "flutter pub get"
+    description: pub get app module.
+
+  pub_get_shared:
+    run: dart pub global run melos exec --fail-fast --scope="*shared*" "flutter pub get"
+    description: pub get shared module.
+
+  check_unused_l10n_app:
+    run: dart pub global run melos exec --fail-fast --scope="*app*" "flutter pub run dart_code_metrics:metrics check-unused-l10n lib -p ^S$"
+    description: check unused l10n app.
+
+  check_unused_l10n_domain:
+    run: dart pub global run melos exec --fail-fast --scope="*domain*" "flutter pub run dart_code_metrics:metrics check-unused-l10n lib -p ^S$"
+    description: check unused l10n domain.

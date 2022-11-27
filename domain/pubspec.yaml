@@ -1,0 +1,41 @@
+name: domain
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependency_overrides:
+  analyzer: 4.7.0
+  build_resolvers: 2.0.9
+  dart_style: 2.2.3
+  sqflite: 2.0.2+1
+
+dependencies:
+  async: 2.9.0
+  dartx: 1.0.0
+  flutter:
+    sdk: flutter
+  get_it: 7.2.0
+  injectable: 1.5.3
+  meta: 1.8.0
+  resources:
+    path: ../resources
+  rxdart: 0.26.0
+  shared:
+    path: ../shared
+  tuple: 2.0.0
+
+dev_dependencies:
+  build_runner: 2.1.7
+  dart_code_metrics: 4.17.0
+
+  flutter_lints: 2.0.1
+  flutter_test:
+    sdk: flutter
+  freezed: 2.1.1
+  freezed_annotation: 2.1.0
+  injectable_generator: 1.5.3
+  mocktail: 0.3.0

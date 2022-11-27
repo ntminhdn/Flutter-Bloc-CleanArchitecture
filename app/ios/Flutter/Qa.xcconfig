@@ -1,0 +1,5 @@
+#include "Generated.xcconfig"
+FLUTTER_BUILD_NAME=1.0.5
+FLUTTER_BUILD_NUMBER=15
+PRODUCT_BUNDLE_IDENTIFIER=jp.flutter.app.qa
+APP_DISPLAY_NAME=Qa
