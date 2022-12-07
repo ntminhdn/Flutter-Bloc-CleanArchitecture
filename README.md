@@ -1,3 +1,9 @@
+# Tutorials for this project
+
+* English: https://medium.com/@NALSengineering/list/building-a-perfect-boilerplate-flutter-project-from-scratch-3c2b29d9dfa8
+
+* Vietnamese: https://medium.com/@NALSengineering/list/flutter-xay-dung-base-project-hoan-hao-tu-a-en-a-c240f845f660
+
 # Flutter Bloc - Clean Architecture
 
 Flutter project using clean architecture and bloc pattern.
