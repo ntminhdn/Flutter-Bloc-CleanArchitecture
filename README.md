@@ -113,4 +113,6 @@ export PATH="$PATH:~/.gem/gems/lefthook-0.7.7/bin"
     - [cd_staging.yaml](.github/workflows/cd_staging.yaml)
     - [cd_production.yaml](.github/workflows/cd_production.yaml)
 
+## License
 
+MIT
