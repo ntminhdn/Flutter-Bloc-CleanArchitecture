@@ -4,7 +4,7 @@ root_project_path=$(dirname $parent_path)
 env_path="$root_project_path/env/$1.env"
 
 dart_define=""
-while read line; do
+while read line || [ -n "$line" ]; do
     if [[ $line =~ ^[A-Za-z_]+=.*$ ]]; then
         dart_define+="--dart-define $line "
     fi
