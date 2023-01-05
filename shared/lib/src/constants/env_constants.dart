@@ -8,7 +8,7 @@ class EnvConstants {
   static const appBasicAuthPasswordKey = 'APP_BASIC_AUTH_PASSWORD';
 
   static late Flavor flavor =
-      Flavor.values.byName(String.fromEnvironment(flavorKey, defaultValue: Flavor.develop.name));
+      Flavor.values.byName(const String.fromEnvironment(flavorKey, defaultValue: 'develop'));
   static late String appBasicAuthName = const String.fromEnvironment(appBasicAuthNameKey);
   static late String appBasicAuthPassword = const String.fromEnvironment(appBasicAuthPasswordKey);
 

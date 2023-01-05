@@ -25,9 +25,26 @@ void main() {
     ).call();
   } on FormatException catch (e) {
     print(
-        'Lỗi: File settings.json và launch.json đang empty hoặc bị thừa dấu phẩy (,) ở phần tử cuối (trailing comma)\n$e');
+        '''Error: The content of settings.json or launch.json is empty or the trailing comma is redundant or comments are invalid
+        
+        BAD:
+        ```
+        "settingA": {
+          "keyA": "A",
+          "keyB": "B", // <== Please remove this trailing comma
+        }
+        ```
+
+        GOOD:
+        ```
+        "settingA": {
+          "keyA": "A",
+          "keyB": "B"
+        }
+        ```
+        $e''');
   } on FileSystemException catch (e) {
-    print('Lỗi: File settings.json hoặc launch.json không tồn tại!\n$e');
+    print('Error: Either .vscode/settings.json or .vscode/launch.json is not exist!\n$e');
   }
 }
 
