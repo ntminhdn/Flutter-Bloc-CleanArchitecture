@@ -11,11 +11,11 @@ class LogConfig {
   static const logOnBlocCreate = false;
   static const logOnBlocClose = false;
   static const logOnBlocError = false;
-  static const logOnBlocEvent = false;
+  static const logOnBlocEvent = kDebugMode;
   static const logOnBlocTransition = false;
 
   /// navigator observer
-  static const enableNavigatorObserverLog = false;
+  static const enableNavigatorObserverLog = kDebugMode;
 
   /// disposeBag
   static const enableDisposeBagLog = false;
@@ -35,6 +35,6 @@ class LogConfig {
 
   /// enable log usecase
   static const enableLogUseCaseInput = kDebugMode;
-  static const enableLogUseCaseOutput = false;
+  static const enableLogUseCaseOutput = kDebugMode;
   static const enableLogUseCaseError = kDebugMode;
 }

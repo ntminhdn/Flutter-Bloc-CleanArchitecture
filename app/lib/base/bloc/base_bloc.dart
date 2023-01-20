@@ -28,6 +28,15 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
 
   CommonBloc get commonBloc => this is CommonBloc ? this as CommonBloc : _commonBloc;
 
+  @override
+  void add(E event) {
+    if (!isClosed) {
+      super.add(event);
+    } else {
+      Log.e('Cannot add new event $event because $runtimeType was closed');
+    }
+  }
+
   Future<void> addException(AppExceptionWrapper appExceptionWrapper) async {
     commonBloc.add(ExceptionEmitted(
       appExceptionWrapper: appExceptionWrapper,

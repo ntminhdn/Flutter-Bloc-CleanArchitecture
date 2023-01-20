@@ -1,8 +1,8 @@
 library shared;
 
 export 'shared.dart';
-export 'src/config/build_config.dart';
 export 'src/config/config.dart';
+export 'src/config/log_config.dart';
 export 'src/config/shared_config.dart';
 export 'src/constants/database_constants.dart';
 export 'src/constants/duration_constants.dart';
