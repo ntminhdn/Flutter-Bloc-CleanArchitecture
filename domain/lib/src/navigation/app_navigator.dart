@@ -10,6 +10,8 @@ abstract class AppNavigator {
 
   int get currentBottomTab;
 
+  String getCurrentRouteName({bool useRootNavigator = false});
+
   void popUntilRootOfCurrentBottomTab();
 
   void navigateToBottomTab(int index, {bool notify = true});
@@ -33,7 +35,7 @@ abstract class AppNavigator {
     bool useRootNavigator = false,
   });
 
-  Future<void> popAndPushAll(List<AppRouteInfo> listAppRouteInfo);
+  Future<void> popAndPushAll(List<AppRouteInfo> listAppRouteInfo, {bool useRootNavigator = false});
 
   void popUntilRoot({bool useRootNavigator = false});
 
