@@ -12,8 +12,8 @@ class AppInitializer {
   Future<void> init() async {
     EnvConstants.init();
     await SharedConfig.getInstance().init();
-    await _applicationConfig.init();
-    await DomainConfig.getInstance().init();
     await DataConfig.getInstance().init();
+    await DomainConfig.getInstance().init();
+    await _applicationConfig.init();
   }
 }
