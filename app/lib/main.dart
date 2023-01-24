@@ -11,6 +11,7 @@ import 'config/app_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   await AppInitializer(AppConfig.getInstance()).init();
   await runZonedGuarded(_runMyApp, _reportError);
 }

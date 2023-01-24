@@ -1,11 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 
-import '../../ui/home/home_page.dart';
-import '../../ui/item_detail/item_detail_page.dart';
-import '../../ui/login/login_page.dart';
-import '../../ui/main/main_page.dart';
-import '../../ui/my_page/my_page_page.dart';
-import '../../ui/search/search_page.dart';
+import '../../app.dart';
 
 // ignore_for_file:avoid-dynamic
 @MaterialAutoRouter(
@@ -27,7 +22,10 @@ const mainScreenRouter = CustomRoute<dynamic>(
       page: EmptyRouterPage,
       children: [
         AutoRoute<dynamic>(page: HomePage, initial: true),
-        AutoRoute<dynamic>(page: ItemDetailPage),
+        AutoRoute<dynamic>(
+          page: ItemDetailPage,
+          guards: [RouteGuard],
+        ),
       ],
     ),
     AutoRoute<dynamic>(
