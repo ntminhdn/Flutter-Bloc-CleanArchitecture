@@ -24,4 +24,4 @@ abstract class ServiceModule {
 final GetIt getIt = GetIt.instance;
 
 @injectableInit
-Future<void> configureInjection() async => $initGetIt(getIt);
+Future<void> configureInjection() async => getIt.init();

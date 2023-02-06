@@ -22,7 +22,7 @@ class LocalPushNotificationHelper with LogMixin {
 
     /// don't request permission here
     /// we use firebase_messaging package to request permission instead
-    const iOSInit = IOSInitializationSettings(
+    const iOSInit = DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
@@ -75,7 +75,7 @@ class LocalPushNotificationHelper with LogMixin {
             )
           : null,
     );
-    const iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    const iOSPlatformChannelSpecifics = DarwinNotificationDetails();
 
     final platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,

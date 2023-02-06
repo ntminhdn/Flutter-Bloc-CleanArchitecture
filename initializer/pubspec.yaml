@@ -8,9 +8,9 @@ environment:
   flutter: ">=1.17.0"
 
 dependency_overrides:
-  analyzer: 4.7.0
-  build_resolvers: 2.0.9
-  dart_style: 2.2.3
+  analyzer: 5.2.0
+  build_resolvers: 2.1.0
+  dart_style: 2.2.4
   sqflite: 2.0.2+1
 
 dependencies:
@@ -24,5 +24,5 @@ dependencies:
     path: ../shared
 
 dev_dependencies:
-  dart_code_metrics: 4.17.0
+  dart_code_metrics: 5.1.0
   flutter_lints: 2.0.1

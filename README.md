@@ -59,7 +59,7 @@ https://user-images.githubusercontent.com/22645452/204954653-a704d380-0f6a-419d-
 ### Requirements
 
 - Dart: 2.18.5
-- Flutter SDK: 3.3.9
+- Flutter SDK: 3.7.1
 - Melos: 2.8.0
 - CocoaPods: 1.11.2
 

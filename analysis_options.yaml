@@ -29,15 +29,18 @@ dart_code_metrics:
     #    number-of-parameters: 4
     # source-lines-of-code: 50
   rules:
-    - member-ordering-extended:
+    - member-ordering:
         #        alphabetize: true
         order:
           - constructors
-          - public-fields
-          - private-fields
+          - fields
           - getters-setters
-          - public-methods
-          - private-methods
+          - methods
+        widgets-order:
+          - constructors
+          - fields
+          - getters-setters
+          - methods
     - always-remove-listener
     - no-boolean-literal-compare
     - newline-before-return

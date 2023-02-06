@@ -19,7 +19,7 @@ class GraphQLExceptionMapper extends ExceptionMapper<RemoteException> {
     }
 
     if (exception.linkException?.originalException is DioError) {
-      final dioException = exception.linkException!.originalException;
+      final dioException = exception.linkException!.originalException as DioError;
       if (dioException.type == DioErrorType.response) {
         /// server-defined error
         ServerError? serverError;
