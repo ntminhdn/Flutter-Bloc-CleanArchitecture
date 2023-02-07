@@ -48,7 +48,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  bool get canPopSelfOrChildren => _appRouter.canPopSelfOrChildren;
+  bool get canPopSelfOrChildren => _appRouter.canPop();
 
   @override
   String getCurrentRouteName({bool useRootNavigator = false}) =>
@@ -62,7 +62,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       throw 'Not found any TabRouter';
     }
 
-    if (_currentTabRouter?.canPopSelfOrChildren == true) {
+    if (_currentTabRouter?.canPop() == true) {
       if (LogConfig.enableNavigatorObserverLog) {
         logD('popUntilRootOfCurrentBottomTab');
       }

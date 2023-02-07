@@ -68,5 +68,4 @@ export 'src/repository/source/api/middleware/refresh_token_interceptor.dart';
 export 'src/repository/source/api/middleware/retry_on_error_interceptor.dart';
 export 'src/repository/source/api/refresh_token_api_service.dart';
 export 'src/repository/source/database/app_database.dart';
-export 'src/repository/source/location/location_data_source.dart';
 export 'src/repository/source/preference/app_preferences.dart';

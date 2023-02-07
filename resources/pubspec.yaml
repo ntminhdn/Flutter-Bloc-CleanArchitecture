@@ -15,12 +15,12 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  dart_code_metrics: 4.17.0
+  dart_code_metrics: 5.1.0
   # flutter_lints: 1.0.4
   flutter_test:
     sdk: flutter
   intl: 0.17.0
-  intl_utils: 2.7.0
+  intl_utils: 2.8.1
 
 flutter_intl:
   enabled: true
