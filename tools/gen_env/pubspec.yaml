@@ -1,0 +1,9 @@
+name: gen_env
+description: Generate config docs for VSCode & Android Studio
+version: 1.0.0
+
+environment:
+  sdk: '>=2.19.0 <3.0.0'
+
+dependencies:
+  xml: ^6.2.2

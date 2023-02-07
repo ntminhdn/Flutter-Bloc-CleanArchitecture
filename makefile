@@ -208,7 +208,8 @@ check_commit_message:
 	$(COMMIT_CHECK_CMD) "$(shell git log --format=%B -n 1 --no-merges $(BITBUCKET_COMMIT))"
 
 gen_env:
-	dart run tools/gen_env.dart
+	dart pub get --directory=tools/gen_env
+	dart run tools/gen_env/lib/main.dart
 
 pub_upgrade:
 	melos pub_upgrade
