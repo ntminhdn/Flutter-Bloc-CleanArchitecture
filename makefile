@@ -214,3 +214,6 @@ gen_env:
 pub_upgrade:
 	melos pub_upgrade
 	
+pub_sync:
+	cd tools && ./sync_all_pub_versions.sh
+	melos bootstrap
