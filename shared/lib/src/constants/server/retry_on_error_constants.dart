@@ -1,6 +1,6 @@
 class RetryOnErrorConstants {
   const RetryOnErrorConstants._();
 
-  static int retries = 3;
+  static int maxRetries = 3;
   static Duration retryInterval = const Duration(seconds: 3);
 }
