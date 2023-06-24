@@ -12,7 +12,5 @@ class DomainConfig extends Config {
   static final DomainConfig _instance = DomainConfig._();
 
   @override
-  Future<void> config() async {
-    await di.configureInjection();
-  }
+  Future<void> config() async => di.configureInjection();
 }

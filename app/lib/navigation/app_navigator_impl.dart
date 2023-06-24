@@ -9,7 +9,7 @@ import '../app.dart';
 @LazySingleton(as: AppNavigator)
 class AppNavigatorImpl extends AppNavigator with LogMixin {
   AppNavigatorImpl(
-    this._appRouter,
+    this._myAppRouter,
     this._appPopupInfoMapper,
     this._appRouteInfoMapper,
   );
@@ -22,16 +22,16 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
   TabsRouter? tabsRouter;
 
-  final AppRouter _appRouter;
+  final MyAppRouter _myAppRouter;
   final BasePopupInfoMapper _appPopupInfoMapper;
   final BaseRouteInfoMapper _appRouteInfoMapper;
   final _popups = <AppPopupInfo>{};
 
   StackRouter? get _currentTabRouter => tabsRouter?.stackRouterOfIndex(currentBottomTab);
 
-  StackRouter get _currentTabRouterOrRootRouter => _currentTabRouter ?? _appRouter;
+  StackRouter get _currentTabRouterOrRootRouter => _currentTabRouter ?? _myAppRouter;
 
-  m.BuildContext get _rootRouterContext => _appRouter.navigatorKey.currentContext!;
+  m.BuildContext get _rootRouterContext => _myAppRouter.navigatorKey.currentContext!;
 
   m.BuildContext? get _currentTabRouterContext => _currentTabRouter?.navigatorKey.currentContext;
 
@@ -48,7 +48,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  bool get canPopSelfOrChildren => _appRouter.canPop();
+  bool get canPopSelfOrChildren => _myAppRouter.canPop();
 
   @override
   String getCurrentRouteName({bool useRootNavigator = false}) =>
@@ -88,7 +88,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('push $appRouteInfo');
     }
 
-    return _appRouter.push<T>(_appRouteInfoMapper.map(appRouteInfo));
+    return _myAppRouter.push<T>(_appRouteInfoMapper.map(appRouteInfo));
   }
 
   @override
@@ -97,7 +97,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('pushAll $listAppRouteInfo');
     }
 
-    return _appRouter.pushAll(_appRouteInfoMapper.mapList(listAppRouteInfo));
+    return _myAppRouter.pushAll(_appRouteInfoMapper.mapList(listAppRouteInfo));
   }
 
   @override
@@ -106,7 +106,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('replace by $appRouteInfo');
     }
 
-    return _appRouter.replace<T>(_appRouteInfoMapper.map(appRouteInfo));
+    return _myAppRouter.replace<T>(_appRouteInfoMapper.map(appRouteInfo));
   }
 
   @override
@@ -115,7 +115,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('replaceAll by $listAppRouteInfo');
     }
 
-    return _appRouter.replaceAll(_appRouteInfoMapper.mapList(listAppRouteInfo));
+    return _myAppRouter.replaceAll(_appRouteInfoMapper.mapList(listAppRouteInfo));
   }
 
   @override
@@ -125,7 +125,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     }
 
     return useRootNavigator
-        ? _appRouter.pop<T>(result)
+        ? _myAppRouter.pop<T>(result)
         : _currentTabRouterOrRootRouter.pop<T>(result);
   }
 
@@ -140,7 +140,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     }
 
     return useRootNavigator
-        ? _appRouter.popAndPush<T, R>(_appRouteInfoMapper.map(appRouteInfo), result: result)
+        ? _myAppRouter.popAndPush<T, R>(_appRouteInfoMapper.map(appRouteInfo), result: result)
         : _currentTabRouterOrRootRouter.popAndPush<T, R>(
             _appRouteInfoMapper.map(appRouteInfo),
             result: result,
@@ -153,7 +153,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('popUntilRoot, useRootNav = $useRootNavigator');
     }
 
-    useRootNavigator ? _appRouter.popUntilRoot() : _currentTabRouterOrRootRouter.popUntilRoot();
+    useRootNavigator ? _myAppRouter.popUntilRoot() : _currentTabRouterOrRootRouter.popUntilRoot();
   }
 
   @override
@@ -162,7 +162,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('popUntilRouteName $routeName');
     }
 
-    _appRouter.popUntilRouteWithName(routeName);
+    _myAppRouter.popUntilRouteWithName(routeName);
   }
 
   @override
@@ -171,7 +171,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('removeUntilRouteName $routeName');
     }
 
-    return _appRouter.removeUntil((route) => route.name == routeName);
+    return _myAppRouter.removeUntil((route) => route.name == routeName);
   }
 
   @override
@@ -180,7 +180,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('removeAllRoutesWithName $routeName');
     }
 
-    return _appRouter.removeWhere((route) => route.name == routeName);
+    return _myAppRouter.removeWhere((route) => route.name == routeName);
   }
 
   @override
@@ -190,7 +190,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     }
 
     return useRootNavigator
-        ? _appRouter.popAndPushAll(_appRouteInfoMapper.mapList(listAppRouteInfo))
+        ? _myAppRouter.popAndPushAll(_appRouteInfoMapper.mapList(listAppRouteInfo))
         : _currentTabRouterOrRootRouter
             .popAndPushAll(_appRouteInfoMapper.mapList(listAppRouteInfo));
   }
@@ -201,7 +201,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('removeLast');
     }
 
-    return _appRouter.removeLast();
+    return _myAppRouter.removeLast();
   }
 
   @override

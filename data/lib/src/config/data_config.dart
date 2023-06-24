@@ -12,7 +12,5 @@ class DataConfig extends Config {
   static final DataConfig _instance = DataConfig._();
 
   @override
-  Future<void> config() async {
-    await di.configureInjection();
-  }
+  Future<void> config() async => di.configureInjection();
 }

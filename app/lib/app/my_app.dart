@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends BasePageState<MyApp, AppBloc> {
-  final _appRouter = GetIt.instance.get<AppRouter>();
+  final _appRouter = GetIt.instance.get<MyAppRouter>();
 
   @override
   bool get isAppWidget => true;
