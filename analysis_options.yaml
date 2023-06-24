@@ -12,9 +12,9 @@ analyzer:
     # - "**/test/*.dart"
     - "resources/lib/src/generated/intl/*.dart"
     - "resources/lib/src/generated/*.dart"
-  strong-mode:
-    implicit-casts: true
-    implicit-dynamic: false
+  language:
+    strict-casts: false
+    strict-raw-types: true
   errors:
     unused_import: warning
     # invalid_annotation_target: ignore

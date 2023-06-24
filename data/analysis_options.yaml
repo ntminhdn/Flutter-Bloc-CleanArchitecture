@@ -10,7 +10,7 @@ analyzer:
     - "**/*.gen.dart"
     # - "test/*.dart"
     - "lib/src/repository/model/generated/*.dart"
-  strong-mode:
-    implicit-dynamic: true
+  language:
+    strict-raw-types: false
   errors:
     invalid_annotation_target: ignore

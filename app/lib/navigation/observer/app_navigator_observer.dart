@@ -7,7 +7,7 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
   static const _enableLog = LogConfig.enableNavigatorObserverLog;
 
   @override
-  void didPush(Route route, Route? previousRoute) {
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
     if (_enableLog) {
       logD('didPush from ${previousRoute?.settings.name} to ${route.settings.name}');
@@ -15,7 +15,7 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
   }
 
   @override
-  void didPop(Route route, Route? previousRoute) {
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPop(route, previousRoute);
     if (_enableLog) {
       logD('didPop ${route.settings.name}, back to ${previousRoute?.settings.name}');
@@ -23,7 +23,7 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
   }
 
   @override
-  void didRemove(Route route, Route? previousRoute) {
+  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didRemove(route, previousRoute);
     if (_enableLog) {
       logD('didRemove ${route.settings.name}, back to ${previousRoute?.settings.name}');
@@ -31,7 +31,7 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
   }
 
   @override
-  void didReplace({Route? newRoute, Route? oldRoute}) {
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
     if (_enableLog) {
       logD('didReplace ${oldRoute?.settings.name} by ${newRoute?.settings.name}');
@@ -39,7 +39,7 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
   }
 
   @override
-  void didStartUserGesture(Route route, Route? previousRoute) {
+  void didStartUserGesture(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didStartUserGesture(route, previousRoute);
   }
 

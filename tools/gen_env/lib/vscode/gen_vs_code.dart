@@ -146,7 +146,7 @@ class LaunchJsonWriter {
   List<dynamic> getNonDartDefineArguments(List<dynamic> argList) {
     bool previousWasDartDefine = false;
 
-    final List retainedArgs = <dynamic>[];
+    final List<dynamic> retainedArgs = <dynamic>[];
     argList.forEach((dynamic arg) {
       if (arg == '--dart-define') {
         previousWasDartDefine = true;

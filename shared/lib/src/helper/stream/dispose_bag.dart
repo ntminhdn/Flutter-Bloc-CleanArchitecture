@@ -37,13 +37,13 @@ class DisposeBag with LogMixin {
   }
 }
 
-extension StreamSubscriptionExtensions on StreamSubscription {
+extension StreamSubscriptionExtensions<T> on StreamSubscription<T> {
   void disposeBy(DisposeBag disposeBag) {
     disposeBag.addDisposable(this);
   }
 }
 
-extension StreamControllerExtensions on StreamController {
+extension StreamControllerExtensions<T> on StreamController<T> {
   void disposeBy(DisposeBag disposeBag) {
     disposeBag.addDisposable(this);
   }

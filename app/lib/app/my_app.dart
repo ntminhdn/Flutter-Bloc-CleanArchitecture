@@ -41,7 +41,6 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
             previous.languageCode != current.languageCode,
         builder: (context, state) {
           return MaterialApp.router(
-            useInheritedMediaQuery: true,
             builder: (context, child) {
               final MediaQueryData data = MediaQuery.of(context);
 

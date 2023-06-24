@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:android_id/android_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_udid/flutter_udid.dart';
 
 import '../../../shared.dart';
 
@@ -10,15 +12,14 @@ class DeviceUtils {
   static late DeviceType deviceType = _getDeviceType();
 
   static Future<String> getDeviceId() async {
-    final deviceInfo = DeviceInfoPlugin();
     if (Platform.isIOS) {
-      final iosDeviceInfo = await deviceInfo.iosInfo;
-
-      return iosDeviceInfo.identifierForVendor ?? '';
+      return await FlutterUdid.udid; // unique ID on iOS
     } else {
-      final androidDeviceInfo = await deviceInfo.androidInfo;
+      const _androidIdPlugin = AndroidId();
 
-      return androidDeviceInfo.androidId ?? '';
+      final androidID = await _androidIdPlugin.getId();
+
+      return androidID ?? ''; // unique ID on Android
     }
   }
 
@@ -27,7 +28,7 @@ class DeviceUtils {
     if (Platform.isIOS) {
       final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
 
-      return iosInfo.name ?? '';
+      return iosInfo.name;
     } else {
       final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
 
@@ -36,9 +37,10 @@ class DeviceUtils {
   }
 
   static DeviceType _getDeviceType() {
-    final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
-
-    return data.size.shortestSide < DeviceConstants.maxMobileWidthForDeviceType
+    return MediaQueryData.fromView(WidgetsBinding.instance.platformDispatcher.views.first)
+                .size
+                .shortestSide <
+            DeviceConstants.maxMobileWidthForDeviceType
         ? DeviceType.mobile
         : DeviceType.tablet;
   }
