@@ -11,7 +11,7 @@ import 'package:shared/shared.dart';
 import '../app.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({required this.initialResource, Key? key}) : super(key: key);
+  const MyApp({required this.initialResource, super.key});
 
   final LoadInitialResourceOutput initialResource;
 

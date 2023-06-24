@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CommonNewPageErrorIndicator extends StatelessWidget {
-  const CommonNewPageErrorIndicator({Key? key}) : super(key: key);
+  const CommonNewPageErrorIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {

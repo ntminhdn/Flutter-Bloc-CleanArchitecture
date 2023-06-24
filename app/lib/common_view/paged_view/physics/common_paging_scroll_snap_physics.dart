@@ -15,8 +15,8 @@ class CommonPagingScrollSnapPhysics extends ScrollPhysics {
     required this.maxWidth,
     required this.maxHeight,
     required this.isHorizontal,
-    ScrollPhysics? parent,
-  }) : super(parent: parent);
+    super.parent,
+  });
 
   final double itemSize;
   final SelectedAnchorItem selectedAnchorItem;

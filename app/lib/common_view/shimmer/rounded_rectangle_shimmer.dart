@@ -6,8 +6,8 @@ class RounedRectangleShimmer extends StatelessWidget {
   const RounedRectangleShimmer({
     this.width,
     this.height,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final double? width;
   final double? height;

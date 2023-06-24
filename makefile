@@ -217,3 +217,6 @@ pub_upgrade:
 pub_sync:
 	cd tools && ./sync_all_pub_versions.sh
 	melos bootstrap
+
+dart_fix:
+	dart fix --apply

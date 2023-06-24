@@ -4,14 +4,11 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: ">=3.0.5 <4.0.0"
   flutter: ">=1.17.0"
 
 dependency_overrides:
-  analyzer: 5.2.0
-  build_resolvers: 2.1.0
-  dart_style: 2.2.4
-  sqflite: 2.0.2+1
+  analyzer: 5.13.0
 
 dependencies:
   data:
@@ -24,5 +21,5 @@ dependencies:
     path: ../shared
 
 dev_dependencies:
-  dart_code_metrics: 5.1.0
+  dart_code_metrics: 5.7.5
   flutter_lints: 2.0.1

@@ -16,7 +16,7 @@ class CommonPagedSliverList<T> extends StatelessWidget {
     this.newPageProgressIndicator,
     this.noItemsFoundIndicator,
     this.noMoreItemsIndicator,
-    Key? key,
+    super.key,
     this.itemExtent,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
@@ -24,7 +24,7 @@ class CommonPagedSliverList<T> extends StatelessWidget {
     this.semanticIndexCallback,
     this.shrinkWrapFirstPageIndicators = false,
     this.separatorBuilder,
-  }) : super(key: key);
+  });
 
   final CommonPagingController<T> pagingController;
   final Widget Function(

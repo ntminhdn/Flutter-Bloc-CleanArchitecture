@@ -6,8 +6,8 @@ import '../../app.dart';
 class ItemDetailPage extends StatefulWidget {
   const ItemDetailPage({
     required this.user,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final User user;
 

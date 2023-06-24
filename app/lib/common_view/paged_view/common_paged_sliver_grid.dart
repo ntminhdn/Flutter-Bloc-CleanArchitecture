@@ -17,7 +17,7 @@ class CommonPagedSliverGrid<T> extends StatelessWidget {
     this.newPageProgressIndicator,
     this.noItemsFoundIndicator,
     this.noMoreItemsIndicator,
-    Key? key,
+    super.key,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -25,7 +25,7 @@ class CommonPagedSliverGrid<T> extends StatelessWidget {
     this.showNewPageErrorIndicatorAsGridChild = false,
     this.showNoMoreItemsIndicatorAsGridChild = false,
     this.shrinkWrapFirstPageIndicators = false,
-  }) : super(key: key);
+  });
 
   final CommonPagingController<T> pagingController;
   final Widget Function(

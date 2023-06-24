@@ -165,3 +165,4 @@ linter:
     - constant_identifier_names
     - non_constant_identifier_names
     - prefer_relative_imports
+    - use_super_parameters

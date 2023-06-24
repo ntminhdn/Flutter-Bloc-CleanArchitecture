@@ -5,8 +5,8 @@ import '../../app.dart';
 class CircleShimmer extends StatelessWidget {
   const CircleShimmer({
     this.diameter,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final double? diameter;
 
