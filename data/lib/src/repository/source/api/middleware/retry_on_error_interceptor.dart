@@ -23,7 +23,7 @@ class RetryOnErrorInterceptor extends BaseInterceptor {
   }
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
     assert(err.requestOptions.headers[_retryCountKey] != null);
     final retryCount = err.requestOptions.headers[_retryCountKey] as int;
     if (retryCount > 0 && _shouldRetry(err)) {
@@ -44,6 +44,6 @@ class RetryOnErrorInterceptor extends BaseInterceptor {
     return super.onError(err, handler);
   }
 
-  bool _shouldRetry(DioError error) =>
-      error.type != DioErrorType.cancel && error.type != DioErrorType.response;
+  bool _shouldRetry(DioException error) =>
+      error.type != DioExceptionType.cancel && error.type != DioExceptionType.badResponse;
 }

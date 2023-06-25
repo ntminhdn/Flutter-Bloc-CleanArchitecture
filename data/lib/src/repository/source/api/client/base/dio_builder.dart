@@ -9,9 +9,9 @@ class DioBuilder {
   }) {
     return Dio(
       BaseOptions(
-        connectTimeout: options?.connectTimeout ?? ServerTimeoutConstants.connectTimeoutInMs,
-        receiveTimeout: options?.receiveTimeout ?? ServerTimeoutConstants.receiveTimeoutInMs,
-        sendTimeout: options?.sendTimeout ?? ServerTimeoutConstants.sendTimeoutInMs,
+        connectTimeout: options?.connectTimeout ?? ServerTimeoutConstants.connectTimeout,
+        receiveTimeout: options?.receiveTimeout ?? ServerTimeoutConstants.receiveTimeout,
+        sendTimeout: options?.sendTimeout ?? ServerTimeoutConstants.sendTimeout,
         baseUrl: options?.baseUrl ?? UrlConstants.appApiBaseUrl,
       ),
     );

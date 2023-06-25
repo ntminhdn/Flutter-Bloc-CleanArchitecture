@@ -15,7 +15,7 @@ class ConnectivityInterceptor extends BaseInterceptor {
     final connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       return handler.reject(
-        DioError(
+        DioException(
           requestOptions: options,
           error: const RemoteException(kind: RemoteExceptionKind.noInternet),
         ),

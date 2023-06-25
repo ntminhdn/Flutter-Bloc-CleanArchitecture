@@ -9,16 +9,18 @@ class ExceptionMessageMapper {
       case AppExceptionType.remote:
         final exception = appException as RemoteException;
         switch (exception.kind) {
+          case RemoteExceptionKind.badCertificate:
+            return S.current.badCertificateException;
           case RemoteExceptionKind.noInternet:
             return S.current.noInternetException;
           case RemoteExceptionKind.network:
-            return S.current.noInternetException;
+            return S.current.canNotConnectToHost;
           case RemoteExceptionKind.serverDefined:
             return exception.generalServerMessage ?? S.current.unknownException;
           case RemoteExceptionKind.serverUndefined:
             return exception.generalServerMessage ?? S.current.unknownException;
           case RemoteExceptionKind.timeout:
-            return S.current.noInternetException;
+            return S.current.timeoutException;
           case RemoteExceptionKind.cancellation:
             return S.current.cancellationException;
           case RemoteExceptionKind.unknown:

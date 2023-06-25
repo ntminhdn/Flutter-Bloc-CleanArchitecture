@@ -18,9 +18,9 @@ class GraphQLExceptionMapper extends ExceptionMapper<RemoteException> {
       return RemoteException(kind: RemoteExceptionKind.unknown, rootException: exception);
     }
 
-    if (exception.linkException?.originalException is DioError) {
-      final dioException = exception.linkException!.originalException as DioError;
-      if (dioException.type == DioErrorType.response) {
+    if (exception.linkException?.originalException is DioException) {
+      final dioException = exception.linkException!.originalException as DioException;
+      if (dioException.type == DioExceptionType.badResponse) {
         /// server-defined error
         ServerError? serverError;
         if (dioException.response?.data != null) {

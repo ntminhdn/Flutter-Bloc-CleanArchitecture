@@ -31,7 +31,7 @@ dependencies:
   injectable: 2.1.2
   resources:
     path: ../resources
-  rxdart: 0.26.0
+  rxdart: 0.27.1
   shared:
     path: ../shared
   tuple: 2.0.0
