@@ -26,7 +26,7 @@ custom_lint_builder: 0.0.16
 custom_pop_up_menu: 1.2.2
 dart_code_metrics: 5.7.5
 dart_style: 2.3.1
-dartx: 1.0.0
+dartx: 1.1.0
 decimal: 2.1.0
 device_info_plus: 9.0.2
 device_preview: 1.1.0
@@ -58,7 +58,7 @@ flutter_native_timezone: 2.0.0
 flutter_portal: 1.1.1
 flutter_screenutil: 5.8.4
 flutter_svg: 2.0.7
-freezed: 2.3.2
+freezed: 2.3.5
 freezed_annotation: 2.2.0
 geolocator: 8.2.1
 get_it: 7.6.0
@@ -90,12 +90,12 @@ objectbox_generator: 2.1.0
 ogp_data_extract: 0.1.2
 optimized_cached_image: 3.0.0
 package_info_plus: 4.0.2
-path_provider: 2.0.7
+path_provider: 2.0.15
 percent_indicator: 4.2.2
 permission_handler: 9.2.0
 photo_view: 0.13.0
 pull_to_refresh_flutter3: 2.0.1
-rxdart: 0.27.1
+rxdart: 0.27.7
 sliding_up_panel: 2.0.0+1
 smooth_page_indicator: 1.0.0+2
 source_gen: 1.2.6
@@ -105,7 +105,7 @@ syncfusion_flutter_charts: 20.2.45
 table_calendar: 3.0.7
 timeago: 3.3.0
 timezone: 0.9.0
-tuple: 2.0.0
+tuple: 2.0.2
 uni_links: 0.5.1
 url_launcher: 6.0.17
 webview_flutter_android: 2.8.14
