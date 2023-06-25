@@ -7,8 +7,8 @@ class ShimmerLoading extends StatefulWidget {
     required this.isLoading,
     required this.child,
     this.loadingWidget,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget child;
   final Widget? loadingWidget;

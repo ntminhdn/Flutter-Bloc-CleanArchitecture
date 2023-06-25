@@ -7,6 +7,8 @@
             "type": "dart",
             "program": "app/lib/main.dart",
             "toolArgs": [
+                // "--verbose",
+                // "--no-enable-impeller",
                 "--flavor",
                 "develop",
                 "--dart-define",
@@ -19,6 +21,8 @@
             "type": "dart",
             "program": "app/lib/main.dart",
             "toolArgs": [
+                // "--verbose",
+                // "--no-enable-impeller",                
                 "--flavor",
                 "qa",
                 "--dart-define",
@@ -31,6 +35,8 @@
             "type": "dart",
             "program": "app/lib/main.dart",
             "toolArgs": [
+                // "--verbose",
+                // "--no-enable-impeller",                
                 "--flavor",
                 "staging",
                 "--dart-define",
@@ -43,6 +49,8 @@
             "type": "dart",
             "program": "app/lib/main.dart",
             "toolArgs": [
+                // "--verbose",
+                // "--no-enable-impeller",                
                 "--flavor",
                 "production",
                 "--dart-define",

@@ -18,9 +18,9 @@ class AppDimen {
   final ScreenType screenType;
 
   static AppDimen of(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenHeight = MediaQuery.sizeOf(context).height;
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
 
     final screen = AppDimen._(
       screenWidth: screenWidth,

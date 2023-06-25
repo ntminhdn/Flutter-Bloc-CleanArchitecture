@@ -2,12 +2,13 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared/shared.dart';
 
 import '../app.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   CommonAppBar({
-    Key? key,
+    super.key,
     this.text,
     this.onLeadingPressed,
     this.onTitlePressed,
@@ -35,10 +36,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleTextStyle,
     this.systemOverlayStyle,
     this.leadingIconColor,
-  })  : preferredSize = Size.fromHeight(
+  }) : preferredSize = Size.fromHeight(
           height ?? Dimens.d56.responsive(),
-        ),
-        super(key: key);
+        );
 
   final String? text;
   final VoidCallback? onLeadingPressed;
@@ -121,7 +121,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget _buildIcon(SvgGenImage svg) {
     return svg.svg(
-      color: leadingIconColor,
+      colorFilter: leadingIconColor?.let((it) => ColorFilter.mode(it, BlendMode.srcIn)),
       width: Dimens.d24.responsive(),
       height: Dimens.d24.responsive(),
     );

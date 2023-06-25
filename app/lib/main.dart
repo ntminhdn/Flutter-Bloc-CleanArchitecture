@@ -9,11 +9,20 @@ import 'package:shared/shared.dart';
 import 'app/my_app.dart';
 import 'config/app_config.dart';
 
-Future<void> main() async {
+void main() => runZonedGuarded(_runMyApp, _reportError);
+
+Future<void> _runMyApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
   await AppInitializer(AppConfig.getInstance()).init();
-  await runZonedGuarded(_runMyApp, _reportError);
+  final initialResource = await _loadInitialResource();
+  runApp(MyApp(initialResource: initialResource));
+}
+
+void _reportError(Object error, StackTrace stackTrace) {
+  Log.e(error, stackTrace: stackTrace, name: 'Uncaught exception');
+
+  // report by Firebase Crashlytics here
 }
 
 Future<LoadInitialResourceOutput> _loadInitialResource() async {
@@ -26,15 +35,4 @@ Future<LoadInitialResourceOutput> _loadInitialResource() async {
     success: (output) => output,
     failure: (e) => const LoadInitialResourceOutput(),
   );
-}
-
-Future<void> _runMyApp() async {
-  final initialResource = await _loadInitialResource();
-  runApp(MyApp(initialResource: initialResource));
-}
-
-void _reportError(Object error, StackTrace stackTrace) {
-  Log.e(error, stackTrace: stackTrace, name: 'Uncaught exception');
-
-  // report by Firebase Crashlytics here
 }

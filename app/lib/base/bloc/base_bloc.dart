@@ -8,12 +8,12 @@ import '../../app.dart';
 
 abstract class BaseBloc<E extends BaseBlocEvent, S extends BaseBlocState>
     extends BaseBlocDelegate<E, S> with EventTransformerMixin, LogMixin {
-  BaseBloc(S initialState) : super(initialState);
+  BaseBloc(super.initialState);
 }
 
 abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState>
     extends Bloc<E, S> {
-  BaseBlocDelegate(S initialState) : super(initialState);
+  BaseBlocDelegate(super.initialState);
 
   late final AppNavigator navigator;
   late final AppBloc appBloc;

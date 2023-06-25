@@ -30,7 +30,7 @@ class RefreshTokenInterceptor extends BaseInterceptor {
   int get priority => BaseInterceptor.refreshTokenPriority;
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == HttpStatus.unauthorized) {
       final options = err.response!.requestOptions;
       _onExpiredToken(options, handler);
@@ -81,7 +81,7 @@ class RefreshTokenInterceptor extends BaseInterceptor {
     _queue.forEach((element) {
       final options = element.item1;
       final handler = element.item2;
-      handler.next(DioError(requestOptions: options, error: error));
+      handler.next(DioException(requestOptions: options, error: error));
     });
   }
 
@@ -95,6 +95,6 @@ class RefreshTokenInterceptor extends BaseInterceptor {
     return _noneAuthAppServerApiClient
         .fetch(options)
         .then((response) => handler.resolve(response))
-        .catchError((e) => handler.next(DioError(requestOptions: options, error: e)));
+        .catchError((e) => handler.next(DioException(requestOptions: options, error: e)));
   }
 }

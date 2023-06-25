@@ -13,3 +13,4 @@ key.properties
 **/*.jks
 keybase64.txt
 distribution
+/app/build

@@ -15,8 +15,8 @@ class CommonPagingScrollSnapPhysics extends ScrollPhysics {
     required this.maxWidth,
     required this.maxHeight,
     required this.isHorizontal,
-    ScrollPhysics? parent,
-  }) : super(parent: parent);
+    super.parent,
+  });
 
   final double itemSize;
   final SelectedAnchorItem selectedAnchorItem;
@@ -46,7 +46,14 @@ class CommonPagingScrollSnapPhysics extends ScrollPhysics {
       return super.createBallisticSimulation(position, velocity);
     }
 
-    final Tolerance tolerance = this.tolerance;
+    final Tolerance tolerance = toleranceFor(FixedScrollMetrics(
+      minScrollExtent: null,
+      maxScrollExtent: null,
+      pixels: null,
+      viewportDimension: null,
+      axisDirection: AxisDirection.down,
+      devicePixelRatio: WidgetsBinding.instance.platformDispatcher.views.first.devicePixelRatio,
+    ));
     final double target = _getTargetPixels(position, tolerance, velocity);
 
     if (target != position.pixels) {

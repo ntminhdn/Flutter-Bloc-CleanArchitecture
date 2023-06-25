@@ -6,7 +6,7 @@ import 'package:resources/resources.dart';
 import '../../app.dart';
 
 class MyPagePage extends StatefulWidget {
-  const MyPagePage({Key? key}) : super(key: key);
+  const MyPagePage({super.key});
 
   @override
   State<StatefulWidget> createState() {

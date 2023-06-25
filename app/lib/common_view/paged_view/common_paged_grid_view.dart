@@ -18,7 +18,7 @@ class CommonPagedGridView<T> extends StatelessWidget {
     this.newPageProgressIndicator,
     this.noItemsFoundIndicator,
     this.noMoreItemsIndicator,
-    Key? key,
+    super.key,
     this.scrollController,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
@@ -39,7 +39,7 @@ class CommonPagedGridView<T> extends StatelessWidget {
     this.showNewPageErrorIndicatorAsGridChild = false,
     this.showNoMoreItemsIndicatorAsGridChild = false,
     this.onRefresh,
-  }) : super(key: key);
+  });
 
   final CommonPagingController<T> pagingController;
   final Widget Function(

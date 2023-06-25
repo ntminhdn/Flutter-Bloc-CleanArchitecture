@@ -1,6 +1,6 @@
 class ServerTimeoutConstants {
   const ServerTimeoutConstants._();
-  static const connectTimeoutInMs = 30000;
-  static const receiveTimeoutInMs = 30000;
-  static const sendTimeoutInMs = 30000;
+  static const connectTimeout = Duration(seconds: 30);
+  static const receiveTimeout = Duration(seconds: 30);
+  static const sendTimeout = Duration(seconds: 30);
 }

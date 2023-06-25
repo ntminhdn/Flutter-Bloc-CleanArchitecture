@@ -11,8 +11,8 @@ class CommonScaffold extends StatelessWidget {
     this.drawer,
     this.backgroundColor,
     this.hideKeyboardWhenTouchOutside = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget body;
   final PreferredSizeWidget? appBar;

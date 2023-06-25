@@ -17,7 +17,7 @@ class CommonPagedListView<T> extends StatelessWidget {
     this.newPageProgressIndicator,
     this.noItemsFoundIndicator,
     this.noMoreItemsIndicator,
-    Key? key,
+    super.key,
     this.scrollController,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
@@ -38,7 +38,7 @@ class CommonPagedListView<T> extends StatelessWidget {
     this.itemSize,
     this.snapping = false,
     this.selectedAnchorItem = SelectedAnchorItem.middle,
-  }) : super(key: key);
+  });
 
   final CommonPagingController<T> pagingController;
   final Widget Function(

@@ -17,15 +17,15 @@ class RestApiClient {
     this.interceptors = const [],
     this.errorResponseMapperType = ResponseMapperConstants.defaultErrorResponseMapperType,
     this.successResponseMapperType = ResponseMapperConstants.defaultSuccessResponseMapperType,
-    this.connectTimeoutInMs = ServerTimeoutConstants.connectTimeoutInMs,
-    this.sendTimeoutInMs = ServerTimeoutConstants.sendTimeoutInMs,
-    this.receiveTimeoutInMs = ServerTimeoutConstants.receiveTimeoutInMs,
+    this.connectTimeout = ServerTimeoutConstants.connectTimeout,
+    this.sendTimeout = ServerTimeoutConstants.sendTimeout,
+    this.receiveTimeout = ServerTimeoutConstants.receiveTimeout,
   }) : _dio = DioBuilder.createDio(
           options: BaseOptions(
             baseUrl: baseUrl,
-            connectTimeout: connectTimeoutInMs,
-            sendTimeout: sendTimeoutInMs,
-            receiveTimeout: receiveTimeoutInMs,
+            connectTimeout: connectTimeout,
+            sendTimeout: sendTimeout,
+            receiveTimeout: receiveTimeout,
           ),
         ) {
     final sortedInterceptors = [
@@ -41,9 +41,9 @@ class RestApiClient {
   final SuccessResponseMapperType successResponseMapperType;
   final ErrorResponseMapperType errorResponseMapperType;
   final String baseUrl;
-  final int? connectTimeoutInMs;
-  final int? sendTimeoutInMs;
-  final int? receiveTimeoutInMs;
+  final Duration? connectTimeout;
+  final Duration? sendTimeout;
+  final Duration? receiveTimeout;
   final List<Interceptor> interceptors;
   final Dio _dio;
 
@@ -60,8 +60,8 @@ class RestApiClient {
     Map<String, dynamic>? headers,
     String? contentType,
     ResponseType? responseType,
-    int? sendTimeoutInMs,
-    int? receiveTimeoutInMs,
+    Duration? sendTimeout,
+    Duration? receiveTimeout,
   }) async {
     try {
       final response = await _requestByMethod(
@@ -73,8 +73,8 @@ class RestApiClient {
           headers: headers,
           contentType: contentType,
           responseType: responseType,
-          sendTimeout: sendTimeoutInMs,
-          receiveTimeout: receiveTimeoutInMs,
+          sendTimeout: sendTimeout,
+          receiveTimeout: receiveTimeout,
         ),
       );
 

@@ -99,7 +99,8 @@ class ConfigXmlWriter {
       if (projectRootElements.isEmpty) {
         throw FormatException;
       }
-      XmlNode runManagerElement = createElementFromSkeleton(runManagerSkeleton);
+      final XmlNode runManagerElement =
+          createElementFromSkeleton(runManagerSkeleton);
       projectRootElements.first.children.add(runManagerElement);
 
       runConfRootElement = document
@@ -111,15 +112,16 @@ class ConfigXmlWriter {
 
   XmlNode createRunConf(
       {required String config,
-        required String flavor,
-        Map<String, String>? dartDefines}) {
-    XmlNode newRunConfElement = createElementFromSkeleton(runConfigSkeletonXml);
+      required String flavor,
+      Map<String, String>? dartDefines}) {
+    final XmlNode newRunConfElement =
+        createElementFromSkeleton(runConfigSkeletonXml);
     newRunConfElement.setAttribute('name', '$config $flavor');
     final buildFlavorElement = newRunConfElement.childElements
         .firstWhere((element) => element.getAttribute('name') == 'buildFlavor');
     buildFlavorElement.setAttribute('value', flavor);
     final dartDefinesElement = newRunConfElement.childElements.firstWhere(
-            (element) => element.getAttribute('name') == 'additionalArgs');
+        (element) => element.getAttribute('name') == 'additionalArgs');
     dartDefinesElement.setAttribute(
         'value',
         getAdditionalArgs(
@@ -128,8 +130,8 @@ class ConfigXmlWriter {
   }
 
   XmlNode createMakeConf({required String target}) {
-    XmlNode newMakeConfElement =
-    createElementFromSkeleton(makeConfigSkeletonXml);
+    final XmlNode newMakeConfElement =
+        createElementFromSkeleton(makeConfigSkeletonXml);
     newMakeConfElement.setAttribute('name', 'make $target');
     final targetElement = newMakeConfElement.findAllElements('makefile').first;
     targetElement.setAttribute('target', target);
@@ -137,17 +139,18 @@ class ConfigXmlWriter {
   }
 
   XmlNode createElementFromSkeleton(String skeleton) {
-    XmlNode? element = XmlDocument.parse(skeleton).firstChild?.copy();
+    final XmlNode? element = XmlDocument.parse(skeleton).firstChild?.copy();
     if (element == null) {
       throw FormatException;
     }
     return element;
   }
 
-  String getAdditionalArgs(
-      {String? command,
-        required String flavor,
-        Map<String, String>? dartDefines}) {
+  String getAdditionalArgs({
+    required String flavor,
+    String? command,
+    Map<String, String>? dartDefines,
+  }) {
     final StringBuffer buffer = StringBuffer();
     if (command != null && !command.contains('run')) {
       buffer.write('--$command ');
@@ -158,9 +161,9 @@ class ConfigXmlWriter {
   }
 
   void addOrReplaceConf(XmlElement rootElement, XmlNode newConf) {
-    XmlNode? existingElement = rootElement.children.firstWhereOrNull(
-            (element) =>
-        element.getAttribute('name') == newConf.getAttribute('name'));
+    final XmlNode? existingElement = rootElement.children.firstWhereOrNull(
+        (element) =>
+            element.getAttribute('name') == newConf.getAttribute('name'));
     if (existingElement != null) {
       rootElement.children.remove(existingElement);
     }

@@ -5,7 +5,7 @@ import 'package:resources/resources.dart';
 import '../../app.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
   State<StatefulWidget> createState() {

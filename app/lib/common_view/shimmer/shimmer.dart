@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class Shimmer extends StatefulWidget {
   const Shimmer({
     this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget? child;
   static _ShimmerState? of(BuildContext context) {

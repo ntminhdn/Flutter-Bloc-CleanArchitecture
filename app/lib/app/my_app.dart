@@ -11,7 +11,7 @@ import 'package:shared/shared.dart';
 import '../app.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({required this.initialResource, Key? key}) : super(key: key);
+  const MyApp({required this.initialResource, super.key});
 
   final LoadInitialResourceOutput initialResource;
 
@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends BasePageState<MyApp, AppBloc> {
-  final _appRouter = GetIt.instance.get<AppRouter>();
+  final _appRouter = GetIt.instance.get<MyAppRouter>();
 
   @override
   bool get isAppWidget => true;
@@ -41,7 +41,6 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
             previous.languageCode != current.languageCode,
         builder: (context, state) {
           return MaterialApp.router(
-            useInheritedMediaQuery: true,
             builder: (context, child) {
               final MediaQueryData data = MediaQuery.of(context);
 

@@ -12,8 +12,8 @@ class CommonDialog extends StatelessWidget {
     this.actions = const <PopupButton>[],
     this.title,
     this.message,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   const CommonDialog.android({
     List<PopupButton> actions = const <PopupButton>[],

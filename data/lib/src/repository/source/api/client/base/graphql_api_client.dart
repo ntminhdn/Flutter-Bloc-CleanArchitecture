@@ -23,9 +23,9 @@ class GraphQLApiClient {
     this.baseUrl = '',
     this.interceptors = const [],
     this.errorResponseMapperType = ResponseMapperConstants.defaultErrorResponseMapperType,
-    this.connectTimeoutInMs = ServerTimeoutConstants.connectTimeoutInMs,
-    this.sendTimeoutInMs = ServerTimeoutConstants.sendTimeoutInMs,
-    this.receiveTimeoutInMs = ServerTimeoutConstants.receiveTimeoutInMs,
+    this.connectTimeout = ServerTimeoutConstants.connectTimeout,
+    this.sendTimeout = ServerTimeoutConstants.sendTimeout,
+    this.receiveTimeout = ServerTimeoutConstants.receiveTimeout,
   }) : _graphQLClient = ValueNotifier<GraphQLClient>(
           GraphQLClient(
             cache: GraphQLCache(),
@@ -34,9 +34,9 @@ class GraphQLApiClient {
               client: DioBuilder.createDio(
                 options: BaseOptions(
                   baseUrl: baseUrl,
-                  connectTimeout: connectTimeoutInMs,
-                  sendTimeout: sendTimeoutInMs,
-                  receiveTimeout: receiveTimeoutInMs,
+                  connectTimeout: connectTimeout,
+                  sendTimeout: sendTimeout,
+                  receiveTimeout: receiveTimeout,
                 ),
               ),
             ),
@@ -54,9 +54,9 @@ class GraphQLApiClient {
 
   final ErrorResponseMapperType errorResponseMapperType;
   final String baseUrl;
-  final int? connectTimeoutInMs;
-  final int? sendTimeoutInMs;
-  final int? receiveTimeoutInMs;
+  final Duration? connectTimeout;
+  final Duration? sendTimeout;
+  final Duration? receiveTimeout;
   final List<Interceptor> interceptors;
   final ValueNotifier<GraphQLClient> _graphQLClient;
 

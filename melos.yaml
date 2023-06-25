@@ -1,16 +1,11 @@
 name: basecleanflutter
 
 packages:
-  - domain/**
-  - data/**
-  - initializer/**
-  - resources/**
-  - shared/**
-  - app/**
+  - ./**
 
 command:
   bootstrap:
-    usePubspecOverrides: true
+    runPubGetInParallel: false
 
 scripts:
   # build runner build
@@ -126,7 +121,7 @@ scripts:
     description: Run test shared module.
 
   format:
-    run: dart pub global run melos exec --fail-fast --flutter -- "find . -name "*.dart" ! -name "*.g.dart" ! -name "*.freezed.dart" ! -name "*.gr.dart" ! -name "*.config.dart" ! -name "*.mocks.dart" ! -path '*/generated/*' ! -path '*/.dart_tool/*' | tr '\n' ' ' | xargs flutter format --set-exit-if-changed -l 100"
+    run: dart pub global run melos exec --fail-fast --flutter -- "find . -name "*.dart" ! -name "*.g.dart" ! -name "*.freezed.dart" ! -name "*.gr.dart" ! -name "*.config.dart" ! -name "*.mocks.dart" ! -path '*/generated/*' ! -path '*/.dart_tool/*' | tr '\n' ' ' | xargs dart format --set-exit-if-changed -l 100"
     description: Run format.
 
   metrics:

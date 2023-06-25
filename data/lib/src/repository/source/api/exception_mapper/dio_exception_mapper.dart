@@ -12,18 +12,18 @@ class DioExceptionMapper extends ExceptionMapper<RemoteException> {
 
   @override
   RemoteException map(Object? exception) {
-    if (exception is DioError) {
+    if (exception is DioException) {
       switch (exception.type) {
-        case DioErrorType.cancel:
+        case DioExceptionType.cancel:
           return const RemoteException(kind: RemoteExceptionKind.cancellation);
-        case DioErrorType.connectTimeout:
-        case DioErrorType.receiveTimeout:
-        case DioErrorType.sendTimeout:
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.receiveTimeout:
+        case DioExceptionType.sendTimeout:
           return RemoteException(
             kind: RemoteExceptionKind.timeout,
             rootException: exception,
           );
-        case DioErrorType.response:
+        case DioExceptionType.badResponse:
           final httpErrorCode = exception.response?.statusCode ?? -1;
 
           /// server-defined error
@@ -44,13 +44,20 @@ class DioExceptionMapper extends ExceptionMapper<RemoteException> {
             httpErrorCode: httpErrorCode,
             rootException: exception,
           );
-        case DioErrorType.other:
+        case DioExceptionType.badCertificate:
+          return RemoteException(
+            kind: RemoteExceptionKind.badCertificate,
+            rootException: exception,
+          );
+        case DioExceptionType.connectionError:
+          return RemoteException(kind: RemoteExceptionKind.network, rootException: exception);
+        case DioExceptionType.unknown:
           if (exception is SocketException) {
             return RemoteException(kind: RemoteExceptionKind.network, rootException: exception);
           }
 
           if (exception.error is RemoteException) {
-            return exception.error;
+            return exception.error as RemoteException;
           }
       }
     }

@@ -7,9 +7,9 @@ class RetryOnErrorInterceptor extends BaseInterceptor {
   RetryOnErrorInterceptor(this.dio);
 
   final Dio dio;
-  int _retries = RetryOnErrorConstants.retries;
 
   static const _retryHeaderKey = 'isRetry';
+  static const _retryCountKey = 'retryCount';
 
   @override
   int get priority => BaseInterceptor.retryOnErrorPriority;
@@ -17,21 +17,26 @@ class RetryOnErrorInterceptor extends BaseInterceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     if (!options.headers.containsKey(_retryHeaderKey)) {
-      _retries = RetryOnErrorConstants.retries;
+      options.headers[_retryCountKey] = RetryOnErrorConstants.maxRetries;
     }
     super.onRequest(options, handler);
   }
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
-    if (_retries > 0 && shouldRetry(err)) {
-      await Future.delayed(RetryOnErrorConstants.retryInterval);
-      _retries--;
+  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
+    assert(err.requestOptions.headers[_retryCountKey] != null);
+    final retryCount = err.requestOptions.headers[_retryCountKey] as int;
+    if (retryCount > 0 && _shouldRetry(err)) {
+      await Future<void>.delayed(RetryOnErrorConstants.retryInterval);
       try {
-        return await dio
-            .fetch(err.requestOptions..headers[_retryHeaderKey] = true)
-            .then((value) => handler.resolve(value));
-      } catch (e) {
+        final response = await dio.fetch<dynamic>(
+          err.requestOptions
+            ..headers[_retryHeaderKey] = true
+            ..headers[_retryCountKey] = retryCount - 1,
+        );
+
+        return handler.resolve(response);
+      } catch (_) {
         return super.onError(err, handler);
       }
     }
@@ -39,6 +44,6 @@ class RetryOnErrorInterceptor extends BaseInterceptor {
     return super.onError(err, handler);
   }
 
-  bool shouldRetry(DioError error) =>
-      error.type != DioErrorType.cancel && error.type != DioErrorType.response;
+  bool _shouldRetry(DioException error) =>
+      error.type != DioExceptionType.cancel && error.type != DioExceptionType.badResponse;
 }

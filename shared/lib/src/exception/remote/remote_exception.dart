@@ -45,7 +45,7 @@ class RemoteException extends AppException {
 enum RemoteExceptionKind {
   noInternet,
 
-  /// host not found, cannot connect to host
+  /// host not found, cannot connect to host, SocketException
   network,
 
   /// server has defined response
@@ -53,6 +53,9 @@ enum RemoteExceptionKind {
 
   /// server has not defined response
   serverUndefined,
+
+  /// Caused by an incorrect certificate as configured by [ValidateCertificate]
+  badCertificate,
 
   refreshTokenFailed,
   timeout,

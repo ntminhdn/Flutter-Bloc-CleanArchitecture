@@ -11,8 +11,8 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.onTap,
     this.keyboardType = TextInputType.text,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String title;
   final String hintText;
