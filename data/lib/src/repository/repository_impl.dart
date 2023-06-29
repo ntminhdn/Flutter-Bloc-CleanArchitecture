@@ -169,7 +169,7 @@ class RepositoryImpl implements Repository {
     return _appDatabase.putUser(userData);
   }
 
-  Future<List<Object>> _saveTokenAndUser(AuthResponseData? authData) async {
+  Future<List<dynamic>> _saveTokenAndUser(AuthResponseData? authData) async {
     return Future.wait([
       _appPreferences.saveCurrentUser(PreferenceUserData(
         id: authData?.id ?? -1,
