@@ -50,7 +50,6 @@ export 'navigation/middleware/route_guard.dart';
 export 'navigation/observer/app_navigator_observer.dart';
 export 'navigation/routes/app_router.dart';
 export 'navigation/routes/app_router.gr.dart';
-export 'navigation/routes/my_app_router.dart';
 export 'resource/dimens/app_dimen.dart';
 export 'resource/dimens/dimens.dart';
 export 'resource/generated/assets.gen.dart';

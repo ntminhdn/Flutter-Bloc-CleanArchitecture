@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,16 +10,14 @@ import 'package:shared/shared.dart';
 import '../app.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({required this.initialResource, super.key});
-
-  final LoadInitialResourceOutput initialResource;
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends BasePageState<MyApp, AppBloc> {
-  final _appRouter = GetIt.instance.get<MyAppRouter>();
+  final _appRouter = GetIt.instance.get<AppRouter>();
 
   @override
   bool get isAppWidget => true;
@@ -50,7 +47,9 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
               );
             },
             routerDelegate: _appRouter.delegate(
-              initialRoutes: _mapRouteToPageRouteInfo(widget.initialResource),
+              deepLinkBuilder: (deepLink) {
+                return DeepLink.defaultPath;
+              },
               navigatorObservers: () => [AppNavigatorObserver()],
             ),
             routeInformationParser: _appRouter.defaultRouteParser(),
@@ -76,16 +75,5 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
         },
       ),
     );
-  }
-
-  List<PageRouteInfo> _mapRouteToPageRouteInfo(LoadInitialResourceOutput initialResource) {
-    return initialResource.initialRoutes.map((e) {
-      switch (e) {
-        case AppRoute.login:
-          return const LoginRoute();
-        case AppRoute.main:
-          return const MainRoute();
-      }
-    }).toList(growable: false);
   }
 }
