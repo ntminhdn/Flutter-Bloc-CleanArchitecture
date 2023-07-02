@@ -1,4 +1,5 @@
 import 'package:app/app.dart';
+import 'package:app/ui/login/bloc/login.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -36,7 +37,7 @@ void main() {
     blocTest<LoginBloc, LoginState>(
       'login successfully',
       setUp: () {
-        when(() => _navigator.replace(const AppRouteInfo.main()))
+        when(() => _navigator.popAllAndPush(AppRouteInfo.main()))
             .thenAnswer((_) => Future.value(true));
 
         when(() =>
@@ -54,7 +55,7 @@ void main() {
         const LoginState(email: inputEmail, password: inputPassword, isLoginButtonEnabled: true),
       ],
       verify: (_) {
-        verify(() => _navigator.replace(const AppRouteInfo.main())).called(1);
+        verify(() => _navigator.popAllAndPush(AppRouteInfo.main())).called(1);
       },
     );
 
@@ -88,7 +89,7 @@ void main() {
         ),
       ],
       verify: (_) {
-        verifyNever(() => _navigator.replace(const AppRouteInfo.main()));
+        verifyNever(() => _navigator.popAllAndPush(AppRouteInfo.main()));
       },
     );
 

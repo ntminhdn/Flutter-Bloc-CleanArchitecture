@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../app.dart';
+import 'login.dart';
 
 @Injectable()
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
@@ -56,7 +57,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     return runBlocCatching(
       action: () async {
         await _loginUseCase.execute(LoginInput(email: state.email, password: state.password));
-        await navigator.replace(const AppRouteInfo.main());
+        navigator.popAllAndPush(AppRouteInfo.main());
       },
       handleError: false,
       doOnError: (e) async {

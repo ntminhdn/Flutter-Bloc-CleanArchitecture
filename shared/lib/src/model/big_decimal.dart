@@ -90,4 +90,6 @@ class BigDecimal implements Comparable<BigDecimal> {
   BigDecimal plus(BigDecimal other) => this + other;
   BigDecimal minus(BigDecimal other) => this - other;
   BigDecimal times(BigDecimal other) => this * other;
+
+  String toJson() => decimal.toJson();
 }

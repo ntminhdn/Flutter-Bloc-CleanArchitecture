@@ -13,6 +13,7 @@ export 'src/constants/firebase/firebase_remote_config_constants.dart';
 export 'src/constants/format/date_time_format_constants.dart';
 export 'src/constants/format/number_format_constants.dart';
 export 'src/constants/locale_constants.dart';
+export 'src/constants/navigation_constants.dart';
 export 'src/constants/server/response_mapper_constants.dart';
 export 'src/constants/server/retry_on_error_constants.dart';
 export 'src/constants/server/server_error_constants.dart';

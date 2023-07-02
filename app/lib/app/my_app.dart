@@ -1,10 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_it/get_it.dart';
 import 'package:resources/resources.dart';
 import 'package:shared/shared.dart';
 
@@ -20,8 +18,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends BasePageState<MyApp, AppBloc> {
-  final _appRouter = GetIt.instance.get<MyAppRouter>();
-
   @override
   bool get isAppWidget => true;
 
@@ -49,11 +45,10 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
                 child: child ?? const SizedBox.shrink(),
               );
             },
-            routerDelegate: _appRouter.delegate(
-              initialRoutes: _mapRouteToPageRouteInfo(widget.initialResource),
-              navigatorObservers: () => [AppNavigatorObserver()],
-            ),
-            routeInformationParser: _appRouter.defaultRouteParser(),
+            routerConfig: router,
+            // routerDelegate: router.routerDelegate,
+            // routeInformationParser: router.routeInformationParser,
+            // routeInformationProvider: router.routeInformationProvider,
             title: UiConstants.materialAppTitle,
             color: UiConstants.taskMenuMaterialAppColor,
             themeMode: state.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
@@ -76,16 +71,5 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
         },
       ),
     );
-  }
-
-  List<PageRouteInfo> _mapRouteToPageRouteInfo(LoadInitialResourceOutput initialResource) {
-    return initialResource.initialRoutes.map((e) {
-      switch (e) {
-        case AppRoute.login:
-          return const LoginRoute();
-        case AppRoute.main:
-          return const MainRoute();
-      }
-    }).toList(growable: false);
   }
 }

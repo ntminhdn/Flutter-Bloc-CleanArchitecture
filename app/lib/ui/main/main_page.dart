@@ -1,11 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app.dart';
+import 'bloc/main.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  const MainPage({required this.navigationShell, super.key});
+
+  final StatefulNavigationShell navigationShell;
 
   @override
   State<StatefulWidget> createState() {
@@ -14,41 +17,34 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends BasePageState<MainPage, MainBloc> {
-  final _bottomBarKey = GlobalKey();
-
   @override
   Widget buildPage(BuildContext context) {
-    return AutoTabsScaffold(
-      routes: (navigator as AppNavigatorImpl).tabRoutes,
-      bottomNavigationBuilder: (_, tabsRouter) {
-        (navigator as AppNavigatorImpl).tabsRouter = tabsRouter;
-
-        return BottomNavigationBar(
-          key: _bottomBarKey,
-          currentIndex: tabsRouter.activeIndex,
-          onTap: (index) {
-            if (index == tabsRouter.activeIndex) {
-              (navigator as AppNavigatorImpl).popUntilRootOfCurrentBottomTab();
-            }
-            tabsRouter.setActiveIndex(index);
-          },
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          // unselectedItemColor: AppColors.current.primaryColor,
-          // selectedItemColor: AppColors.current.primaryColor,
-          type: BottomNavigationBarType.fixed,
-          // backgroundColor: AppColors.current.primaryColor,
-          items: BottomTab.values
-              .map(
-                (tab) => BottomNavigationBarItem(
-                  label: tab.title,
-                  icon: tab.icon,
-                  activeIcon: tab.activeIcon,
-                ),
-              )
-              .toList(),
-        );
-      },
+    return Scaffold(
+      body: widget.navigationShell,
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: widget.navigationShell.currentIndex,
+        onTap: (index) {
+          widget.navigationShell.goBranch(
+            index,
+            initialLocation: index == widget.navigationShell.currentIndex,
+          );
+        },
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        // unselectedItemColor: AppColors.current.primaryColor,
+        // selectedItemColor: AppColors.current.primaryColor,
+        type: BottomNavigationBarType.fixed,
+        // backgroundColor: AppColors.current.primaryColor,
+        items: BottomTab.values
+            .map(
+              (tab) => BottomNavigationBarItem(
+                label: tab.title,
+                icon: tab.icon,
+                activeIcon: tab.activeIcon,
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }

@@ -1,8 +1,10 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import '../../app.dart';
+import 'bloc/login.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -71,6 +73,13 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                     ),
                   );
                 },
+              ),
+              InkWell(
+                onTap: () => navigator.push(AppRouteInfo.registerAccount(), useRootNavigator: true),
+                child: Text(
+                  'Register',
+                  style: AppTextStyles.s14w400Secondary(),
+                ),
               ),
             ],
           ),

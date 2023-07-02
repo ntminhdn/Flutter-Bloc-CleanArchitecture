@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart' as m;
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared/shared.dart';
 
@@ -9,124 +9,99 @@ import '../app.dart';
 @LazySingleton(as: AppNavigator)
 class AppNavigatorImpl extends AppNavigator with LogMixin {
   AppNavigatorImpl(
-    this._myAppRouter,
     this._appPopupInfoMapper,
-    this._appRouteInfoMapper,
   );
 
-  final tabRoutes = const [
-    BottomTabHomeRouter(),
-    BottomTabSearchRouter(),
-    BottomTabMyPageRouter(),
-  ];
-
-  TabsRouter? tabsRouter;
-
-  final MyAppRouter _myAppRouter;
   final BasePopupInfoMapper _appPopupInfoMapper;
-  final BaseRouteInfoMapper _appRouteInfoMapper;
   final _popups = <AppPopupInfo>{};
 
-  StackRouter? get _currentTabRouter => tabsRouter?.stackRouterOfIndex(currentBottomTab);
-
-  StackRouter get _currentTabRouterOrRootRouter => _currentTabRouter ?? _myAppRouter;
-
-  m.BuildContext get _rootRouterContext => _myAppRouter.navigatorKey.currentContext!;
-
-  m.BuildContext? get _currentTabRouterContext => _currentTabRouter?.navigatorKey.currentContext;
-
-  m.BuildContext get _currentTabContextOrRootContext =>
-      _currentTabRouterContext ?? _rootRouterContext;
+  m.BuildContext get _context => rootNavigatorKey.currentContext!;
+  m.BuildContext get _childContext {
+    return homeNavigatorKey.currentContext!;
+  }
 
   @override
   int get currentBottomTab {
-    if (tabsRouter == null) {
-      throw 'Not found any TabRouter';
-    }
-
-    return tabsRouter?.activeIndex ?? 0;
+    return StatefulNavigationShell.of(_childContext).currentIndex;
   }
 
   @override
-  bool get canPopSelfOrChildren => _myAppRouter.canPop();
+  bool get canPopSelfOrChildren => _getRouter(true).canPop();
+
+  GoRouter _getRouter(bool useRootNavigator) =>
+      GoRouter.of(useRootNavigator ? _context : _childContext);
+
+  m.NavigatorState _getNavigator(bool useRootNavigator) =>
+      m.Navigator.of(useRootNavigator ? _context : _childContext);
 
   @override
   String getCurrentRouteName({bool useRootNavigator = false}) =>
-      AutoRouter.of(useRootNavigator ? _rootRouterContext : _currentTabContextOrRootContext)
-          .current
-          .name;
-
-  @override
-  void popUntilRootOfCurrentBottomTab() {
-    if (tabsRouter == null) {
-      throw 'Not found any TabRouter';
-    }
-
-    if (_currentTabRouter?.canPop() == true) {
-      if (LogConfig.enableNavigatorObserverLog) {
-        logD('popUntilRootOfCurrentBottomTab');
-      }
-      _currentTabRouter?.popUntilRoot();
-    }
-  }
+      GoRouterState.of(_context).location;
 
   @override
   void navigateToBottomTab(int index, {bool notify = true}) {
-    if (tabsRouter == null) {
-      throw 'Not found any TabRouter';
-    }
-
     if (LogConfig.enableNavigatorObserverLog) {
       logD('navigateToBottomTab with index = $index, notify = $notify');
     }
-    tabsRouter?.setActiveIndex(index, notify: notify);
+
+    StatefulNavigationShell.of(_context).goBranch(index);
   }
 
   @override
-  Future<T?> push<T extends Object?>(AppRouteInfo appRouteInfo) {
+  Future<T?> push<T extends Object?>(
+    AppRouteInfo appRouteInfo, {
+    bool useRootNavigator = false,
+  }) {
     if (LogConfig.enableNavigatorObserverLog) {
       logD('push $appRouteInfo');
     }
 
-    return _myAppRouter.push<T>(_appRouteInfoMapper.map(appRouteInfo));
+    return _getRouter(useRootNavigator).pushNamed<T>(
+      appRouteInfo.name,
+      extra: appRouteInfo.extra,
+      pathParameters: appRouteInfo.pathParameters,
+      queryParameters: appRouteInfo.queryParameters,
+    );
   }
 
   @override
-  Future<void> pushAll(List<AppRouteInfo> listAppRouteInfo) {
+  Future<void> pushAll(
+    List<AppRouteInfo> listAppRouteInfo, {
+    bool useRootNavigator = false,
+  }) async {
     if (LogConfig.enableNavigatorObserverLog) {
       logD('pushAll $listAppRouteInfo');
     }
 
-    return _myAppRouter.pushAll(_appRouteInfoMapper.mapList(listAppRouteInfo));
+    for (final appRouteInfo in listAppRouteInfo) {
+      await push(appRouteInfo);
+    }
   }
 
   @override
-  Future<T?> replace<T extends Object?>(AppRouteInfo appRouteInfo) {
+  Future<T?> replace<T extends Object?>(
+    AppRouteInfo appRouteInfo, {
+    bool useRootNavigator = false,
+  }) {
     if (LogConfig.enableNavigatorObserverLog) {
       logD('replace by $appRouteInfo');
     }
 
-    return _myAppRouter.replace<T>(_appRouteInfoMapper.map(appRouteInfo));
+    return _getRouter(useRootNavigator).replaceNamed(
+      appRouteInfo.name,
+      extra: appRouteInfo.extra,
+      pathParameters: appRouteInfo.pathParameters,
+      queryParameters: appRouteInfo.queryParameters,
+    );
   }
 
   @override
-  Future<void> replaceAll(List<AppRouteInfo> listAppRouteInfo) {
-    if (LogConfig.enableNavigatorObserverLog) {
-      logD('replaceAll by $listAppRouteInfo');
-    }
-
-    return _myAppRouter.replaceAll(_appRouteInfoMapper.mapList(listAppRouteInfo));
-  }
-
-  @override
-  Future<bool> pop<T extends Object?>({T? result, bool useRootNavigator = false}) {
+  void pop<T extends Object?>({T? result, bool useRootNavigator = false}) {
     if (LogConfig.enableNavigatorObserverLog) {
       logD('pop with result = $result, useRootNav = $useRootNavigator');
     }
 
-    return useRootNavigator
-        ? _myAppRouter.pop<T>(result)
-        : _currentTabRouterOrRootRouter.pop<T>(result);
+    _getRouter(useRootNavigator).pop<T>(result);
   }
 
   @override
@@ -139,12 +114,9 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('popAndPush $appRouteInfo with result = $result, useRootNav = $useRootNavigator');
     }
 
-    return useRootNavigator
-        ? _myAppRouter.popAndPush<T, R>(_appRouteInfoMapper.map(appRouteInfo), result: result)
-        : _currentTabRouterOrRootRouter.popAndPush<T, R>(
-            _appRouteInfoMapper.map(appRouteInfo),
-            result: result,
-          );
+    _getRouter(useRootNavigator).pop();
+
+    return push(appRouteInfo, useRootNavigator: useRootNavigator);
   }
 
   @override
@@ -153,55 +125,40 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       logD('popUntilRoot, useRootNav = $useRootNavigator');
     }
 
-    useRootNavigator ? _myAppRouter.popUntilRoot() : _currentTabRouterOrRootRouter.popUntilRoot();
+    _getNavigator(useRootNavigator).popUntil((route) => route.isFirst);
   }
 
   @override
-  void popUntilRouteName(String routeName) {
+  void popUntilRouteName(String routeName, {bool useRootNavigator = false}) {
     if (LogConfig.enableNavigatorObserverLog) {
       logD('popUntilRouteName $routeName');
     }
 
-    _myAppRouter.popUntilRouteWithName(routeName);
+    _getNavigator(useRootNavigator).popUntil((route) => route.settings.name == routeName);
   }
 
   @override
-  bool removeUntilRouteName(String routeName) {
+  void popAllAndPush<T extends Object?>(
+    AppRouteInfo appRouteInfo, {
+    bool useRootNavigator = false,
+  }) {
     if (LogConfig.enableNavigatorObserverLog) {
-      logD('removeUntilRouteName $routeName');
+      logD('popAllAndPush $appRouteInfo');
     }
 
-    return _myAppRouter.removeUntil((route) => route.name == routeName);
+    _getRouter(useRootNavigator).goNamed(appRouteInfo.name);
   }
 
   @override
-  bool removeAllRoutesWithName(String routeName) {
+  Future<T?> pushReplacement<T extends Object?>(
+    AppRouteInfo appRouteInfo, {
+    bool useRootNavigator = false,
+  }) {
     if (LogConfig.enableNavigatorObserverLog) {
-      logD('removeAllRoutesWithName $routeName');
+      logD('pushReplacement $appRouteInfo');
     }
 
-    return _myAppRouter.removeWhere((route) => route.name == routeName);
-  }
-
-  @override
-  Future<void> popAndPushAll(List<AppRouteInfo> listAppRouteInfo, {bool useRootNavigator = false}) {
-    if (LogConfig.enableNavigatorObserverLog) {
-      logD('popAndPushAll $listAppRouteInfo, useRootNav = $useRootNavigator');
-    }
-
-    return useRootNavigator
-        ? _myAppRouter.popAndPushAll(_appRouteInfoMapper.mapList(listAppRouteInfo))
-        : _currentTabRouterOrRootRouter
-            .popAndPushAll(_appRouteInfoMapper.mapList(listAppRouteInfo));
-  }
-
-  @override
-  bool removeLast() {
-    if (LogConfig.enableNavigatorObserverLog) {
-      logD('removeLast');
-    }
-
-    return _myAppRouter.removeLast();
+    return _getRouter(useRootNavigator).pushReplacementNamed(appRouteInfo.name);
   }
 
   @override
@@ -219,7 +176,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     _popups.add(appPopupInfo);
 
     return m.showDialog<T>(
-      context: useRootNavigator ? _rootRouterContext : _currentTabContextOrRootContext,
+      context: _context,
       builder: (_) => m.WillPopScope(
         onWillPop: () async {
           logD('Dialog $appPopupInfo dismissed');
@@ -253,7 +210,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     _popups.add(appPopupInfo);
 
     return m.showGeneralDialog<T>(
-      context: useRootNavigator ? _rootRouterContext : _currentTabContextOrRootContext,
+      context: _context,
       barrierColor: barrierColor,
       useRootNavigator: useRootNavigator,
       barrierDismissible: barrierDismissible,
@@ -291,7 +248,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     }
 
     return m.showModalBottomSheet<T>(
-      context: useRootNavigator ? _rootRouterContext : _currentTabContextOrRootContext,
+      context: _context,
       builder: (_) => _appPopupInfoMapper.map(appPopupInfo, this),
       isDismissible: isDismissible,
       enableDrag: enableDrag,
@@ -305,7 +262,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   @override
   void showErrorSnackBar(String message, {Duration? duration}) {
     ViewUtils.showAppSnackBar(
-      _rootRouterContext,
+      _context,
       message,
       duration: duration,
       // backgroundColor: AppColors.current.primaryColor,
@@ -315,7 +272,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   @override
   void showSuccessSnackBar(String message, {Duration? duration}) {
     ViewUtils.showAppSnackBar(
-      _rootRouterContext,
+      _context,
       message,
       duration: duration,
       // backgroundColor: AppColors.current.primaryColor,

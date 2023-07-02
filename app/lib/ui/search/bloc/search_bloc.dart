@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../app.dart';
+import 'search.dart';
 
 @Injectable()
 class SearchBloc extends BaseBloc<SearchEvent, SearchState> {

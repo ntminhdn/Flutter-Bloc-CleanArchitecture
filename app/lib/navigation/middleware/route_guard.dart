@@ -1,12 +1,13 @@
-import 'package:auto_route/auto_route.dart';
+import 'dart:async';
+
 import 'package:domain/domain.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared/shared.dart';
 
-import '../../app.dart';
-
 @Injectable()
-class RouteGuard extends AutoRouteGuard {
+class RouteGuard {
   RouteGuard(this._isLoggedInUseCase);
 
   final IsLoggedInUseCase _isLoggedInUseCase;
@@ -17,13 +18,7 @@ class RouteGuard extends AutoRouteGuard {
         failure: (e) => false,
       );
 
-  @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) {
-    if (_isLoggedIn) {
-      resolver.next(true);
-    } else {
-      router.push(const LoginRoute());
-      resolver.next(false);
-    }
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
+    return _isLoggedIn ? null : NavigationConstants.loginPath;
   }
 }

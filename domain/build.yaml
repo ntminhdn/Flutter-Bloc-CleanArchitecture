@@ -2,22 +2,7 @@ targets:
   $default:
     sources:
       - lib/**
-      - graphql/**
     builders:
-      artemis:
-        options:
-          generate_helpers: true
-
-          schema_mapping:
-            - schema: graphql/schema.graphql
-              queries_glob: graphql/pokedex.graphql
-              output: lib/src/repository/model/generated/pokedex_graphql.dart
-          
-          scalar_mapping:
-            - graphql_type: DateTime
-              dart_type: DateTime
-              use_custom_parser: true
-
       json_serializable:
         options:
           # Options configure how source code is generated for every
@@ -32,7 +17,7 @@ targets:
           create_per_field_to_json: false
           create_to_json: true
           disallow_unrecognized_keys: false
-          explicit_to_json: false
+          explicit_to_json: true
           field_rename: none
           generic_argument_factories: false
           ignore_unannotated: false

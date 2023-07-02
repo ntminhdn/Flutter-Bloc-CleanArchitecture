@@ -34,7 +34,7 @@ class ExceptionHandler {
             await _showErrorDialogWithRetry(
               message: message,
               onRetryPressed: Func0(() async {
-                await navigator.pop();
+                navigator.pop();
                 await appExceptionWrapper.doOnRetry?.call();
               }),
             );

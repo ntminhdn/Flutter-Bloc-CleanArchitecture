@@ -53,7 +53,7 @@ class CommonBloc extends BaseBloc<CommonEvent, CommonState> {
     return runBlocCatching(
       action: () async {
         await _clearCurrentUserDataUseCase.execute(const ClearCurrentUserDataInput());
-        await navigator.replace(const AppRouteInfo.login());
+        navigator.popAllAndPush(AppRouteInfo.login());
       },
     );
   }

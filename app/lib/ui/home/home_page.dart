@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared/shared.dart';
 
 import '../../app.dart';
+import 'bloc/home.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

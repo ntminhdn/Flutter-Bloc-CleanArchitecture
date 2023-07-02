@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import '../../app.dart';
+import 'bloc/my_page.dart';
 
 class MyPagePage extends StatefulWidget {
   const MyPagePage({super.key});

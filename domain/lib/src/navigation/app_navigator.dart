@@ -12,19 +12,26 @@ abstract class AppNavigator {
 
   String getCurrentRouteName({bool useRootNavigator = false});
 
-  void popUntilRootOfCurrentBottomTab();
+  void navigateToBottomTab(int index);
 
-  void navigateToBottomTab(int index, {bool notify = true});
+  Future<T?> push<T extends Object?>(
+    AppRouteInfo appRouteInfo, {
+    bool useRootNavigator = false,
+  });
 
-  Future<T?> push<T extends Object?>(AppRouteInfo appRouteInfo);
+  Future<void> pushAll(List<AppRouteInfo> listAppRouteInfo, {
+    bool useRootNavigator = false,
+  });
 
-  Future<void> pushAll(List<AppRouteInfo> listAppRouteInfo);
+  Future<T?> replace<T extends Object?>(AppRouteInfo appRouteInfo, {
+    bool useRootNavigator = false,
+  });
 
-  Future<T?> replace<T extends Object?>(AppRouteInfo appRouteInfo);
+  Future<T?> pushReplacement<T extends Object?>(AppRouteInfo appRouteInfo, {
+    bool useRootNavigator = false,
+  });
 
-  Future<void> replaceAll(List<AppRouteInfo> listAppRouteInfo);
-
-  Future<bool> pop<T extends Object?>({
+  void pop<T extends Object?>({
     T? result,
     bool useRootNavigator = false,
   });
@@ -35,17 +42,14 @@ abstract class AppNavigator {
     bool useRootNavigator = false,
   });
 
-  Future<void> popAndPushAll(List<AppRouteInfo> listAppRouteInfo, {bool useRootNavigator = false});
+  void popAllAndPush<T extends Object?>(
+    AppRouteInfo appRouteInfo, {
+    bool useRootNavigator = false,
+  });
 
   void popUntilRoot({bool useRootNavigator = false});
 
-  void popUntilRouteName(String routeName);
-
-  bool removeUntilRouteName(String routeName);
-
-  bool removeAllRoutesWithName(String routeName);
-
-  bool removeLast();
+  void popUntilRouteName(String routeName, {bool useRootNavigator = false});
 
   Future<T?> showDialog<T extends Object?>(
     AppPopupInfo appPopupInfo, {
