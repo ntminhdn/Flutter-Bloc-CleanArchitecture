@@ -36,11 +36,10 @@ dependencies:
   rxdart: 0.27.7
   shared:
     path: ../shared
-  shared_preferences: 2.1.2
+  shared_preferences: 2.1.0
   tuple: 2.0.2
 dev_dependencies:
   build_runner: 2.4.5
-  dart_code_metrics: 5.7.5
   flutter_lints: 2.0.1
   flutter_test:
     sdk: flutter
