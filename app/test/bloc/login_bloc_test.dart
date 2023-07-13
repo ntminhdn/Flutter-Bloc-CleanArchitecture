@@ -1,3 +1,4 @@
+// ignore_for_file: missing_run_bloc_catching
 import 'package:app/app.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:domain/domain.dart';

@@ -31,7 +31,6 @@ dependencies:
 
 dev_dependencies:
   build_runner: 2.4.5
-  dart_code_metrics: 5.7.5
   flutter_lints: 2.0.1
   flutter_test:
     sdk: flutter

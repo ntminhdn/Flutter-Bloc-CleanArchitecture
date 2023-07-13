@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,10 +12,10 @@ class MyPageBloc extends BaseBloc<MyPageEvent, MyPageState> {
     );
   }
 
-  FutureOr<void> _onMyPagePageInitiated(
+  void _onMyPagePageInitiated(
     MyPagePageInitiated event,
     Emitter<MyPageState> emit,
-  ) async {
+  ) {
     // Xin hãy ghi nhớ đặt tên Event theo convention:
     // <Tên Widget><Verb ở dạng Quá khứ>. VD: LoginButtonPressed, EmailTextFieldChanged, HomePageRefreshed
   }

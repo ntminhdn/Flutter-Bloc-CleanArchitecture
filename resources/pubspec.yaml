@@ -4,18 +4,17 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: ">=3.0.5 <4.0.0"
   flutter: ">=1.17.0"
 
-# dependency_overrides:
-#   analyzer: 3.0.0
-
+dependency_overrides:
+  analyzer: 5.13.0
+  
 dependencies:
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  dart_code_metrics: 5.7.5
   # flutter_lints: 1.0.4
   flutter_test:
     sdk: flutter

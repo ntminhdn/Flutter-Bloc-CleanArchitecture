@@ -1,6 +1,6 @@
 analyzer:
   plugins:
-    - dart_code_metrics
+    - custom_lint
   exclude:
     - "**/*.g.dart"
     - "**/*.graphql.dart"
@@ -18,67 +18,6 @@ analyzer:
   errors:
     unused_import: warning
     # invalid_annotation_target: ignore
-
-dart_code_metrics:
-  anti-patterns:
-  #    - long-method
-  #    - long-parameter-list
-  metrics:
-    # cyclomatic-complexity: 20
-    maximum-nesting-level: 8
-    #    number-of-parameters: 4
-    # source-lines-of-code: 50
-  rules:
-    - member-ordering:
-        #        alphabetize: true
-        order:
-          - constructors
-          - fields
-          - getters-setters
-          - methods
-        widgets-order:
-          - constructors
-          - fields
-          - getters-setters
-          - methods
-    - always-remove-listener
-    - no-boolean-literal-compare
-    - newline-before-return
-    # - no-empty-block
-    - no-magic-number:
-      allowed: [-1, 0, 1, 2, 3]
-    - no-equal-then-else
-    # - no-object-declaration
-    - prefer-conditional-expressions
-    # - prefer-extracting-callbacks
-    - prefer-trailing-comma
-    # - avoid-dynamic
-#    - avoid-unused-parameters
-    - double-literal-format
-    - prefer-first
-    - prefer-last
-    - avoid-unnecessary-setstate
-    - prefer-single-widget-per-file:
-        ignore-private-widgets: true
-    # - prefer-const-border-radius
-    - avoid-wrapping-in-padding
-    - prefer-correct-identifier-length:
-        max-identifier-length: 70
-        min-identifier-length: 2
-    - prefer-correct-type-name:
-        min-length: 3
-        max-length: 70
-    - avoid-nested-conditional-expressions:
-        acceptable-level: 8
-    # - avoid-returning-widgets:
-    #     ignored-names:
-    #       - testFunction
-    #       - buildPage
-    #       - buildPageLoading
-    #       - buildPageListeners
-    #       - _buildBlocProvider
-        ignored-annotations:
-          - allowedAnnotation
 
 linter:
   rules:

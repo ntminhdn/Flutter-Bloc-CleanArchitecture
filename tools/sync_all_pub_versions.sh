@@ -13,6 +13,7 @@ pubspec_domain_path="$root_project_path/domain/pubspec.yaml"
 pubspec_shared_path="$root_project_path/shared/pubspec.yaml"
 pubspec_initializer_path="$root_project_path/initializer/pubspec.yaml"
 pubspec_resources_path="$root_project_path/resources/pubspec.yaml"
+pubspec_nals_lints_path="$root_project_path/nals_lints/pubspec.yaml"
 
 pubspec_versions_path="$root_project_path/pub_versions.yaml"
 
@@ -51,3 +52,4 @@ replaceVersions $pubspec_domain_path
 replaceVersions $pubspec_shared_path
 replaceVersions $pubspec_initializer_path
 replaceVersions $pubspec_resources_path
+replaceVersions $pubspec_nals_lints_path
