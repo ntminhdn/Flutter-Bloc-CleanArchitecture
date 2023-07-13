@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
 
+@RoutePage()
 class ItemDetailPage extends StatefulWidget {
   const ItemDetailPage({
     required this.user,

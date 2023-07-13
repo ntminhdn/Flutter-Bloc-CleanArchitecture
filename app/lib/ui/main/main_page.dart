@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../app.dart';
 
+@RoutePage()
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
