@@ -25,6 +25,7 @@ class _MyPagePageState extends BasePageState<MyPagePage, MyPageBloc> {
           child: Column(
             children: [
               BlocBuilder<AppBloc, AppState>(
+                buildWhen: (previous, current) => previous.isDarkTheme != current.isDarkTheme,
                 builder: (context, state) {
                   return SwitchListTile.adaptive(
                     title: Text(
@@ -40,6 +41,7 @@ class _MyPagePageState extends BasePageState<MyPagePage, MyPageBloc> {
                 },
               ),
               BlocBuilder<AppBloc, AppState>(
+                buildWhen: (previous, current) => previous.languageCode != current.languageCode,
                 builder: (context, state) {
                   return SwitchListTile.adaptive(
                     title: Text(

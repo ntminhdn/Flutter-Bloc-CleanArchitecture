@@ -227,7 +227,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
           return Future.value(true);
         },
-        child: _appPopupInfoMapper.map(appPopupInfo, this),
+        child: _appPopupInfoMapper.map(appPopupInfo: appPopupInfo, navigator: this),
       ),
       useRootNavigator: useRootNavigator,
       barrierDismissible: barrierDismissible,
@@ -269,7 +269,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
           return Future.value(true);
         },
-        child: _appPopupInfoMapper.map(appPopupInfo, this),
+        child: _appPopupInfoMapper.map(appPopupInfo: appPopupInfo, navigator: this),
       ),
       transitionBuilder: transitionBuilder,
       transitionDuration: transitionDuration,
@@ -292,7 +292,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
     return m.showModalBottomSheet<T>(
       context: useRootNavigator ? _rootRouterContext : _currentTabContextOrRootContext,
-      builder: (_) => _appPopupInfoMapper.map(appPopupInfo, this),
+      builder: (_) => _appPopupInfoMapper.map(appPopupInfo: appPopupInfo, navigator: this),
       isDismissible: isDismissible,
       enableDrag: enableDrag,
       useRootNavigator: useRootNavigator,

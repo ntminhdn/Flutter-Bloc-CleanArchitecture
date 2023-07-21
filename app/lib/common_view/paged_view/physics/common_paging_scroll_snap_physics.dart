@@ -54,7 +54,8 @@ class CommonPagingScrollSnapPhysics extends ScrollPhysics {
       axisDirection: AxisDirection.down,
       devicePixelRatio: WidgetsBinding.instance.platformDispatcher.views.first.devicePixelRatio,
     ));
-    final double target = _getTargetPixels(position, tolerance, velocity);
+    final double target =
+        _getTargetPixels(position: position, tolerance: tolerance, velocity: velocity);
 
     if (target != position.pixels) {
       return ScrollSpringSimulation(
@@ -104,7 +105,10 @@ class CommonPagingScrollSnapPhysics extends ScrollPhysics {
   /// `page * itemSize - max(0, _getPadding()),`
   ///
   /// `( 2 * 110 ) -  132.5 = 87.5` =>>> pixels anchor is `87.5`
-  double _getPixels(ScrollMetrics position, double page) {
+  double _getPixels({
+    required ScrollMetrics position,
+    required double page,
+  }) {
     return min(
       max(
         page * itemSize - max(0, _getPadding()),
@@ -115,7 +119,11 @@ class CommonPagingScrollSnapPhysics extends ScrollPhysics {
   }
 
   /// Caltulator target pixels
-  double _getTargetPixels(ScrollMetrics position, Tolerance tolerance, double velocity) {
+  double _getTargetPixels({
+    required ScrollMetrics position,
+    required Tolerance tolerance,
+    required double velocity,
+  }) {
     double page = _getPage(position);
     if (velocity < -tolerance.velocity) {
       page -= 0.5;
@@ -123,7 +131,7 @@ class CommonPagingScrollSnapPhysics extends ScrollPhysics {
       page += 0.5;
     }
 
-    return _getPixels(position, page.roundToDouble());
+    return _getPixels(position: position, page: page.roundToDouble());
   }
 
   /// calculate page number of list

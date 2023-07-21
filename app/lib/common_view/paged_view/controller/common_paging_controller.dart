@@ -49,19 +49,28 @@ class CommonPagingController<T> implements Disposable {
     }
   }
 
-  void insertItemAt(int index, T item) {
+  void insertItemAt({
+    required int index,
+    required T item,
+  }) {
     pagingController.itemList?.insert(index, item);
     // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
     pagingController.notifyListeners();
   }
 
-  void insertAllItemsAt(int index, Iterable<T> items) {
+  void insertAllItemsAt({
+    required int index,
+    required Iterable<T> items,
+  }) {
     pagingController.itemList?.insertAll(index, items);
     // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
     pagingController.notifyListeners();
   }
 
-  void updateItemAt(int index, T newItem) {
+  void updateItemAt({
+    required int index,
+    required T newItem,
+  }) {
     pagingController.itemList?[index] = newItem;
     // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
     pagingController.notifyListeners();
@@ -73,13 +82,19 @@ class CommonPagingController<T> implements Disposable {
     pagingController.notifyListeners();
   }
 
-  void removeRange(int start, int end) {
+  void removeRange({
+    required int start,
+    required int end,
+  }) {
     pagingController.itemList?.removeRange(start, end);
     // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
     pagingController.notifyListeners();
   }
 
-  void clear(int start, int end) {
+  void clear({
+    required int start,
+    required int end,
+  }) {
     pagingController.itemList?.clear();
     // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
     pagingController.notifyListeners();

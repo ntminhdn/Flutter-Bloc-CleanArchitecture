@@ -10,10 +10,10 @@ class ExceptionHandler {
   final AppNavigator navigator;
   final ExceptionHandlerListener listener;
 
-  Future<void> handleException(
-    AppExceptionWrapper appExceptionWrapper,
-    String commonExceptionMessage,
-  ) async {
+  Future<void> handleException({
+    required AppExceptionWrapper appExceptionWrapper,
+    required String commonExceptionMessage,
+  }) async {
     final message = appExceptionWrapper.overrideMessage ?? commonExceptionMessage;
 
     switch (appExceptionWrapper.appException.appExceptionType) {

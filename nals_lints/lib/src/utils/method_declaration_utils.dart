@@ -2,10 +2,7 @@ import '../index.dart';
 
 extension MethodDeclarationExt on MethodDeclaration {
   List<MethodDeclaration> get pearMethodDeclarations {
-    return thisOrAncestorOfType<ClassDeclaration>()
-            ?.childEntities
-            .whereType<MethodDeclaration>()
-            .toList() ??
+    return parentClassDeclaration?.childEntities.whereType<MethodDeclaration>().toList() ??
         <MethodDeclaration>[];
   }
 

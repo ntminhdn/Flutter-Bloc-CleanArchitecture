@@ -15,7 +15,9 @@ extension CustomLintResolverExt on CustomLintResolver {
           startOffsetOfNextLine,
         );
 
-        final isSingleLineComment = content.trim().startsWith('//');
+        final isDocumentationComment = content.trim().startsWith('///');
+
+        final isSingleLineComment = content.trim().startsWith('//') && !isDocumentationComment;
 
         if (content.trim().startsWith('/*')) {
           isMultiLineComment = true;
@@ -33,7 +35,9 @@ extension CustomLintResolverExt on CustomLintResolver {
             lineOffset: startOffset,
             lineLength: lineLength,
             content: content,
-            isComment: isSingleLineComment || isMultiLineComment,
+            isEndOfLineComment: isSingleLineComment,
+            isBlockComment: isMultiLineComment,
+            isDocumentationComment: isDocumentationComment,
           ),
         );
       }

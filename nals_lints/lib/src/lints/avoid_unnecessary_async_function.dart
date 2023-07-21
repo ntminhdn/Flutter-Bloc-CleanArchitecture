@@ -1,10 +1,10 @@
 import '../index.dart';
 
-class UnnecessaryAsyncFunction extends DartLintRule {
-  const UnnecessaryAsyncFunction() : super(code: _code);
+class AvoidUnnecessaryAsyncFunction extends DartLintRule {
+  const AvoidUnnecessaryAsyncFunction() : super(code: _code);
 
   static const _code = LintCode(
-    name: 'unnecessary_async_function',
+    name: 'avoid_unnecessary_async_function',
     problemMessage: 'This async function is unnecessary. Please remove \'async\' keyword',
   );
 

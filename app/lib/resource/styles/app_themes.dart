@@ -7,16 +7,16 @@ final lightTheme = ThemeData(
   brightness: Brightness.light,
   splashColor: Colors.transparent,
 )..addAppColor(
-    AppThemeType.light,
-    AppColors.defaultAppColor,
+    type: AppThemeType.light,
+    appColor: AppColors.defaultAppColor,
   );
 
 final darkTheme = ThemeData(
   brightness: Brightness.dark,
   splashColor: Colors.transparent,
 )..addAppColor(
-    AppThemeType.dark,
-    AppColors.darkThemeColor,
+    type: AppThemeType.dark,
+    appColor: AppColors.darkThemeColor,
   );
 
 enum AppThemeType { light, dark }
@@ -24,7 +24,10 @@ enum AppThemeType { light, dark }
 extension ThemeDataExtensions on ThemeData {
   static final Map<AppThemeType, AppColors> _appColorMap = {};
 
-  void addAppColor(AppThemeType type, AppColors appColor) {
+  void addAppColor({
+    required AppThemeType type,
+    required AppColors appColor,
+  }) {
     _appColorMap[type] = appColor;
   }
 

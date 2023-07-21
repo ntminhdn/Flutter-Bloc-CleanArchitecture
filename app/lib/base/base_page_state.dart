@@ -98,8 +98,8 @@ abstract class BasePageStateDelegate<T extends StatefulWidget, B extends BaseBlo
   void handleException(AppExceptionWrapper appExceptionWrapper) {
     exceptionHandler
         .handleException(
-      appExceptionWrapper,
-      handleExceptionMessage(appExceptionWrapper.appException),
+      appExceptionWrapper: appExceptionWrapper,
+      commonExceptionMessage: handleExceptionMessage(appExceptionWrapper.appException),
     )
         .then((value) {
       appExceptionWrapper.exceptionCompleter?.complete();

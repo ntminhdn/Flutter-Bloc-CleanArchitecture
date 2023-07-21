@@ -32,14 +32,17 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
 
   final LoginUseCase _loginUseCase;
 
-  bool _isLoginButtonEnabled(String email, String password) {
+  bool _isLoginButtonEnabled({
+    required String email,
+    required String password,
+  }) {
     return email.isNotEmpty && password.isNotEmpty;
   }
 
   void _onEmailTextFieldChanged(EmailTextFieldChanged event, Emitter<LoginState> emit) {
     emit(state.copyWith(
       email: event.email,
-      isLoginButtonEnabled: _isLoginButtonEnabled(event.email, state.password),
+      isLoginButtonEnabled: _isLoginButtonEnabled(email: event.email, password: state.password),
       onPageError: '',
     ));
   }
@@ -47,7 +50,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   void _onPasswordTextFieldChanged(PasswordTextFieldChanged event, Emitter<LoginState> emit) {
     emit(state.copyWith(
       password: event.password,
-      isLoginButtonEnabled: _isLoginButtonEnabled(state.email, event.password),
+      isLoginButtonEnabled: _isLoginButtonEnabled(email: state.email, password: event.password),
       onPageError: '',
     ));
   }

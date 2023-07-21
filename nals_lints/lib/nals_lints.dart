@@ -7,9 +7,19 @@ class _NalsLintsPlugin extends PluginBase {
   List<LintRule> getLintRules(CustomLintConfigs configs) {
     return [
       const MissingRunBlocCatching(),
-      const UnnecessaryAsyncFunction(),
+      const AvoidUnnecessaryAsyncFunction(),
       const AvoidHardCodedColors(),
       const LinesLongerThan100Chars(),
+      const PreferNamedParameters(),
+      const MissingCallingResponsive(),
+      const AvoidHardCodedTextStyle(),
+      const MissingListenWhen(),
+      const MissingBuildWhen(),
+      const MissingBuildWhenOrListenWhen(),
+      const PreferIsEmptyString(),
+      const PreferIsNotEmptyString(),
+      const AvoidNestedIfStatements(),
+      const IncorrectTodoComment(),
     ];
   }
 }

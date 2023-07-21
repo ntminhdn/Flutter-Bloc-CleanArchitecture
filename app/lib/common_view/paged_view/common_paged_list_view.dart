@@ -111,68 +111,72 @@ class CommonPagedListView<T> extends StatelessWidget {
           noMoreItemsIndicator ?? const CommonNoMoreItemsIndicator(),
     );
 
-    PagedListView<int, T> pagedView(double maxWidth, double maxHeight) => separatorBuilder != null
-        ? PagedListView.separated(
-            pagingController: pagingController.pagingController,
-            builderDelegate: builderDelegate,
-            separatorBuilder: separatorBuilder!,
-            scrollDirection: scrollDirection,
-            reverse: reverse,
-            scrollController: scrollController,
-            primary: primary,
-            physics: snapping
-                ? CommonPagingScrollSnapPhysics(
-                    itemSize: itemSize!,
-                    selectedAnchorItem: selectedAnchorItem,
-                    maxWidth: maxWidth,
-                    maxHeight: maxHeight,
-                    isHorizontal: scrollDirection == Axis.horizontal,
-                  )
-                : physics,
-            shrinkWrap: shrinkWrap,
-            padding: padding,
-            cacheExtent: cacheExtent,
-            dragStartBehavior: dragStartBehavior,
-            keyboardDismissBehavior: keyboardDismissBehavior,
-            restorationId: restorationId,
-            clipBehavior: clipBehavior,
-            addAutomaticKeepAlives: addAutomaticKeepAlives,
-            addRepaintBoundaries: addRepaintBoundaries,
-            addSemanticIndexes: addSemanticIndexes,
-            itemExtent: itemExtent,
-          )
-        : PagedListView<int, T>(
-            pagingController: pagingController.pagingController,
-            builderDelegate: builderDelegate,
-            scrollDirection: scrollDirection,
-            reverse: reverse,
-            scrollController: scrollController,
-            primary: primary,
-            physics: snapping
-                ? CommonPagingScrollSnapPhysics(
-                    itemSize: itemSize!,
-                    selectedAnchorItem: selectedAnchorItem,
-                    maxWidth: maxWidth,
-                    maxHeight: maxHeight,
-                    isHorizontal: scrollDirection == Axis.horizontal,
-                  )
-                : physics,
-            shrinkWrap: shrinkWrap,
-            padding: padding,
-            cacheExtent: cacheExtent,
-            dragStartBehavior: dragStartBehavior,
-            keyboardDismissBehavior: keyboardDismissBehavior,
-            restorationId: restorationId,
-            clipBehavior: clipBehavior,
-            addAutomaticKeepAlives: addAutomaticKeepAlives,
-            addRepaintBoundaries: addRepaintBoundaries,
-            addSemanticIndexes: addSemanticIndexes,
-            itemExtent: itemExtent,
-          );
+    PagedListView<int, T> pagedView({
+      required double maxWidth,
+      required double maxHeight,
+    }) =>
+        separatorBuilder != null
+            ? PagedListView.separated(
+                pagingController: pagingController.pagingController,
+                builderDelegate: builderDelegate,
+                separatorBuilder: separatorBuilder!,
+                scrollDirection: scrollDirection,
+                reverse: reverse,
+                scrollController: scrollController,
+                primary: primary,
+                physics: snapping
+                    ? CommonPagingScrollSnapPhysics(
+                        itemSize: itemSize!,
+                        selectedAnchorItem: selectedAnchorItem,
+                        maxWidth: maxWidth,
+                        maxHeight: maxHeight,
+                        isHorizontal: scrollDirection == Axis.horizontal,
+                      )
+                    : physics,
+                shrinkWrap: shrinkWrap,
+                padding: padding,
+                cacheExtent: cacheExtent,
+                dragStartBehavior: dragStartBehavior,
+                keyboardDismissBehavior: keyboardDismissBehavior,
+                restorationId: restorationId,
+                clipBehavior: clipBehavior,
+                addAutomaticKeepAlives: addAutomaticKeepAlives,
+                addRepaintBoundaries: addRepaintBoundaries,
+                addSemanticIndexes: addSemanticIndexes,
+                itemExtent: itemExtent,
+              )
+            : PagedListView<int, T>(
+                pagingController: pagingController.pagingController,
+                builderDelegate: builderDelegate,
+                scrollDirection: scrollDirection,
+                reverse: reverse,
+                scrollController: scrollController,
+                primary: primary,
+                physics: snapping
+                    ? CommonPagingScrollSnapPhysics(
+                        itemSize: itemSize!,
+                        selectedAnchorItem: selectedAnchorItem,
+                        maxWidth: maxWidth,
+                        maxHeight: maxHeight,
+                        isHorizontal: scrollDirection == Axis.horizontal,
+                      )
+                    : physics,
+                shrinkWrap: shrinkWrap,
+                padding: padding,
+                cacheExtent: cacheExtent,
+                dragStartBehavior: dragStartBehavior,
+                keyboardDismissBehavior: keyboardDismissBehavior,
+                restorationId: restorationId,
+                clipBehavior: clipBehavior,
+                addAutomaticKeepAlives: addAutomaticKeepAlives,
+                addRepaintBoundaries: addRepaintBoundaries,
+                addSemanticIndexes: addSemanticIndexes,
+                itemExtent: itemExtent,
+              );
 
     return LayoutBuilder(
       builder: (BuildContext ctx, BoxConstraints constraint) {
-        return pagedView(constraint.maxWidth, constraint.maxHeight);
+        return pagedView(maxWidth: constraint.maxWidth, maxHeight: constraint.maxHeight);
       },
     );
   }
