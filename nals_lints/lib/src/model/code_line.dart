@@ -19,10 +19,12 @@ class CodeLine {
 
   bool get isComment => isEndOfLineComment || isBlockComment || isDocumentationComment;
 
-  bool get isImportStatement => content.trim().startsWith('import');
+  bool get isImportStatement => content.trim().startsWith('import ');
+
+  bool get isExportStatement => content.trim().startsWith('export ');
 
   bool get isString {
-    const regex = '^[\'"].+[\'"] *[,;]\$';
+    const regex = '^(return\\s*)?r?[\'"].+[\'"] *[,;]\$';
 
     return RegExp(regex).hasMatch(content.trim());
   }

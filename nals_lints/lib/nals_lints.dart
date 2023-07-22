@@ -18,7 +18,6 @@ class _NalsLintsPlugin extends PluginBase {
       const MissingBuildWhenOrListenWhen(),
       const PreferIsEmptyString(),
       const PreferIsNotEmptyString(),
-      const AvoidNestedIfStatements(),
       const IncorrectTodoComment(),
     ];
   }

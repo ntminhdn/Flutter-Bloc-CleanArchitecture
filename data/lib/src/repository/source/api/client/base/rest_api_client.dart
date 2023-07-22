@@ -80,7 +80,7 @@ class RestApiClient {
 
       return BaseSuccessResponseMapper<D, T>.fromType(
         successResponseMapperType ?? this.successResponseMapperType,
-      ).map(response.data, decoder);
+      ).map(response: response.data, decoder: decoder);
     } catch (error) {
       throw DioExceptionMapper(
         errorResponseMapper ??

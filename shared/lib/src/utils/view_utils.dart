@@ -6,9 +6,9 @@ import '../../shared.dart';
 class ViewUtils {
   const ViewUtils._();
 
-  static void showAppSnackBar(
-    BuildContext context,
-    String message, {
+  static void showAppSnackBar({
+    required BuildContext context,
+    required String message,
     Duration? duration,
     Color? backgroundColor,
   }) {

@@ -73,7 +73,10 @@ class BigDecimal implements Comparable<BigDecimal> {
 
   BigDecimal truncate() => BigDecimal._(decimal.truncate());
 
-  BigDecimal clamp(BigDecimal lowerLimit, BigDecimal upperLimit) =>
+  BigDecimal clamp({
+    required BigDecimal lowerLimit,
+    required BigDecimal upperLimit,
+  }) =>
       BigDecimal._(decimal.clamp(lowerLimit.decimal, upperLimit.decimal));
 
   BigInt toBigInt() => decimal.toBigInt();

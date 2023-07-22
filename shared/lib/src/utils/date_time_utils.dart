@@ -8,7 +8,10 @@ import '../../shared.dart';
 class DateTimeUtils {
   DateTimeUtils._();
 
-  static int daysBetween(DateTime from, DateTime to) {
+  static int daysBetween({
+    required DateTime from,
+    required DateTime to,
+  }) {
     from = DateTime(from.year, from.month, from.day);
     to = DateTime(to.year, to.month, to.day);
 
@@ -37,7 +40,10 @@ class DateTimeUtils {
     );
   }
 
-  static DateTime? toDateTime(String dateTimeString, {bool isUtc = false}) {
+  static DateTime? toDateTime({
+    required String dateTimeString,
+    bool isUtc = false,
+  }) {
     final dateTime = DateTime.tryParse(dateTimeString);
     if (dateTime != null) {
       if (isUtc) {
@@ -59,7 +65,10 @@ class DateTimeUtils {
     return null;
   }
 
-  static DateTime? toNormalizeDateTime(String dateTimeString, {bool isUtc = false}) {
+  static DateTime? toNormalizeDateTime({
+    required String dateTimeString,
+    bool isUtc = false,
+  }) {
     final dateTime = DateTime.tryParse('-123450101 $dateTimeString');
     if (dateTime != null) {
       if (isUtc) {

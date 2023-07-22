@@ -86,7 +86,7 @@ class GraphQLApiClient {
     }
 
     return BaseSuccessResponseMapper<T, T>.fromType(SuccessResponseMapperType.jsonObject)
-        .map(response.data, decoder);
+        .map(response: response.data, decoder: decoder);
   }
 
   Future<QueryResult> _requestByMethod({

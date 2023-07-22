@@ -15,7 +15,10 @@ class AppApiService {
   final AuthAppServerApiClient _authAppServerApiClient;
   final RandomUserApiClient _randomUserApiClient;
 
-  Future<DataResponse<AuthResponseData>> login(String email, String password) async {
+  Future<DataResponse<AuthResponseData>> login({
+    required String email,
+    required String password,
+  }) async {
     return _noneAuthAppServerApiClient.request(
       method: RestMethod.post,
       path: '/v1/auth/login',

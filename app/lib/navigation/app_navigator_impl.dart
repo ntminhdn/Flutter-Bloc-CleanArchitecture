@@ -71,7 +71,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  void navigateToBottomTab(int index, {bool notify = true}) {
+  void navigateToBottomTab({required int index, bool notify = true}) {
     if (tabsRouter == null) {
       throw 'Not found any TabRouter';
     }
@@ -130,8 +130,8 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  Future<T?> popAndPush<T extends Object?, R extends Object?>(
-    AppRouteInfo appRouteInfo, {
+  Future<T?> popAndPush<T extends Object?, R extends Object?>({
+    required AppRouteInfo appRouteInfo,
     R? result,
     bool useRootNavigator = false,
   }) {
@@ -184,7 +184,8 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  Future<void> popAndPushAll(List<AppRouteInfo> listAppRouteInfo, {bool useRootNavigator = false}) {
+  Future<void> popAndPushAll(
+      {required List<AppRouteInfo> listAppRouteInfo, bool useRootNavigator = false}) {
     if (LogConfig.enableNavigatorObserverLog) {
       logD('popAndPushAll $listAppRouteInfo, useRootNav = $useRootNavigator');
     }
@@ -205,8 +206,8 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  Future<T?> showDialog<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
+  Future<T?> showDialog<T extends Object?>({
+    required AppPopupInfo appPopupInfo,
     bool barrierDismissible = true,
     bool useSafeArea = false,
     bool useRootNavigator = true,
@@ -236,8 +237,8 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  Future<T?> showGeneralDialog<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
+  Future<T?> showGeneralDialog<T extends Object?>({
+    required AppPopupInfo appPopupInfo,
     Duration transitionDuration = DurationConstants.defaultGeneralDialogTransitionDuration,
     m.Widget Function(m.BuildContext, m.Animation<double>, m.Animation<double>, m.Widget)?
         transitionBuilder,
@@ -277,8 +278,8 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  Future<T?> showModalBottomSheet<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
+  Future<T?> showModalBottomSheet<T extends Object?>({
+    required AppPopupInfo appPopupInfo,
     bool isScrollControlled = false,
     bool useRootNavigator = false,
     bool isDismissible = true,
@@ -303,20 +304,20 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  void showErrorSnackBar(String message, {Duration? duration}) {
+  void showErrorSnackBar({required String message, Duration? duration}) {
     ViewUtils.showAppSnackBar(
-      _rootRouterContext,
-      message,
+      context: _rootRouterContext,
+      message: message,
       duration: duration,
       // backgroundColor: AppColors.current.primaryColor,
     );
   }
 
   @override
-  void showSuccessSnackBar(String message, {Duration? duration}) {
+  void showSuccessSnackBar({required String message, Duration? duration}) {
     ViewUtils.showAppSnackBar(
-      _rootRouterContext,
-      message,
+      context: _rootRouterContext,
+      message: message,
       duration: duration,
       // backgroundColor: AppColors.current.primaryColor,
     );

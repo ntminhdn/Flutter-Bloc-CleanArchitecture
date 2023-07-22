@@ -14,7 +14,10 @@ abstract class AppNavigator {
 
   void popUntilRootOfCurrentBottomTab();
 
-  void navigateToBottomTab(int index, {bool notify = true});
+  void navigateToBottomTab({
+    required int index,
+    bool notify = true,
+  });
 
   Future<T?> push<T extends Object?>(AppRouteInfo appRouteInfo);
 
@@ -29,13 +32,16 @@ abstract class AppNavigator {
     bool useRootNavigator = false,
   });
 
-  Future<T?> popAndPush<T extends Object?, R extends Object?>(
-    AppRouteInfo appRouteInfo, {
+  Future<T?> popAndPush<T extends Object?, R extends Object?>({
+    required AppRouteInfo appRouteInfo,
     R? result,
     bool useRootNavigator = false,
   });
 
-  Future<void> popAndPushAll(List<AppRouteInfo> listAppRouteInfo, {bool useRootNavigator = false});
+  Future<void> popAndPushAll({
+    required List<AppRouteInfo> listAppRouteInfo,
+    bool useRootNavigator = false,
+  });
 
   void popUntilRoot({bool useRootNavigator = false});
 
@@ -47,15 +53,15 @@ abstract class AppNavigator {
 
   bool removeLast();
 
-  Future<T?> showDialog<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
+  Future<T?> showDialog<T extends Object?>({
+    required AppPopupInfo appPopupInfo,
     bool barrierDismissible = true,
     bool useSafeArea = false,
     bool useRootNavigator = true,
   });
 
-  Future<T?> showGeneralDialog<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
+  Future<T?> showGeneralDialog<T extends Object?>({
+    required AppPopupInfo appPopupInfo,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionBuilder,
     Duration transitionDuration = DurationConstants.defaultGeneralDialogTransitionDuration,
     bool barrierDismissible = true,
@@ -63,8 +69,8 @@ abstract class AppNavigator {
     bool useRootNavigator = true,
   });
 
-  Future<T?> showModalBottomSheet<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
+  Future<T?> showModalBottomSheet<T extends Object?>({
+    required AppPopupInfo appPopupInfo,
     bool isScrollControlled = false,
     bool useRootNavigator = false,
     bool isDismissible = true,
@@ -73,7 +79,13 @@ abstract class AppNavigator {
     Color? backgroundColor,
   });
 
-  void showErrorSnackBar(String message, {Duration? duration});
+  void showErrorSnackBar({
+    required String message,
+    Duration? duration,
+  });
 
-  void showSuccessSnackBar(String message, {Duration? duration});
+  void showSuccessSnackBar({
+    required String message,
+    Duration? duration,
+  });
 }

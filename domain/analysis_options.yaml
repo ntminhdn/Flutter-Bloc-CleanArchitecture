@@ -1,0 +1,15 @@
+include: ../analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.graphql.dart"
+    - "**/*.gr.dart"
+    - "**/*.freezed.dart"
+    - "**/*.config.dart"
+    - "**/*.gen.dart"
+    # - "test/*.dart"
+
+custom_lint:
+  rules:
+    - missing_run_bloc_catching: false

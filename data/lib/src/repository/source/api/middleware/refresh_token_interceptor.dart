@@ -33,18 +33,24 @@ class RefreshTokenInterceptor extends BaseInterceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == HttpStatus.unauthorized) {
       final options = err.response!.requestOptions;
-      _onExpiredToken(options, handler);
+      _onExpiredToken(options: options, handler: handler);
     } else {
       handler.next(err);
     }
   }
 
-  void _putAccessToken(Map<String, dynamic> headers, String accessToken) {
+  void _putAccessToken({
+    required Map<String, dynamic> headers,
+    required String accessToken,
+  }) {
     headers[ServerRequestResponseConstants.basicAuthorization] =
         '${ServerRequestResponseConstants.bearer} $accessToken';
   }
 
-  void _onExpiredToken(RequestOptions options, ErrorInterceptorHandler handler) {
+  void _onExpiredToken({
+    required RequestOptions options,
+    required ErrorInterceptorHandler handler,
+  }) {
     _queue.addLast(Tuple2(options, handler));
     if (!_isRefreshing) {
       _isRefreshing = true;
@@ -73,7 +79,8 @@ class RefreshTokenInterceptor extends BaseInterceptor {
 
   Future<void> _onRefreshTokenSuccess(String newToken) async {
     await Future.wait(_queue.map(
-      (requestInfo) => _requestWithNewToken(requestInfo.item1, requestInfo.item2, newToken),
+      (requestInfo) => _requestWithNewToken(
+          options: requestInfo.item1, handler: requestInfo.item2, newAccessToken: newToken),
     ));
   }
 
@@ -85,12 +92,12 @@ class RefreshTokenInterceptor extends BaseInterceptor {
     });
   }
 
-  Future<void> _requestWithNewToken(
-    RequestOptions options,
-    ErrorInterceptorHandler handler,
-    String newAccessToken,
-  ) {
-    _putAccessToken(options.headers, newAccessToken);
+  Future<void> _requestWithNewToken({
+    required RequestOptions options,
+    required ErrorInterceptorHandler handler,
+    required String newAccessToken,
+  }) {
+    _putAccessToken(headers: options.headers, accessToken: newAccessToken);
 
     return _noneAuthAppServerApiClient
         .fetch(options)

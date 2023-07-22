@@ -25,7 +25,6 @@ export 'ast_visitor/recursive_return_statement_visitor.dart';
 export 'ast_visitor/variable_and_argument_visitor.dart';
 export 'lints/avoid_hard_coded_colors.dart';
 export 'lints/avoid_hard_coded_text_style.dart';
-export 'lints/avoid_nested_if_statements.dart';
 export 'lints/avoid_unnecessary_async_function.dart';
 export 'lints/incorrect_todo_comment.dart';
 export 'lints/lines_longer_than_100_chars.dart';

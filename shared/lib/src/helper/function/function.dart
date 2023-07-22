@@ -1,4 +1,4 @@
-// ignore_for_file:avoid-dynamic
+// ignore_for_file:avoid-dynamic, prefer_named_parameters
 class Func0<R> {
   Func0(this.function);
   final R Function() function;

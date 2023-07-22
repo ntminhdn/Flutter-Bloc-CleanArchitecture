@@ -19,7 +19,10 @@ abstract class BaseLoadMoreUseCase<Input extends BaseInput, Output>
   int get page => _output.page;
   int get offset => _output.offset;
 
-  Future<LoadMoreOutput<Output>> execute(Input input, bool isInitialLoad) async {
+  Future<LoadMoreOutput<Output>> execute({
+    required Input input,
+    required bool isInitialLoad,
+  }) async {
     try {
       if (isInitialLoad) {
         _output = LoadMoreOutput<Output>(data: <Output>[], page: initPage, offset: initOffset);

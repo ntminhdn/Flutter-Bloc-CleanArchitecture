@@ -60,7 +60,7 @@ class ExceptionHandler {
     required String message,
     Duration duration = DurationConstants.defaultErrorVisibleDuration,
   }) {
-    navigator.showErrorSnackBar(message, duration: duration);
+    navigator.showErrorSnackBar(message: message, duration: duration);
   }
 
   Future<void> _showErrorDialog({
@@ -69,7 +69,8 @@ class ExceptionHandler {
     bool isRefreshTokenFailed = false,
   }) async {
     await navigator
-        .showDialog(AppPopupInfo.confirmDialog(
+        .showDialog(
+            appPopupInfo: AppPopupInfo.confirmDialog(
       message: message,
       onPressed: onPressed,
     ))
@@ -84,7 +85,8 @@ class ExceptionHandler {
     required String message,
     required Func0<void>? onRetryPressed,
   }) async {
-    await navigator.showDialog(AppPopupInfo.errorWithRetryDialog(
+    await navigator.showDialog(
+        appPopupInfo: AppPopupInfo.errorWithRetryDialog(
       message: message,
       onRetryPressed: onRetryPressed,
     ));

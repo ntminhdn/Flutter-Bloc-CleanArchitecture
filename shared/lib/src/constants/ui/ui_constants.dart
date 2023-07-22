@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_hard_coded_colors
 import 'package:flutter/services.dart';
 
 class UiConstants {

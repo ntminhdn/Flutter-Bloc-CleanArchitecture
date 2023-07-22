@@ -51,7 +51,10 @@ extension SetExtensions<T> on Set<T> {
 }
 
 extension MapExtensions<K, V> on Map<K, V> {
-  Map<K, V> plus(K key, V value) {
+  Map<K, V> plus({
+    required K key,
+    required V value,
+  }) {
     return <K, V>{key: value, ...this};
   }
 

@@ -7,7 +7,7 @@ class ParseUtils {
     try {
       return BigDecimal.parse(value);
     } on FormatException catch (e) {
-      throw ParseException(ParseExceptionKind.invalidSourceFormat, e);
+      throw ParseException(kind: ParseExceptionKind.invalidSourceFormat, rootException: e);
     }
   }
 
@@ -15,7 +15,7 @@ class ParseUtils {
     try {
       return int.parse(value);
     } on FormatException catch (e) {
-      throw ParseException(ParseExceptionKind.invalidSourceFormat, e);
+      throw ParseException(kind: ParseExceptionKind.invalidSourceFormat, rootException: e);
     }
   }
 
@@ -23,7 +23,7 @@ class ParseUtils {
     try {
       return double.parse(value);
     } on FormatException catch (e) {
-      throw ParseException(ParseExceptionKind.invalidSourceFormat, e);
+      throw ParseException(kind: ParseExceptionKind.invalidSourceFormat, rootException: e);
     }
   }
 }

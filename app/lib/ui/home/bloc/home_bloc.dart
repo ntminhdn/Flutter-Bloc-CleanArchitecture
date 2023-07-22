@@ -66,7 +66,8 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
     return runBlocCatching(
       action: () async {
         emit(state.copyWith(loadUsersException: null));
-        final output = await _getUsersUseCase.execute(const GetUsersInput(), isInitialLoad);
+        final output = await _getUsersUseCase.execute(
+            input: const GetUsersInput(), isInitialLoad: isInitialLoad);
         emit(state.copyWith(users: output));
       },
       doOnError: (e) async {

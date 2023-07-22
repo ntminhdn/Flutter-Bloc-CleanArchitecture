@@ -49,7 +49,7 @@ void main() {
         (_) => Future.value(DataResponse(data: authResponseData)),
       );
 
-      final result = await appApiService.login(inputEmail, inputPassword);
+      final result = await appApiService.login(email: inputEmail, password: inputPassword);
 
       expect(
         result.data,

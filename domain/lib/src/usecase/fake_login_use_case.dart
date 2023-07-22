@@ -16,7 +16,7 @@ class FakeLoginUseCase extends BaseFutureUseCase<FakeLoginInput, FakeLoginOutput
   @override
   Future<FakeLoginOutput> buildUseCase(FakeLoginInput input) async {
     await _navigator.showDialog(
-      const AppPopupInfo.requiredLoginDialog(),
+      appPopupInfo: const AppPopupInfo.requiredLoginDialog(),
       useRootNavigator: false,
     );
 

@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_named_parameters
 import '../../shared.dart';
 
 mixin LogMixin on Object {

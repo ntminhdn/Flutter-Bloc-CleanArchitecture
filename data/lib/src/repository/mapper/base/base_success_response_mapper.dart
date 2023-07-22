@@ -28,5 +28,8 @@ abstract class BaseSuccessResponseMapper<I, O> {
   }
 
   // ignore: avoid-dynamic
-  O map(dynamic response, Decoder<I>? decoder);
+  O map({
+    required dynamic response,
+    Decoder<I>? decoder,
+  });
 }

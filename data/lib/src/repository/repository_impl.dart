@@ -58,8 +58,11 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<void> login(String email, String password) async {
-    final response = await _appApiService.login(email, password);
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    final response = await _appApiService.login(email: email, password: password);
     await _saveTokenAndUser(response.data);
   }
 

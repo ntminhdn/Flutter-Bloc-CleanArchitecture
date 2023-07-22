@@ -19,7 +19,8 @@ class AvoidUnnecessaryAsyncFunction extends DartLintRule {
           !node.isOverrideMethod &&
           node.body is BlockFunctionBody &&
           node.body.childAwaitExpressions.isEmpty &&
-          node.returnTypeOfBlock.toString().startsWith('Future') != true) {
+          !node.childReturnStatements.any((element) =>
+              element.expression?.staticType.toString().startsWith('Future') == true)) {
         if (node.body.keyword != null) {
           reporter.reportErrorForToken(code, node.body.keyword!);
         } else {

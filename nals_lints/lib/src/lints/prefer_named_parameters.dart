@@ -51,11 +51,10 @@ class PreferNamedParameters extends DartLintRule {
   }
 
   bool _isConstuctorDeclarationException(ConstructorDeclaration node) {
-    return node.parentClassDeclaration
-            ?.toString()
-            .trim()
-            .startsWith(RegExp(r'@injectable|@lazySingleton|@singleton', caseSensitive: false)) ==
-        true;
+    return node.name.toString() == 'fromJson' ||
+        node.parentClassDeclaration?.toString().trim().startsWith(
+                RegExp(r'@injectable|@lazySingleton|@singleton', caseSensitive: false)) ==
+            true;
   }
 
   @override

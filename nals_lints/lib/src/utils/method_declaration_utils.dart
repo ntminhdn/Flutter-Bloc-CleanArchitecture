@@ -6,7 +6,5 @@ extension MethodDeclarationExt on MethodDeclaration {
         <MethodDeclaration>[];
   }
 
-  DartType? get returnTypeOfBlock => body.childReturnStatements.lastOrNull?.expression?.staticType;
-
-  bool get isOverrideMethod => toString().trim().startsWith('@override');
+  bool get isOverrideMethod => toString().trim().contains('@override');
 }

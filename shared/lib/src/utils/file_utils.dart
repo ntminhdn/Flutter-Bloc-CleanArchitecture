@@ -26,8 +26,11 @@ class FileUtils {
   /// // read png image from cached folder
   /// final pngContent = await FileUtils.readFile('my-avatar.png', temporary: true);
   /// ```
-  static Future<Uint8List?> readFile(String filename, {bool temporary = false}) async {
-    final theFile = await _getFile(filename, temporary: temporary);
+  static Future<Uint8List?> readFile({
+    required String filename,
+    bool temporary = false,
+  }) async {
+    final theFile = await _getFile(filename: filename, temporary: temporary);
     if (theFile != null) {
       return await theFile.readAsBytes();
     }
@@ -36,15 +39,15 @@ class FileUtils {
   }
 
   /// Write content to a file by file-name
-  static Future<File> writeFile(
-    String filename,
-    Uint8List buffer, {
+  static Future<File> writeFile({
+    required String filename,
+    required Uint8List buffer,
     bool temporary = false,
     bool override = false,
   }) async {
-    final theFile = await _getFile(filename, temporary: temporary);
+    final theFile = await _getFile(filename: filename, temporary: temporary);
     if (theFile == null) {
-      final newFilePath = await _filePath(filename, temporary: temporary);
+      final newFilePath = await _filePath(filename: filename, temporary: temporary);
 
       return await File(newFilePath).writeAsBytes(buffer);
     } else {
@@ -52,15 +55,13 @@ class FileUtils {
         return await theFile.writeAsBytes(buffer);
       } else {
         final oldFileName = filename.split('.').toList();
-        var fileExtension = '';
-        if (oldFileName.length > 1) {
-          fileExtension = '.${oldFileName.removeLast()}';
-        }
+        final fileExtension = oldFileName.length > 1 ? '.${oldFileName.removeLast()}' : '';
 
         final newFileName =
             '${oldFileName.join(".")}_${(DateTime.now().millisecondsSinceEpoch) / 1000}$fileExtension';
 
-        return await writeFile(newFileName, buffer, temporary: temporary, override: override);
+        return await writeFile(
+            filename: newFileName, buffer: buffer, temporary: temporary, override: override);
       }
     }
   }
@@ -135,15 +136,21 @@ class FileUtils {
   }
 
   /// Get file object from filename. If file is not exists, return `null`
-  static Future<File?> _getFile(String filename, {bool temporary = false}) async {
-    final filePath = await _filePath(filename, temporary: temporary);
+  static Future<File?> _getFile({
+    required String filename,
+    bool temporary = false,
+  }) async {
+    final filePath = await _filePath(filename: filename, temporary: temporary);
     final file = File(filePath);
 
     return (await file.exists()) ? file : null;
   }
 
   /// Return `file-path` according to either temporary folder or document folder
-  static Future<String> _filePath(String filename, {bool temporary = false}) async {
+  static Future<String> _filePath({
+    required String filename,
+    bool temporary = false,
+  }) async {
     return temporary
         ? "${(await _getTemporaryDir())?.path ?? ''}/$filename"
         : "${(await _getDocumentDir())?.path ?? ''}/$filename";

@@ -3,6 +3,7 @@ import 'package:rxdart/rxdart.dart';
 import '../../../shared.dart';
 
 extension StreamExt<T> on Stream<T> {
+// ignore: prefer_named_parameters
   Stream<T> log(
     String name, {
     bool logOnListen = false,
