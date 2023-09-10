@@ -1,22 +1,22 @@
-import '../../index.dart';
+import '../index.dart';
 
 class VariableAndArgumentVisitor extends GeneralizingAstVisitor<void> {
   void Function(InstanceCreationExpression node) onVisitInstanceCreationExpression;
-  void Function(NamedExpression node) onVisitNamedExpression;
   void Function(VariableDeclaration node) onVisitVariableDeclaration;
   void Function(AssignmentExpression node) onVisitAssignmentExpression;
   void Function(ConstructorFieldInitializer node) onVisitConstructorFieldInitializer;
   void Function(SuperConstructorInvocation node) onVisitSuperConstructorInvocation;
   void Function(ConstructorDeclaration node) onVisitConstructorDeclaration;
+  void Function(ArgumentList node) onVisitArgumentList;
 
   VariableAndArgumentVisitor({
     required this.onVisitInstanceCreationExpression,
-    required this.onVisitNamedExpression,
     required this.onVisitVariableDeclaration,
     required this.onVisitAssignmentExpression,
     required this.onVisitConstructorFieldInitializer,
     required this.onVisitSuperConstructorInvocation,
     required this.onVisitConstructorDeclaration,
+    required this.onVisitArgumentList,
   });
 
   @override
@@ -24,14 +24,6 @@ class VariableAndArgumentVisitor extends GeneralizingAstVisitor<void> {
     onVisitInstanceCreationExpression(node);
 
     // Recursively visit nested InstanceCreationExpression nodes
-    node.visitChildren(this);
-  }
-
-  @override
-  void visitNamedExpression(NamedExpression node) {
-    onVisitNamedExpression(node);
-
-    // Recursively visit nested NamedExpression nodes
     node.visitChildren(this);
   }
 
@@ -72,6 +64,14 @@ class VariableAndArgumentVisitor extends GeneralizingAstVisitor<void> {
     onVisitConstructorDeclaration(node);
 
     // Recursively visit nested ConstructorDeclaration nodes
+    node.visitChildren(this);
+  }
+
+  @override
+  void visitArgumentList(ArgumentList node) {
+    onVisitArgumentList(node);
+
+    // Recursively visit nested ArgumentList nodes
     node.visitChildren(this);
   }
 }

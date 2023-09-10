@@ -19,6 +19,7 @@ class LinesLongerThan100Chars extends DartLintRule {
       if (codeLine.lineLength > 100 &&
           !codeLine.isComment &&
           !codeLine.isImportStatement &&
+          !codeLine.isExportStatement &&
           !codeLine.isString) {
         reporter.reportErrorForOffset(_code, codeLine.lineOffset, codeLine.lineLength);
       }

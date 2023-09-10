@@ -1,10 +1,10 @@
 import '../index.dart';
 
-class UnnecessaryAsyncFunction extends DartLintRule {
-  const UnnecessaryAsyncFunction() : super(code: _code);
+class AvoidUnnecessaryAsyncFunction extends DartLintRule {
+  const AvoidUnnecessaryAsyncFunction() : super(code: _code);
 
   static const _code = LintCode(
-    name: 'unnecessary_async_function',
+    name: 'avoid_unnecessary_async_function',
     problemMessage: 'This async function is unnecessary. Please remove \'async\' keyword',
   );
 
@@ -19,7 +19,8 @@ class UnnecessaryAsyncFunction extends DartLintRule {
           !node.isOverrideMethod &&
           node.body is BlockFunctionBody &&
           node.body.childAwaitExpressions.isEmpty &&
-          node.returnTypeOfBlock.toString().startsWith('Future') != true) {
+          !node.childReturnStatements.any((element) =>
+              element.expression?.staticType.toString().startsWith('Future') == true)) {
         if (node.body.keyword != null) {
           reporter.reportErrorForToken(code, node.body.keyword!);
         } else {

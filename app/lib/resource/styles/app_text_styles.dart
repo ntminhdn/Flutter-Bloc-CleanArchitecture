@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_hard_coded_text_style
 import 'package:flutter/material.dart';
 
 import '../../app.dart';

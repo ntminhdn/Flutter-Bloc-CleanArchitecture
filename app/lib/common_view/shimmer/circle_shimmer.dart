@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_hardcoded_colors
+// ignore_for_file: avoid_hard_coded_colors
 import 'package:flutter/material.dart';
 
 import '../../app.dart';

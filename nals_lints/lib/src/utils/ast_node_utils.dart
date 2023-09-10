@@ -1,6 +1,8 @@
 import '../index.dart';
 
 extension AstNodeExt on AstNode {
+  ClassDeclaration? get parentClassDeclaration => thisOrAncestorOfType<ClassDeclaration>();
+
   List<MethodInvocation> get childMethodInvocations {
     final methodInvocations = <MethodInvocation>[];
     visitChildren(RecursiveMethodInvocationVisitor(

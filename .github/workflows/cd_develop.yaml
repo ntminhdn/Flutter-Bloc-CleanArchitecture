@@ -6,7 +6,7 @@ on:
 
 env:
   JAVA_VERSION: "12.x"
-  FLUTTER_VERSION: "3.10.5"
+  FLUTTER_VERSION: "3.13.1"
   MELOS_VERSION: "3.1.0"
   TESTER_GROUPS: "testers"
 

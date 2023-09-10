@@ -8,6 +8,7 @@ class UiConstants {
 
   /// material app
   static const materialAppTitle = 'My App';
+// ignore: avoid_hard_coded_colors
   static const taskMenuMaterialAppColor = Color.fromARGB(255, 153, 154, 251);
 
   /// orientation
@@ -26,6 +27,7 @@ class UiConstants {
   /// status bar color
   static const systemUiOverlay = SystemUiOverlayStyle(
     statusBarBrightness: Brightness.light,
+// ignore: avoid_hard_coded_colors
     statusBarColor: Color.fromARGB(255, 153, 154, 251),
   );
 
