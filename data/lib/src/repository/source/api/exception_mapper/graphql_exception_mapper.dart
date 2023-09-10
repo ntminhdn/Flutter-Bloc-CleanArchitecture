@@ -22,12 +22,11 @@ class GraphQLExceptionMapper extends ExceptionMapper<RemoteException> {
       final dioException = exception.linkException!.originalException as DioException;
       if (dioException.type == DioExceptionType.badResponse) {
         /// server-defined error
-        ServerError? serverError;
-        if (dioException.response?.data != null) {
-          serverError = dioException.response!.data! is Map
-              ? _errorResponseMapper.mapToEntity(dioException.response!.data!)
-              : ServerError(generalMessage: dioException.response!.data!);
-        }
+        final serverError = dioException.response?.data is Map
+            ? _errorResponseMapper.mapToEntity(dioException.response!.data!)
+            : dioException.response?.data is String
+                ? ServerError(generalMessage: dioException.response!.data!)
+                : null;
 
         return RemoteException(
           kind: RemoteExceptionKind.serverUndefined,

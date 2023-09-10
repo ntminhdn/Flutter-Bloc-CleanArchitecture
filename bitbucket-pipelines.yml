@@ -1,4 +1,4 @@
-image: cirrusci/flutter:3.10.5
+image: cirrusci/flutter:3.13.1
 
 definitions:
   steps:
