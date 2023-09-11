@@ -35,7 +35,7 @@ class RemoteException extends AppException {
       serverError: $serverError,
       rootException: $rootException,
       generalServerMessage: $generalServerMessage,
-      generalServerErrorCode: $generalServerStatusCode,
+      generalServerStatusCode: $generalServerStatusCode,
       generalServerErrorId: $generalServerErrorId,
       stackTrace: ${rootException is Error ? (rootException as Error).stackTrace : ''}
 }''';
@@ -56,6 +56,18 @@ enum RemoteExceptionKind {
 
   /// Caused by an incorrect certificate as configured by [ValidateCertificate]
   badCertificate,
+
+  /// error occurs when passing JSON
+  decodeError,
+
+  /// error occurs when using incorrect SuccessResponseMapperType
+  invalidSuccessResponseMapperType,
+
+  /// error occurs when using incorrect ErrorResponseMapperType
+  invalidErrorResponseMapperType,
+
+  /// error occurs when all JSON keys of error response are incorrect
+  invalidErrorResponse,
 
   refreshTokenFailed,
   timeout,

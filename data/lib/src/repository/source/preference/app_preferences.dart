@@ -18,11 +18,13 @@ class AppPreferences with LogMixin {
     return _sharedPreference.getBool(SharedPreferenceKeys.isDarkMode) ?? false;
   }
 
-  String get deviceToken {
-    return _sharedPreference.getString(SharedPreferenceKeys.deviceToken) ?? '';
+  Future<String> get deviceToken async {
+    return await _secureStorage.read(key: SharedPreferenceKeys.deviceToken) ?? '';
   }
 
-  String get languageCode => _sharedPreference.getString(SharedPreferenceKeys.languageCode) ?? '';
+  String get languageCode =>
+      _sharedPreference.getString(SharedPreferenceKeys.languageCode) ??
+      ServerRequestResponseConstants.ja;
 
   bool get isFirstLogin => _sharedPreference.getBool(SharedPreferenceKeys.isFirstLogin) ?? true;
 
@@ -49,7 +51,7 @@ class AppPreferences with LogMixin {
       return null;
     }
 
-    return PreferenceUserData.fromJson(json.decode(user));
+    return PreferenceUserData.fromJson(json.decode(user) as Map<String, dynamic>);
   }
 
   Future<bool> saveLanguageCode(String languageCode) {
@@ -65,14 +67,14 @@ class AppPreferences with LogMixin {
   }
 
   Future<void> saveAccessToken(String token) async {
-    await _secureStorage.write(
+    return _secureStorage.write(
       key: SharedPreferenceKeys.accessToken,
       value: token,
     );
   }
 
   Future<void> saveRefreshToken(String token) async {
-    await _secureStorage.write(
+    return _secureStorage.write(
       key: SharedPreferenceKeys.refreshToken,
       value: token,
     );
@@ -89,8 +91,11 @@ class AppPreferences with LogMixin {
     return _sharedPreference.setBool(SharedPreferenceKeys.isDarkMode, isDarkMode);
   }
 
-  Future<bool> saveDeviceToken(String token) {
-    return _sharedPreference.setString(SharedPreferenceKeys.deviceToken, token);
+  Future<void> saveDeviceToken(String token) {
+    return _secureStorage.write(
+      key: SharedPreferenceKeys.deviceToken,
+      value: token,
+    );
   }
 
   Future<void> clearCurrentUserData() async {

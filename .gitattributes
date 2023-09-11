@@ -98,6 +98,7 @@ readme          text
 TODO            text
 
 # file gen
+*.mapper.dart          linguist-generated=true
 *.g.dart                linguist-generated=true
 *.gr.dart               linguist-generated=true
 *.freezed.dart          linguist-generated=true

@@ -5,53 +5,37 @@ class ExceptionMessageMapper {
   const ExceptionMessageMapper();
 
   String map(AppException appException) {
-    switch (appException.appExceptionType) {
-      case AppExceptionType.remote:
-        final exception = appException as RemoteException;
-        switch (exception.kind) {
-          case RemoteExceptionKind.badCertificate:
-            return S.current.badCertificateException;
-          case RemoteExceptionKind.noInternet:
-            return S.current.noInternetException;
-          case RemoteExceptionKind.network:
-            return S.current.canNotConnectToHost;
-          case RemoteExceptionKind.serverDefined:
-            return exception.generalServerMessage ?? S.current.unknownException;
-          case RemoteExceptionKind.serverUndefined:
-            return exception.generalServerMessage ?? S.current.unknownException;
-          case RemoteExceptionKind.timeout:
-            return S.current.timeoutException;
-          case RemoteExceptionKind.cancellation:
-            return S.current.cancellationException;
-          case RemoteExceptionKind.unknown:
-            return '${S.current.unknownException}: ${exception.rootException}';
-          case RemoteExceptionKind.refreshTokenFailed:
-            return S.current.tokenExpired;
-        }
-      case AppExceptionType.parse:
-        return S.current.parseException;
-      case AppExceptionType.remoteConfig:
-        return S.current.unknownException;
-      case AppExceptionType.uncaught:
-        return S.current.unknownException;
-      case AppExceptionType.validation:
-        final exception = appException as ValidationException;
-        switch (exception.kind) {
-          case ValidationExceptionKind.emptyEmail:
-            return S.current.emptyEmail;
-          case ValidationExceptionKind.invalidEmail:
-            return S.current.invalidEmail;
-          case ValidationExceptionKind.invalidPassword:
-            return S.current.invalidPassword;
-          case ValidationExceptionKind.invalidUserName:
-            return S.current.invalidUserName;
-          case ValidationExceptionKind.invalidPhoneNumber:
-            return S.current.invalidPhoneNumber;
-          case ValidationExceptionKind.invalidDateTime:
-            return S.current.invalidDateTime;
-          case ValidationExceptionKind.passwordsAreNotMatch:
-            return S.current.passwordsAreNotMatch;
-        }
-    }
+    return switch (appException.appExceptionType) {
+      AppExceptionType.remote => switch ((appException as RemoteException).kind) {
+          RemoteExceptionKind.badCertificate => S.current.unknownException('UE-01'),
+          RemoteExceptionKind.noInternet => S.current.noInternetException,
+          RemoteExceptionKind.network => S.current.canNotConnectToHost,
+          RemoteExceptionKind.serverDefined =>
+            appException.generalServerMessage ?? S.current.unknownException('UE-02'),
+          RemoteExceptionKind.serverUndefined =>
+            appException.generalServerMessage ?? S.current.unknownException('UE-03'),
+          RemoteExceptionKind.timeout => S.current.timeoutException,
+          RemoteExceptionKind.cancellation => S.current.unknownException('UE-04'),
+          RemoteExceptionKind.unknown => S.current.unknownException('UE-05'),
+          RemoteExceptionKind.refreshTokenFailed => S.current.tokenExpired,
+          RemoteExceptionKind.decodeError => S.current.unknownException('UE-06'),
+          RemoteExceptionKind.invalidErrorResponse => S.current.unknownException('UE-07'),
+          RemoteExceptionKind.invalidSuccessResponseMapperType =>
+            S.current.unknownException('UE-08'),
+          RemoteExceptionKind.invalidErrorResponseMapperType => S.current.unknownException('UE-09'),
+        },
+      AppExceptionType.parse => S.current.unknownException('UE-10'),
+      AppExceptionType.uncaught => S.current.unknownException('UE-00'),
+      AppExceptionType.validation => switch ((appException as ValidationException).kind) {
+          ValidationExceptionKind.emptyEmail => S.current.emptyEmail,
+          ValidationExceptionKind.invalidEmail => S.current.invalidEmail,
+          ValidationExceptionKind.invalidPassword => S.current.invalidPassword,
+          ValidationExceptionKind.invalidUserName => S.current.invalidUserName,
+          ValidationExceptionKind.invalidPhoneNumber => S.current.invalidPhoneNumber,
+          ValidationExceptionKind.invalidDateTime => S.current.invalidDateTime,
+          ValidationExceptionKind.passwordsAreNotMatch => S.current.passwordsAreNotMatch,
+        },
+      AppExceptionType.remoteConfig => S.current.unknownException('UE-100'),
+    };
   }
 }

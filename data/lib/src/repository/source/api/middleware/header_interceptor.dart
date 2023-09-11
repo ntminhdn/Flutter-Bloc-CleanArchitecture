@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared/shared.dart';
 
+import 'package:shared/shared.dart';
 import 'base_interceptor.dart';
 
 @Injectable()

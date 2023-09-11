@@ -15,11 +15,19 @@ enum Gender {
 
   const Gender(this.serverValue);
   final int serverValue;
+
+  static const defaultValue = unknown;
 }
 
 enum LanguageCode {
-  en(localeCode: LocaleConstants.en, serverValue: ServerRequestResponseConstants.en),
-  ja(localeCode: LocaleConstants.ja, serverValue: ServerRequestResponseConstants.ja);
+  en(
+    localeCode: LocaleConstants.en,
+    serverValue: ServerRequestResponseConstants.en,
+  ),
+  ja(
+    localeCode: LocaleConstants.ja,
+    serverValue: ServerRequestResponseConstants.ja,
+  );
 
   const LanguageCode({
     required this.localeCode,
@@ -28,13 +36,15 @@ enum LanguageCode {
   final String localeCode;
   final String serverValue;
 
-  static LanguageCode get defaultValue => en;
+  static const defaultValue = ja;
 }
 
 enum NotificationType {
   unknown,
   newPost,
-  liked,
+  liked;
+
+  static const defaultValue = unknown;
 }
 
 enum BottomTab {

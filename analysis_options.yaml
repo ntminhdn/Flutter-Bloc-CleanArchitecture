@@ -8,6 +8,7 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*.config.dart"
     - "**/*.gen.dart"
+    - "**/*.mapper.dart"
     # - "**/test/**/*.dart"
     # - "**/test/*.dart"
     - "resources/lib/src/generated/intl/*.dart"

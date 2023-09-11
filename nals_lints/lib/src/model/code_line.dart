@@ -24,7 +24,7 @@ class CodeLine {
   bool get isExportStatement => content.trim().startsWith('export ');
 
   bool get isString {
-    const regex = '^(return\\s*)?r?[\'"].+[\'"] *[,;]\$';
+    const regex = '^(return\\s*)?r?[\'"].+[\'"] *\\)?[,;]\$';
 
     return RegExp(regex).hasMatch(content.trim());
   }

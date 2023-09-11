@@ -6,6 +6,7 @@ part 'server_error.freezed.dart';
 
 @freezed
 class ServerError with _$ServerError {
+  const ServerError._();
   const factory ServerError({
     /// server-defined status code
     int? generalServerStatusCode,
@@ -15,6 +16,14 @@ class ServerError with _$ServerError {
 
     /// server-defined message
     String? generalMessage,
-    @Default(<ServerErrorDetail>[]) List<ServerErrorDetail> errors,
+    @Default(ServerError.defaultErrors) List<ServerErrorDetail> errors,
   }) = _ServerError;
+
+  static const defaultGeneralServerStatusCode = -1;
+  static const defaultGeneralServerErrorId = '';
+  static const defaultGeneralMessage = '';
+  static const defaultErrors = <ServerErrorDetail>[];
+
+  bool get isDefault =>
+      this == const ServerError() || this == const ServerError(errors: [ServerErrorDetail()]);
 }

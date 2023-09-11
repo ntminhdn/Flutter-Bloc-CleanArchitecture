@@ -88,8 +88,8 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos ${{env.MELOS_VERSION}}
 
-      - name: Run build_runner
-        run: make force_build_all
+      - name: Run pub get and gen files
+        run: make sync
 
       - name: pub get app
         run: cd app && flutter pub get
@@ -142,8 +142,8 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos ${{env.MELOS_VERSION}}
 
-      - name: Run build_runner
-        run: make force_build_all
+      - name: Run pub get and gen files
+        run: make sync
 
       - name: Build APK
         run: make build_stg_apk
