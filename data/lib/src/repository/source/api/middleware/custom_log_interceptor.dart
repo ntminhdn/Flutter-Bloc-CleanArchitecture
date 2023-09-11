@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 
+import 'package:shared/shared.dart';
 import 'base_interceptor.dart';
 
 class CustomLogInterceptor extends BaseInterceptor {
@@ -57,7 +57,7 @@ class CustomLogInterceptor extends BaseInterceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) {
     if (!_enableLogInterceptor || !enableLogSuccessResponse) {
       handler.next(response);
 

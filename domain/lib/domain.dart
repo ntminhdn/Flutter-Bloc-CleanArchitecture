@@ -3,7 +3,6 @@ library domain;
 export 'domain.dart';
 export 'src/config/domain_config.dart';
 export 'src/di/di.dart';
-export 'src/entity/app_location.dart';
 export 'src/entity/app_notification.dart';
 export 'src/entity/base/paged_list.dart';
 export 'src/entity/base/process_state.dart';

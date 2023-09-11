@@ -2,7 +2,7 @@
   "login": "ログイン",
   "email": "メールアドレス",
   "password": "パスワード",
-  "unknownException": "unknownException",
+  "unknownException": "unknownException ({errorCode})",
   "parseException": "parseException",
   "cancellationException": "cancellationException",
   "noInternetException": "noInternetException",

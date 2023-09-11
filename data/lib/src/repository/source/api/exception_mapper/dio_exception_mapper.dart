@@ -1,17 +1,21 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 
-import '../../../mapper/base/base_error_response_mapper.dart';
+import 'package:shared/shared.dart';
+import '../../../../../data.dart';
 
 class DioExceptionMapper extends ExceptionMapper<RemoteException> {
   DioExceptionMapper(this._errorResponseMapper);
 
-  final BaseErrorResponseMapper _errorResponseMapper;
+  final BaseErrorResponseMapper<dynamic> _errorResponseMapper;
 
   @override
   RemoteException map(Object? exception) {
+    if (exception is RemoteException) {
+      return exception;
+    }
+
     if (exception is DioException) {
       switch (exception.type) {
         case DioExceptionType.cancel:
@@ -28,9 +32,7 @@ class DioExceptionMapper extends ExceptionMapper<RemoteException> {
 
           /// server-defined error
           if (exception.response?.data != null) {
-            final serverError = exception.response!.data! is Map
-                ? _errorResponseMapper.mapToEntity(exception.response!.data!)
-                : ServerError(generalMessage: exception.response!.data!);
+            final serverError = _errorResponseMapper.map(exception.response!.data!);
 
             return RemoteException(
               kind: RemoteExceptionKind.serverDefined,
@@ -52,7 +54,7 @@ class DioExceptionMapper extends ExceptionMapper<RemoteException> {
         case DioExceptionType.connectionError:
           return RemoteException(kind: RemoteExceptionKind.network, rootException: exception);
         case DioExceptionType.unknown:
-          if (exception is SocketException) {
+          if (exception.error is SocketException) {
             return RemoteException(kind: RemoteExceptionKind.network, rootException: exception);
           }
 

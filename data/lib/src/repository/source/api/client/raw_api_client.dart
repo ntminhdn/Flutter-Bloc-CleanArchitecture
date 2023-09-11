@@ -1,6 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-import 'base/rest_api_client.dart';
+import '../../../../../data.dart';
 
 @LazySingleton()
-class RawApiClient extends RestApiClient {}
+class RawApiClient extends RestApiClient {
+  RawApiClient()
+      : super(
+          dio: DioBuilder.createDio(
+            options: BaseOptions(baseUrl: ''),
+          ),
+        );
+}

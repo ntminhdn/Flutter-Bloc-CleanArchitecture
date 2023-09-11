@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 
-import 'base_interceptor.dart';
+import 'package:shared/shared.dart';
+import '../../../../../data.dart';
 
 class BasicAuthInterceptor extends BaseInterceptor {
   BasicAuthInterceptor({

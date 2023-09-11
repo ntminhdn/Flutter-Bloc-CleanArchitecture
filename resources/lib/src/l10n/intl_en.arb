@@ -2,7 +2,7 @@
   "login": "Login",
   "email": "Email",
   "password": "Password",
-  "unknownException": "unknownException",
+  "unknownException": "unknownException ({errorCode})",
   "parseException": "parseException",
   "cancellationException": "cancellationException",
   "noInternetException": "noInternetException",

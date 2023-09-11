@@ -1,1 +1,1 @@
-typedef Decoder<T> = T Function(Map<String, dynamic> data);
+typedef Decoder<T> = T Function(Object? data);

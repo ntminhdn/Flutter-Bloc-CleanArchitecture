@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared/shared.dart';
 
-import '../../../../../data.dart';
+import '../../../../data.dart';
 
 @LazySingleton()
 class RefreshTokenApiService {
@@ -9,12 +9,13 @@ class RefreshTokenApiService {
 
   final RefreshTokenApiClient _refreshTokenApiClient;
 
-  Future<DataResponse<RefreshTokenData>> refreshToken(String refreshToken) async {
+  Future<DataResponse<ApiRefreshTokenData>?> refreshToken(String refreshToken) async {
     try {
-      final respone = await _refreshTokenApiClient.request(
+      final respone = await _refreshTokenApiClient
+          .request<ApiRefreshTokenData, DataResponse<ApiRefreshTokenData>>(
         method: RestMethod.post,
         path: '/v1/auth/refresh',
-        decoder: RefreshTokenData.fromJson,
+        decoder: (json) => ApiRefreshTokenData.fromJson(json as Map<String, dynamic>),
       );
 
       return respone;

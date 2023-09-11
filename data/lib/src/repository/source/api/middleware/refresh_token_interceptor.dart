@@ -6,10 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:shared/shared.dart';
 import 'package:tuple/tuple.dart';
 
-import '../../preference/app_preferences.dart';
-import '../client/none_auth_app_server_api_client.dart';
-import '../refresh_token_api_service.dart';
-import 'base_interceptor.dart';
+import '../../../../../data.dart';
 
 @Injectable()
 class RefreshTokenInterceptor extends BaseInterceptor {
@@ -33,28 +30,36 @@ class RefreshTokenInterceptor extends BaseInterceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == HttpStatus.unauthorized) {
       final options = err.response!.requestOptions;
-      _onExpiredToken(options, handler);
+      _onExpiredToken(options: options, handler: handler);
     } else {
       handler.next(err);
     }
   }
 
-  void _putAccessToken(Map<String, dynamic> headers, String accessToken) {
+  void _putAccessToken({
+    required Map<String, dynamic> headers,
+    required String accessToken,
+  }) {
     headers[ServerRequestResponseConstants.basicAuthorization] =
         '${ServerRequestResponseConstants.bearer} $accessToken';
   }
 
-  void _onExpiredToken(RequestOptions options, ErrorInterceptorHandler handler) {
+  Future<void> _onExpiredToken({
+    required RequestOptions options,
+    required ErrorInterceptorHandler handler,
+  }) async {
     _queue.addLast(Tuple2(options, handler));
     if (!_isRefreshing) {
       _isRefreshing = true;
-      _refreshToken()
-          .then(_onRefreshTokenSuccess)
-          .catchError(_onRefreshTokenError)
-          .whenComplete(() {
+      try {
+        final newToken = await _refreshToken();
+        await _onRefreshTokenSuccess(newToken);
+      } catch (e) {
+        _onRefreshTokenError(e);
+      } finally {
         _isRefreshing = false;
         _queue.clear();
-      });
+      }
     }
   }
 
@@ -64,16 +69,22 @@ class RefreshTokenInterceptor extends BaseInterceptor {
     final refreshTokenResponse = await refreshTokenService.refreshToken(refreshToken);
     await Future.wait(
       [
-        appPreferences.saveAccessToken(refreshTokenResponse.data?.accessToken ?? ''),
+        appPreferences.saveAccessToken(
+          safeCast(refreshTokenResponse?.data?.accessToken) ?? '',
+        ),
       ],
     );
 
-    return refreshTokenResponse.data?.accessToken ?? '';
+    return safeCast(refreshTokenResponse?.data?.accessToken) ?? '';
   }
 
   Future<void> _onRefreshTokenSuccess(String newToken) async {
     await Future.wait(_queue.map(
-      (requestInfo) => _requestWithNewToken(requestInfo.item1, requestInfo.item2, newToken),
+      (requestInfo) => _requestWithNewToken(
+        options: requestInfo.item1,
+        handler: requestInfo.item2,
+        newAccessToken: newToken,
+      ),
     ));
   }
 
@@ -85,16 +96,18 @@ class RefreshTokenInterceptor extends BaseInterceptor {
     });
   }
 
-  Future<void> _requestWithNewToken(
-    RequestOptions options,
-    ErrorInterceptorHandler handler,
-    String newAccessToken,
-  ) {
-    _putAccessToken(options.headers, newAccessToken);
+  Future<void> _requestWithNewToken({
+    required RequestOptions options,
+    required ErrorInterceptorHandler handler,
+    required String newAccessToken,
+  }) async {
+    _putAccessToken(headers: options.headers, accessToken: newAccessToken);
 
-    return _noneAuthAppServerApiClient
-        .fetch(options)
-        .then((response) => handler.resolve(response))
-        .catchError((e) => handler.next(DioException(requestOptions: options, error: e)));
+    try {
+      final response = await _noneAuthAppServerApiClient.dio.fetch(options);
+      handler.resolve(response);
+    } catch (e) {
+      handler.next(DioException(requestOptions: options, error: e));
+    }
   }
 }

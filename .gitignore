@@ -53,6 +53,7 @@ app.*.map.json
 *.gr.dart
 *.freezed.dart
 *.config.dart
+*.mapper.dart
 *.gen.dart
 *.mocks.dart
 resources/lib/src/generated

@@ -1,138 +1,108 @@
-import 'package:dartx/dartx.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 
-import '../../../../mapper/base/base_error_response_mapper.dart';
-import '../../../../mapper/base/base_success_response_mapper.dart';
-import '../../exception_mapper/dio_exception_mapper.dart';
-import '../../middleware/base_interceptor.dart';
-import '../base/api_client_default_settings.dart';
-import '../base/dio_builder.dart';
+import 'package:shared/shared.dart';
+import '../../../../../../data.dart';
 
 enum RestMethod { get, post, put, patch, delete }
 
 class RestApiClient {
   RestApiClient({
-    this.baseUrl = '',
-    this.interceptors = const [],
-    this.errorResponseMapperType = ResponseMapperConstants.defaultErrorResponseMapperType,
-    this.successResponseMapperType = ResponseMapperConstants.defaultSuccessResponseMapperType,
-    this.connectTimeout = ServerTimeoutConstants.connectTimeout,
-    this.sendTimeout = ServerTimeoutConstants.sendTimeout,
-    this.receiveTimeout = ServerTimeoutConstants.receiveTimeout,
-  }) : _dio = DioBuilder.createDio(
-          options: BaseOptions(
-            baseUrl: baseUrl,
-            connectTimeout: connectTimeout,
-            sendTimeout: sendTimeout,
-            receiveTimeout: receiveTimeout,
-          ),
-        ) {
-    final sortedInterceptors = [
-      ...ApiClientDefaultSetting.requiredInterceptors(_dio),
-      ...interceptors,
-    ].sortedByDescending((element) {
-      return element is BaseInterceptor ? element.priority : -1;
-    });
-
-    _dio.interceptors.addAll(sortedInterceptors);
-  }
+    required this.dio,
+    this.errorResponseMapperType = ApiClientDefaultSetting.defaultErrorResponseMapperType,
+    this.successResponseMapperType = ApiClientDefaultSetting.defaultSuccessResponseMapperType,
+  });
 
   final SuccessResponseMapperType successResponseMapperType;
   final ErrorResponseMapperType errorResponseMapperType;
-  final String baseUrl;
-  final Duration? connectTimeout;
-  final Duration? sendTimeout;
-  final Duration? receiveTimeout;
-  final List<Interceptor> interceptors;
-  final Dio _dio;
+  final Dio dio;
 
-  Future<T> request<T, D>({
+  Future<T?> request<D, T>({
     required RestMethod method,
     required String path,
     Map<String, dynamic>? queryParameters,
-    // ignore: avoid-dynamic
-    dynamic body,
+    Object? body,
     Decoder<D>? decoder,
     SuccessResponseMapperType? successResponseMapperType,
     ErrorResponseMapperType? errorResponseMapperType,
-    BaseErrorResponseMapper? errorResponseMapper,
-    Map<String, dynamic>? headers,
-    String? contentType,
-    ResponseType? responseType,
-    Duration? sendTimeout,
-    Duration? receiveTimeout,
+    Options? options,
   }) async {
+    assert(
+        method != RestMethod.get ||
+            (successResponseMapperType ?? this.successResponseMapperType) ==
+                SuccessResponseMapperType.plain ||
+            decoder != null,
+        'decoder must not be null if method is GET');
     try {
       final response = await _requestByMethod(
         method: method,
-        path: path.startsWith(baseUrl) ? path.substring(baseUrl.length) : path,
+        path: path.startsWith(dio.options.baseUrl)
+            ? path.substring(dio.options.baseUrl.length)
+            : path,
         queryParameters: queryParameters,
         body: body,
         options: Options(
-          headers: headers,
-          contentType: contentType,
-          responseType: responseType,
-          sendTimeout: sendTimeout,
-          receiveTimeout: receiveTimeout,
+          headers: options?.headers,
+          contentType: options?.contentType,
+          responseType: options?.responseType,
+          sendTimeout: options?.sendTimeout,
+          receiveTimeout: options?.receiveTimeout,
         ),
       );
 
+      if (response.data == null) {
+        return null;
+      }
+
       return BaseSuccessResponseMapper<D, T>.fromType(
         successResponseMapperType ?? this.successResponseMapperType,
-      ).map(response.data, decoder);
+      ).map(response: response.data, decoder: decoder);
     } catch (error) {
       throw DioExceptionMapper(
-        errorResponseMapper ??
-            BaseErrorResponseMapper.fromType(
-              errorResponseMapperType ?? this.errorResponseMapperType,
-            ),
+        BaseErrorResponseMapper.fromType(
+          errorResponseMapperType ?? this.errorResponseMapperType,
+        ),
       ).map(error);
     }
   }
 
-  Future<Response<T>> fetch<T>(RequestOptions requestOptions) {
-    return _dio.fetch(requestOptions);
-  }
-
-  Future<Response> _requestByMethod({
+  Future<Response<dynamic>> _requestByMethod({
     required RestMethod method,
     required String path,
     Map<String, dynamic>? queryParameters,
-    // ignore: avoid-dynamic
-    dynamic body,
+    Object? body,
     Options? options,
   }) {
     switch (method) {
       case RestMethod.get:
-        return _dio.get(
+        return dio.get(
           path,
+          data: body,
           queryParameters: queryParameters,
           options: options,
         );
       case RestMethod.post:
-        return _dio.post(
+        return dio.post(
           path,
           data: body,
           queryParameters: queryParameters,
           options: options,
         );
       case RestMethod.patch:
-        return _dio.patch(
+        return dio.patch(
           path,
           data: body,
           queryParameters: queryParameters,
           options: options,
         );
       case RestMethod.put:
-        return _dio.put(
+        return dio.put(
           path,
           data: body,
           queryParameters: queryParameters,
           options: options,
         );
       case RestMethod.delete:
-        return _dio.delete(
+        return dio.delete(
           path,
           data: body,
           queryParameters: queryParameters,
