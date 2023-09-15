@@ -30,18 +30,48 @@ jobs:
 
       - name: Install melos  
         run: dart pub global activate melos ${{env.MELOS_VERSION}}
-
-      - name: Run build_runner
+      
+      - name: Run pub get and gen files
         run: make sync
 
-      - name: Run Unit Test
+      - name: Run Tests
         run: make test
 
       - name: Check format
         run: make format
 
+      - name: Run custom lint
+        run: make custom_lint
+
       - name: Run analyze
         run: make analyze
+      
+      - name: Run dart_code_metrics
+        run: make dart_code_metrics
+
+      # - name: Check lint app
+      #   uses: dart-code-checker/dart-code-metrics-action@v2
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     relative_path: 'app'
+
+      # - name: Check lint data
+      #   uses: dart-code-checker/dart-code-metrics-action@v2
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     relative_path: 'data'
+
+      # - name: Check lint domain
+      #   uses: dart-code-checker/dart-code-metrics-action@v2
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     relative_path: 'domain'
+
+      # - name: Check lint shared
+      #   uses: dart-code-checker/dart-code-metrics-action@v2
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     relative_path: 'shared'
 
       # - uses: mechiru/chatwork@v2
       #   with:

@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared/shared.dart';
 
-import '../../preference/app_preferences.dart';
-import 'base_interceptor.dart';
+import 'package:shared/shared.dart';
+import '../../../../../data.dart';
 
 @Injectable()
 class AccessTokenInterceptor extends BaseInterceptor {

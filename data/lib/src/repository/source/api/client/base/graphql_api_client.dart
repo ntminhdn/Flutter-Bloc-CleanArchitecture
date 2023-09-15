@@ -8,13 +8,7 @@ import 'package:gql_dio_link/gql_dio_link.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared/shared.dart';
-
-import '../../../../mapper/base/base_error_response_mapper.dart';
-import '../../../../mapper/base/base_success_response_mapper.dart';
-import '../../exception_mapper/graphql_exception_mapper.dart';
-import '../../middleware/base_interceptor.dart';
-import '../base/api_client_default_settings.dart';
-import '../base/dio_builder.dart';
+import '../../../../../../data.dart';
 
 enum GraphQLMethod { query, mutate }
 
@@ -22,7 +16,7 @@ class GraphQLApiClient {
   GraphQLApiClient({
     this.baseUrl = '',
     this.interceptors = const [],
-    this.errorResponseMapperType = ResponseMapperConstants.defaultErrorResponseMapperType,
+    this.errorResponseMapperType = ApiClientDefaultSetting.defaultErrorResponseMapperType,
     this.connectTimeout = ServerTimeoutConstants.connectTimeout,
     this.sendTimeout = ServerTimeoutConstants.sendTimeout,
     this.receiveTimeout = ServerTimeoutConstants.receiveTimeout,
@@ -86,7 +80,7 @@ class GraphQLApiClient {
     }
 
     return BaseSuccessResponseMapper<T, T>.fromType(SuccessResponseMapperType.jsonObject)
-        .map(response.data, decoder);
+        .map(response: response.data, decoder: decoder);
   }
 
   Future<QueryResult> _requestByMethod({

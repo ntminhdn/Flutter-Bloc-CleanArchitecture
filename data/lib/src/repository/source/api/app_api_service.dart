@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:shared/shared.dart';
 
-import '../../../../../data.dart';
+import '../../../../data.dart';
 
 @LazySingleton()
 class AppApiService {
@@ -10,12 +9,14 @@ class AppApiService {
     this._authAppServerApiClient,
     this._randomUserApiClient,
   );
-
   final NoneAuthAppServerApiClient _noneAuthAppServerApiClient;
   final AuthAppServerApiClient _authAppServerApiClient;
   final RandomUserApiClient _randomUserApiClient;
 
-  Future<DataResponse<AuthResponseData>> login(String email, String password) async {
+  Future<DataResponse<ApiAuthResponseData>?> login({
+    required String email,
+    required String password,
+  }) async {
     return _noneAuthAppServerApiClient.request(
       method: RestMethod.post,
       path: '/v1/auth/login',
@@ -23,7 +24,7 @@ class AppApiService {
         'email': email,
         'password': password,
       },
-      decoder: AuthResponseData.fromJson,
+      decoder: (json) => ApiAuthResponseData.fromJson(json as Map<String, dynamic>),
     );
   }
 
@@ -34,7 +35,7 @@ class AppApiService {
     );
   }
 
-  Future<DataResponse<AuthResponseData>> register({
+  Future<DataResponse<ApiAuthResponseData>?> register({
     required String username,
     required String email,
     required String password,
@@ -50,7 +51,7 @@ class AppApiService {
         'password': password,
         'password_confirmation': password,
       },
-      decoder: AuthResponseData.fromJson,
+      decoder: (json) => ApiAuthResponseData.fromJson(json as Map<String, dynamic>),
     );
   }
 
@@ -81,15 +82,16 @@ class AppApiService {
     );
   }
 
-  Future<DataResponse<UserData>> getMe() async {
-    return _noneAuthAppServerApiClient.request(
+  Future<ApiUserData?> getMe() async {
+    return _authAppServerApiClient.request(
       method: RestMethod.get,
       path: '/v1/me',
-      decoder: AuthResponseData.fromJson,
+      successResponseMapperType: SuccessResponseMapperType.jsonObject,
+      decoder: (json) => ApiUserData.fromJson(json as Map<String, dynamic>),
     );
   }
 
-  Future<ResultsListResponse<UserData>> getUsers({
+  Future<ResultsListResponse<ApiUserData>?> getUsers({
     required int page,
     required int? limit,
   }) {
@@ -101,7 +103,7 @@ class AppApiService {
         'results': limit,
       },
       successResponseMapperType: SuccessResponseMapperType.resultsJsonArray,
-      decoder: UserData.fromJson,
+      decoder: (json) => ApiUserData.fromJson(json as Map<String, dynamic>),
     );
   }
 }
