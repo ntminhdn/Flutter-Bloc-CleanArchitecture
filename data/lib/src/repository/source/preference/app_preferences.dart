@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared/shared.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,34 +9,33 @@ import '../../../../data.dart';
 
 @LazySingleton()
 class AppPreferences with LogMixin {
-  AppPreferences(this._sharedPreference, this._secureStorage);
+  AppPreferences(this._sharedPreference)
+      : _encryptedSharedPreferences = EncryptedSharedPreferences(prefs: _sharedPreference);
 
   final SharedPreferences _sharedPreference;
-  final FlutterSecureStorage _secureStorage;
+  final EncryptedSharedPreferences _encryptedSharedPreferences;
 
   bool get isDarkMode {
     return _sharedPreference.getBool(SharedPreferenceKeys.isDarkMode) ?? false;
   }
 
-  Future<String> get deviceToken async {
-    return await _secureStorage.read(key: SharedPreferenceKeys.deviceToken) ?? '';
+  String get deviceToken {
+    return _sharedPreference.getString(SharedPreferenceKeys.deviceToken) ?? '';
   }
 
-  String get languageCode =>
-      _sharedPreference.getString(SharedPreferenceKeys.languageCode) ??
-      ServerRequestResponseConstants.ja;
+  String get languageCode => _sharedPreference.getString(SharedPreferenceKeys.languageCode) ?? '';
 
   bool get isFirstLogin => _sharedPreference.getBool(SharedPreferenceKeys.isFirstLogin) ?? true;
 
   bool get isFirstLaunchApp =>
       _sharedPreference.getBool(SharedPreferenceKeys.isFirstLaunchApp) ?? true;
 
-  Future<String> get accessToken async {
-    return await _secureStorage.read(key: SharedPreferenceKeys.accessToken) ?? '';
+  Future<String> get accessToken {
+    return _encryptedSharedPreferences.getString(SharedPreferenceKeys.accessToken);
   }
 
-  Future<String> get refreshToken async {
-    return await _secureStorage.read(key: SharedPreferenceKeys.refreshToken) ?? '';
+  Future<String> get refreshToken {
+    return _encryptedSharedPreferences.getString(SharedPreferenceKeys.refreshToken);
   }
 
   bool get isLoggedIn {
@@ -51,7 +50,7 @@ class AppPreferences with LogMixin {
       return null;
     }
 
-    return PreferenceUserData.fromJson(json.decode(user) as Map<String, dynamic>);
+    return PreferenceUserData.fromJson(json.decode(user));
   }
 
   Future<bool> saveLanguageCode(String languageCode) {
@@ -67,16 +66,16 @@ class AppPreferences with LogMixin {
   }
 
   Future<void> saveAccessToken(String token) async {
-    return _secureStorage.write(
-      key: SharedPreferenceKeys.accessToken,
-      value: token,
+    await _encryptedSharedPreferences.setString(
+      SharedPreferenceKeys.accessToken,
+      token,
     );
   }
 
   Future<void> saveRefreshToken(String token) async {
-    return _secureStorage.write(
-      key: SharedPreferenceKeys.refreshToken,
-      value: token,
+    await _encryptedSharedPreferences.setString(
+      SharedPreferenceKeys.refreshToken,
+      token,
     );
   }
 
@@ -91,11 +90,8 @@ class AppPreferences with LogMixin {
     return _sharedPreference.setBool(SharedPreferenceKeys.isDarkMode, isDarkMode);
   }
 
-  Future<void> saveDeviceToken(String token) {
-    return _secureStorage.write(
-      key: SharedPreferenceKeys.deviceToken,
-      value: token,
-    );
+  Future<bool> saveDeviceToken(String token) {
+    return _sharedPreference.setString(SharedPreferenceKeys.deviceToken, token);
   }
 
   Future<void> clearCurrentUserData() async {

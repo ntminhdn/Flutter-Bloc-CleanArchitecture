@@ -31,3 +31,8 @@ class EyeIconPressed extends LoginEvent with _$EyeIconPressed {
 class LoginButtonPressed extends LoginEvent with _$LoginButtonPressed {
   const factory LoginButtonPressed() = _LoginButtonPressed;
 }
+
+@freezed
+class FakeLoginButtonPressed extends LoginEvent with _$FakeLoginButtonPressed {
+  const factory FakeLoginButtonPressed() = _FakeLoginButtonPressed;
+}

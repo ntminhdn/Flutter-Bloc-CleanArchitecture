@@ -17,7 +17,7 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: LoginRoute.page),
-        AutoRoute(page: MainRoute.page, initial: true, children: [
+        AutoRoute(page: MainRoute.page, children: [
           AutoRoute(
             page: HomeTab.page,
             maintainState: true,

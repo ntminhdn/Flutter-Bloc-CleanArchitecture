@@ -1,5 +1,4 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dartx/dartx.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared/shared.dart';
@@ -64,12 +63,19 @@ class RepositoryImpl implements Repository {
     required String password,
   }) async {
     final response = await _appApiService.login(email: email, password: password);
-    await _saveTokenAndUser(response?.data);
+    await Future.wait([
+      saveAccessToken(response?.data?.accessToken ?? ''),
+      saveUserPreference(
+        User(
+          id: safeCast(response?.data?.id) ?? -1,
+          email: safeCast(response?.data?.email) ?? '',
+        ),
+      ),
+    ]);
   }
 
   @override
   Future<void> logout() async {
-    await _appApiService.logout();
     await _appPreferences.clearCurrentUserData();
   }
 
@@ -102,7 +108,15 @@ class RepositoryImpl implements Repository {
       password: password,
       gender: _genderDataMapper.mapToData(gender),
     );
-    await _saveTokenAndUser(response?.data);
+    await Future.wait([
+      saveAccessToken(response?.data?.accessToken ?? ''),
+      saveUserPreference(
+        User(
+          id: safeCast(response?.data?.id) ?? -1,
+          email: safeCast(response?.data?.email) ?? '',
+        ),
+      ),
+    ]);
   }
 
   @override
@@ -170,14 +184,10 @@ class RepositoryImpl implements Repository {
     return _appDatabase.putUser(userData);
   }
 
-  Future<List<dynamic>> _saveTokenAndUser(ApiAuthResponseData? authData) async {
-    return Future.wait([
-      _appPreferences.saveCurrentUser(PreferenceUserData(
-        id: safeCast(authData?.id) ?? -1,
-        email: safeCast(authData?.email) ?? '',
-      )),
-      if (authData != null && !safeCast<String>(authData.accessToken).isNullOrEmpty)
-        _appPreferences.saveAccessToken(authData.accessToken as String),
-    ]);
-  }
+  @override
+  Future<void> saveAccessToken(String accessToken) => _appPreferences.saveAccessToken(accessToken);
+
+  @override
+  Future<bool> saveUserPreference(User user) =>
+      _appPreferences.saveCurrentUser(_preferenceUserDataMapper.mapToData(user));
 }

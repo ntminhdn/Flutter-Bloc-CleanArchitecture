@@ -7,15 +7,17 @@ part 'logout_use_case.freezed.dart';
 
 @Injectable()
 class LogoutUseCase extends BaseFutureUseCase<LogoutInput, LogoutOutput> {
-  const LogoutUseCase(this._repository);
+  const LogoutUseCase(this._repository, this._navigator);
 
   final Repository _repository;
+  final AppNavigator _navigator;
 
   @protected
   @override
   Future<LogoutOutput> buildUseCase(LogoutInput input) async {
     if (_repository.isLoggedIn) {
       await _repository.logout();
+      await _navigator.replace(const AppRouteInfo.login());
     }
 
     return const LogoutOutput();

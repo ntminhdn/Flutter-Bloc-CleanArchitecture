@@ -102,6 +102,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
   @override
   Future<T?> replace<T extends Object?>(AppRouteInfo appRouteInfo) {
+    _popups.clear();
     if (LogConfig.enableNavigatorObserverLog) {
       logD('replace by $appRouteInfo');
     }
@@ -111,6 +112,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
   @override
   Future<void> replaceAll(List<AppRouteInfo> listAppRouteInfo) {
+    _popups.clear();
     if (LogConfig.enableNavigatorObserverLog) {
       logD('replaceAll by $listAppRouteInfo');
     }

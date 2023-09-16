@@ -14,8 +14,3 @@ class ItemDetailPageInitiated extends ItemDetailEvent with _$ItemDetailPageIniti
     required int id,
   }) = _ItemDetailPageInitiated;
 }
-
-@freezed
-class ItemDetailPressed extends ItemDetailEvent with _$ItemDetailPressed {
-  const factory ItemDetailPressed() = _ItemDetailPressed;
-}
