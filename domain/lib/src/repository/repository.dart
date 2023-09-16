@@ -53,6 +53,10 @@ abstract class Repository {
 
   Future<bool> saveLanguageCode(LanguageCode languageCode);
 
+  Future<void> saveAccessToken(String accessToken);
+
+  Future<bool> saveUserPreference(User user);
+
   Future<User> getMe();
 
   int putLocalUser(User user);

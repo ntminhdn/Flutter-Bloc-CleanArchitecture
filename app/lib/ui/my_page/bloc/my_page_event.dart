@@ -14,3 +14,8 @@ class MyPagePageInitiated extends MyPageEvent with _$MyPagePageInitiated {
     required int id,
   }) = _MyPagePageInitiated;
 }
+
+@freezed
+class LogoutButtonPressed extends MyPageEvent with _$LogoutButtonPressed {
+  const factory LogoutButtonPressed() = _LogoutButtonPressed;
+}

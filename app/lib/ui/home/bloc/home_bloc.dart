@@ -75,6 +75,7 @@ class HomeBloc extends BaseBloc<HomeEvent, HomeState> {
       doOnSubscribe: doOnSubscribe,
       doOnSuccessOrError: doOnSuccessOrError,
       handleLoading: false,
+      maxRetries: 3,
     );
   }
 }

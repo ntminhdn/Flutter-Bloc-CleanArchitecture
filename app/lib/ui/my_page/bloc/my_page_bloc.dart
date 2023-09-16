@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -5,18 +8,23 @@ import '../../../app.dart';
 
 @Injectable()
 class MyPageBloc extends BaseBloc<MyPageEvent, MyPageState> {
-  MyPageBloc() : super(const MyPageState()) {
-    on<MyPagePageInitiated>(
-      _onMyPagePageInitiated,
+  MyPageBloc(this._logoutUseCase) : super(const MyPageState()) {
+    on<LogoutButtonPressed>(
+      _onLogoutButtonPressed,
       transformer: log(),
     );
   }
 
-  void _onMyPagePageInitiated(
-    MyPagePageInitiated event,
+  final LogoutUseCase _logoutUseCase;
+
+  FutureOr<void> _onLogoutButtonPressed(
+    LogoutButtonPressed event,
     Emitter<MyPageState> emit,
-  ) {
-    // Xin hãy ghi nhớ đặt tên Event theo convention:
-    // <Tên Widget><Verb ở dạng Quá khứ>. VD: LoginButtonPressed, EmailTextFieldChanged, HomePageRefreshed
+  ) async {
+    return runBlocCatching(
+      action: () async {
+        await _logoutUseCase.execute(const LogoutInput());
+      },
+    );
   }
 }

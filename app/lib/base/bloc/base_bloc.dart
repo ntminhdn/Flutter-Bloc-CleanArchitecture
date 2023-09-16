@@ -65,7 +65,9 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
     bool handleRetry = true,
     bool Function(AppException)? forceHandleError,
     String? overrideErrorMessage,
+    int? maxRetries,
   }) async {
+    assert(maxRetries == null || maxRetries > 0, 'maxRetries must be positive');
     Completer<void>? recursion;
     try {
       await doOnSubscribe?.call();
@@ -90,7 +92,7 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
         await addException(AppExceptionWrapper(
           appException: e,
           doOnRetry: doOnRetry ??
-              (handleRetry
+              (handleRetry && maxRetries != 1
                   ? () async {
                       recursion = Completer();
                       await runBlocCatching(
@@ -105,6 +107,7 @@ abstract class BaseBlocDelegate<E extends BaseBlocEvent, S extends BaseBlocState
                         handleLoading: handleLoading,
                         handleRetry: handleRetry,
                         overrideErrorMessage: overrideErrorMessage,
+                        maxRetries: maxRetries?.minus(1),
                       );
                       recursion?.complete();
                     }
