@@ -4,6 +4,12 @@
 
 * Vietnamese: https://medium.com/@NALSengineering/list/flutter-xay-dung-base-project-hoan-hao-tu-a-en-a-c240f845f660
 
+* Code-generation tool: https://github.com/ntminhdn/Flutter-Bloc-CleanArchitecture/blob/master/tools/nals/nalsmobilebrain-0.10.0.vsix
+
+* Tool's features: https://medium.com/@NALSengineering/a-must-have-tool-if-youre-working-with-clean-architecture-4cfd07b473b6
+
+* How to build the tool: https://medium.com/@NALSengineering/code-2x-faster-with-custom-vscode-extensions-4f68e362be3d
+
 # Flutter Bloc - Clean Architecture
 
 Flutter project using clean architecture and bloc pattern.
