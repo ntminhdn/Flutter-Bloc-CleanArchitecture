@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared/shared.dart';
 
 import '../../app.dart';
+import 'bloc/home.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {

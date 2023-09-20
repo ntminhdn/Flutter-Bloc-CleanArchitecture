@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../app.dart';
+import 'login.dart';
 
 @Injectable()
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {

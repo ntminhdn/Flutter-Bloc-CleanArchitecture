@@ -2,6 +2,7 @@ library data;
 
 export 'data.dart';
 export 'src/config/data_config.dart';
+export 'src/di/di.dart';
 export 'src/repository/repository_impl.dart';
 export 'src/repository/source/api/app_api_service.dart';
 export 'src/repository/source/api/client/auth_app_server_api_client.dart';

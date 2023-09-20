@@ -11,7 +11,7 @@ targets:
           schema_mapping:
             - schema: graphql/schema.graphql
               queries_glob: graphql/pokedex.graphql
-              output: lib/src/repository/model/generated/pokedex_graphql.dart
+              output: lib/src/repository/source/api/model/generated/pokedex_graphql.dart
           
           scalar_mapping:
             - graphql_type: DateTime
