@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../app.dart';
+import 'item_detail.dart';
 
 @Injectable()
 class ItemDetailBloc extends BaseBloc<ItemDetailEvent, ItemDetailState> {
