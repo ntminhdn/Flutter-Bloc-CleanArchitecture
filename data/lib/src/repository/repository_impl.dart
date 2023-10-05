@@ -67,8 +67,8 @@ class RepositoryImpl implements Repository {
       saveAccessToken(response?.data?.accessToken ?? ''),
       saveUserPreference(
         User(
-          id: safeCast(response?.data?.id) ?? -1,
-          email: safeCast(response?.data?.email) ?? '',
+          id: response?.data?.id ?? -1,
+          email: response?.data?.email ?? '',
         ),
       ),
     ]);
@@ -112,8 +112,8 @@ class RepositoryImpl implements Repository {
       saveAccessToken(response?.data?.accessToken ?? ''),
       saveUserPreference(
         User(
-          id: safeCast(response?.data?.id) ?? -1,
-          email: safeCast(response?.data?.email) ?? '',
+          id: response?.data?.id ?? -1,
+          email: response?.data?.email ?? '',
         ),
       ),
     ]);

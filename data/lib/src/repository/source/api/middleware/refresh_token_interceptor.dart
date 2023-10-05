@@ -70,12 +70,12 @@ class RefreshTokenInterceptor extends BaseInterceptor {
     await Future.wait(
       [
         appPreferences.saveAccessToken(
-          safeCast(refreshTokenResponse?.data?.accessToken) ?? '',
+          refreshTokenResponse?.data?.accessToken ?? '',
         ),
       ],
     );
 
-    return safeCast(refreshTokenResponse?.data?.accessToken) ?? '';
+    return refreshTokenResponse?.data?.accessToken ?? '';
   }
 
   Future<void> _onRefreshTokenSuccess(String newToken) async {
