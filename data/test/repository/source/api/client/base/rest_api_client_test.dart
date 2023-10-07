@@ -1680,7 +1680,7 @@ void main() {
       );
 
       test(
-        'should throw RemoteException.invalidSuccessResponseMapperType when API return invalid JSON',
+        'should return null when API return invalid JSON',
         () async {
           // arrange
           const method = RestMethod.get;
@@ -1709,23 +1709,14 @@ void main() {
           );
 
           // act
-          final call = restApiClient.request(
+          final result = await restApiClient.request(
             method: method,
             path: path,
             decoder: (json) => MockData.fromJson(json as Map<String, dynamic>),
           );
 
           // assert
-          expect(
-            call,
-            throwsA(
-              isA<RemoteException>().having(
-                (e) => e.kind,
-                'kind',
-                RemoteExceptionKind.invalidSuccessResponseMapperType,
-              ),
-            ),
-          );
+          expect(result, null);
         },
       );
 
@@ -2158,7 +2149,7 @@ void main() {
               isA<RemoteException>().having(
                 (e) => e.kind,
                 'kind',
-                RemoteExceptionKind.invalidErrorResponseMapperType,
+                RemoteExceptionKind.decodeError,
               ),
             ),
           );

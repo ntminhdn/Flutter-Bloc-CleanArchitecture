@@ -281,7 +281,7 @@ void main() {
       );
 
       test(
-        'should throw RemoteException.invalidSuccessResponse when using incorrect SuccessResponseMapperType',
+        'should return null when using incorrect SuccessResponseMapperType',
         () async {
           // arrange
           // JSON response type is incorrect
@@ -291,20 +291,15 @@ void main() {
               'email': 'ntminh@gmail.com',
             },
           ];
-          // assert
-          expect(
-            () => DataJsonArrayResponseMapper<MockData>().map(
-              response: invalidResponse,
-              decoder: (json) => MockData.fromJson(json as Map<String, dynamic>),
-            ),
-            throwsA(
-              isA<RemoteException>().having(
-                (e) => e.kind,
-                'kind',
-                RemoteExceptionKind.invalidSuccessResponseMapperType,
-              ),
-            ),
+
+          // act
+          final result = DataJsonArrayResponseMapper<MockData>().map(
+            response: invalidResponse,
+            decoder: (json) => MockData.fromJson(json as Map<String, dynamic>),
           );
+
+          // assert
+          expect(result, null);
         },
       );
     });

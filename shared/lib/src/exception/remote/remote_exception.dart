@@ -60,15 +60,6 @@ enum RemoteExceptionKind {
   /// error occurs when passing JSON
   decodeError,
 
-  /// error occurs when using incorrect SuccessResponseMapperType
-  invalidSuccessResponseMapperType,
-
-  /// error occurs when using incorrect ErrorResponseMapperType
-  invalidErrorResponseMapperType,
-
-  /// error occurs when all JSON keys of error response are incorrect
-  invalidErrorResponse,
-
   refreshTokenFailed,
   timeout,
   cancellation,

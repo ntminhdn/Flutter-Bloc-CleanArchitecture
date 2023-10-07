@@ -34,7 +34,7 @@ abstract class BaseSuccessResponseMapper<I, O> {
   }
 
   // ignore: avoid-dynamic
-  O map({
+  O? map({
     required dynamic response,
     Decoder<I>? decoder,
   }) {
@@ -49,7 +49,7 @@ abstract class BaseSuccessResponseMapper<I, O> {
   }
 
   // ignore: avoid-dynamic
-  O mapToDataModel({
+  O? mapToDataModel({
     required dynamic response,
     Decoder<I>? decoder,
   });

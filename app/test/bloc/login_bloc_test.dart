@@ -1,5 +1,6 @@
 // ignore_for_file: missing_run_bloc_catching
 import 'package:app/app.dart';
+import 'package:app/ui/login/bloc/login.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';

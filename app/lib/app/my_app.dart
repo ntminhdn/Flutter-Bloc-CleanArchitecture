@@ -83,9 +83,9 @@ class _MyAppState extends BasePageState<MyApp, AppBloc> {
   List<PageRouteInfo> _mapRouteToPageRouteInfo() {
     return widget.initialResource.initialRoutes.map<PageRouteInfo>((e) {
       switch (e) {
-        case AppRoute.login:
+        case InitialAppRoute.login:
           return const LoginRoute();
-        case AppRoute.main:
+        case InitialAppRoute.main:
           return const MainRoute();
       }
     }).toList(growable: false);

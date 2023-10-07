@@ -1,6 +1,5 @@
 import 'package:data/data.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/shared.dart';
 
 void main() {
   group('test `map` function', () {
@@ -48,7 +47,7 @@ void main() {
       });
 
       test(
-        'should throw RemoteException.invalidSuccessResponseMapperType when response is not JSONObject',
+        'should return null when response is not JSONObject',
         () {
           // arrange
           const response = [
@@ -57,18 +56,14 @@ void main() {
               'email': 'email',
             },
           ];
-          // assert
-          expect(
-            () => JsonObjectResponseMapper<MockData>().map(
-              response: response,
-              decoder: (json) => MockData.fromJson(json as Map<String, dynamic>),
-            ),
-            throwsA(isA<RemoteException>().having(
-              (e) => e.kind,
-              'kind',
-              RemoteExceptionKind.invalidSuccessResponseMapperType,
-            )),
+
+          final result = JsonObjectResponseMapper<MockData>().map(
+            response: response,
+            decoder: (json) => MockData.fromJson(json as Map<String, dynamic>),
           );
+
+          // assert
+          expect(result, null);
         },
       );
 
