@@ -218,7 +218,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     if (_shownPopups.containsKey(appPopupInfo)) {
       logD('Dialog $appPopupInfo already shown');
 
-      return _shownPopups[appPopupInfo]!.future as Future<T?>;
+      return _shownPopups[appPopupInfo]!.future.safeCast();
     }
     _shownPopups[appPopupInfo] = Completer<T?>();
 
@@ -252,7 +252,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     if (_shownPopups.containsKey(appPopupInfo)) {
       logD('Dialog $appPopupInfo already shown');
 
-      return _shownPopups[appPopupInfo]!.future as Future<T?>;
+      return _shownPopups[appPopupInfo]!.future.safeCast();
     }
     _shownPopups[appPopupInfo] = Completer<T?>();
 

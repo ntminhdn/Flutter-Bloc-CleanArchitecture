@@ -179,7 +179,6 @@ void main() {
               },
             };
 
-
             // ignore:variable_type_mismatch
             const expected = DataResponse<MockData>(
               data: MockData(email: 'e@gmail.com'),
