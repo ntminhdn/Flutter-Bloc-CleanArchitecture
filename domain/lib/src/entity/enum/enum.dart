@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 import 'package:shared/shared.dart';
 
-enum AppRoute {
+enum InitialAppRoute {
   login,
   main,
 }

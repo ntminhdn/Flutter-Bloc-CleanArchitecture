@@ -48,7 +48,7 @@ void main() {
     });
 
     test(
-      'should throw RemoteException.invalidErrorResponse when all JSON keys are incorrect',
+      'should return corresponding ServerError when all JSON keys are incorrect',
       () async {
         // arrange
         final errorResponse = [
@@ -57,17 +57,10 @@ void main() {
             'error_message': 'The request is invalid', // incorrect key
           },
         ];
+        const expected = ServerError(errors: [ServerErrorDetail()]);
+        final result = jsonArrayErrorResponseMapper.map(errorResponse);
         // assert
-        expect(
-          () => jsonArrayErrorResponseMapper.map(errorResponse),
-          throwsA(
-            isA<RemoteException>().having(
-              (e) => e.kind,
-              'kind',
-              RemoteExceptionKind.invalidErrorResponse,
-            ),
-          ),
-        );
+        expect(result, expected);
       },
     );
 

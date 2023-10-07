@@ -1,4 +1,5 @@
 import 'package:shared/shared.dart';
+
 import '../../../../../../data.dart';
 
 enum SuccessResponseMapperType {
@@ -11,7 +12,7 @@ enum SuccessResponseMapperType {
   plain,
 }
 
-abstract class BaseSuccessResponseMapper<I, O> {
+abstract class BaseSuccessResponseMapper<I extends Object, O extends Object> {
   const BaseSuccessResponseMapper();
 
   factory BaseSuccessResponseMapper.fromType(SuccessResponseMapperType type) {
@@ -34,7 +35,7 @@ abstract class BaseSuccessResponseMapper<I, O> {
   }
 
   // ignore: avoid-dynamic
-  O map({
+  O? map({
     required dynamic response,
     Decoder<I>? decoder,
   }) {
@@ -49,7 +50,7 @@ abstract class BaseSuccessResponseMapper<I, O> {
   }
 
   // ignore: avoid-dynamic
-  O mapToDataModel({
+  O? mapToDataModel({
     required dynamic response,
     Decoder<I>? decoder,
   });

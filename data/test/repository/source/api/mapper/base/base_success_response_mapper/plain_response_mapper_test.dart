@@ -1,6 +1,5 @@
 import 'package:data/data.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/shared.dart';
 
 void main() {
   group('test `map` function', () {
@@ -36,17 +35,13 @@ void main() {
               'email': 'email',
             },
           ];
-          // assert
-          expect(
-            () => PlainResponseMapper<String>().map(
-              response: response,
-            ),
-            throwsA(isA<RemoteException>().having(
-              (e) => e.kind,
-              'kind',
-              RemoteExceptionKind.invalidSuccessResponseMapperType,
-            )),
+
+          final result = PlainResponseMapper<String>().map(
+            response: response,
           );
+
+          // assert
+          expect(result, null);
         },
       );
     });

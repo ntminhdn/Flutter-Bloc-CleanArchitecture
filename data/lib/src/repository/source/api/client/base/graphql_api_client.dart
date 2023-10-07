@@ -56,7 +56,7 @@ class GraphQLApiClient {
 
   Dio get _dio => (_graphQLClient.value.link as DioLink).client;
 
-  Future<T> request<T>({
+  Future<T?> request<T extends Object>({
     required GraphQLMethod method,
     required DocumentNode document,
     Map<String, dynamic> variables = const {},

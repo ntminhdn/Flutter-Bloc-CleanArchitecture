@@ -24,7 +24,7 @@ class FakeLoginUseCase extends BaseFutureUseCase<FakeLoginInput, FakeLoginOutput
             await _repository.saveAccessToken('fakeToken');
             await _navigator.replace(const AppRouteInfo.main());
           })),
-      useRootNavigator: false,
+      useRootNavigator: true,
     );
 
     return const FakeLoginOutput();

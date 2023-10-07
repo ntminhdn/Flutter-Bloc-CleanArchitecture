@@ -52,6 +52,7 @@ void main() {
 
         final result = await appApiService.login(email: 'inputEmail', password: 'inputPassword');
 
+        // ignore: variable_type_mismatch
         const expected = DataResponse(
           data: ApiAuthResponseData(
             accessToken: 'accessToken',

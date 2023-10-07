@@ -19,10 +19,6 @@ class ExceptionMessageMapper {
           RemoteExceptionKind.unknown => S.current.unknownException('UE-05'),
           RemoteExceptionKind.refreshTokenFailed => S.current.tokenExpired,
           RemoteExceptionKind.decodeError => S.current.unknownException('UE-06'),
-          RemoteExceptionKind.invalidErrorResponse => S.current.unknownException('UE-07'),
-          RemoteExceptionKind.invalidSuccessResponseMapperType =>
-            S.current.unknownException('UE-08'),
-          RemoteExceptionKind.invalidErrorResponseMapperType => S.current.unknownException('UE-09'),
         },
       AppExceptionType.parse => S.current.unknownException('UE-10'),
       AppExceptionType.uncaught => S.current.unknownException('UE-00'),

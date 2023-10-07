@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart' as m;
@@ -25,7 +27,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   final AppRouter _appRouter;
   final BasePopupInfoMapper _appPopupInfoMapper;
   final BaseRouteInfoMapper _appRouteInfoMapper;
-  final _popups = <AppPopupInfo>{};
+  final _shownPopups = <AppPopupInfo, Completer<dynamic>>{};
 
   StackRouter? get _currentTabRouter => tabsRouter?.stackRouterOfIndex(currentBottomTab);
 
@@ -102,7 +104,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
   @override
   Future<T?> replace<T extends Object?>(AppRouteInfo appRouteInfo) {
-    _popups.clear();
+    _shownPopups.clear();
     if (LogConfig.enableNavigatorObserverLog) {
       logD('replace by $appRouteInfo');
     }
@@ -112,7 +114,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
   @override
   Future<void> replaceAll(List<AppRouteInfo> listAppRouteInfo) {
-    _popups.clear();
+    _shownPopups.clear();
     if (LogConfig.enableNavigatorObserverLog) {
       logD('replaceAll by $listAppRouteInfo');
     }
@@ -213,19 +215,19 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     bool useSafeArea = false,
     bool useRootNavigator = true,
   }) {
-    if (_popups.contains(appPopupInfo)) {
+    if (_shownPopups.containsKey(appPopupInfo)) {
       logD('Dialog $appPopupInfo already shown');
 
-      return Future.value(null);
+      return _shownPopups[appPopupInfo]!.future.safeCast();
     }
-    _popups.add(appPopupInfo);
+    _shownPopups[appPopupInfo] = Completer<T?>();
 
     return m.showDialog<T>(
       context: useRootNavigator ? _rootRouterContext : _currentTabContextOrRootContext,
       builder: (_) => m.WillPopScope(
         onWillPop: () async {
           logD('Dialog $appPopupInfo dismissed');
-          _popups.remove(appPopupInfo);
+          _shownPopups.remove(appPopupInfo);
 
           return Future.value(true);
         },
@@ -247,12 +249,12 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
     bool barrierDismissible = true,
     bool useRootNavigator = true,
   }) {
-    if (_popups.contains(appPopupInfo)) {
+    if (_shownPopups.containsKey(appPopupInfo)) {
       logD('Dialog $appPopupInfo already shown');
 
-      return Future.value(null);
+      return _shownPopups[appPopupInfo]!.future.safeCast();
     }
-    _popups.add(appPopupInfo);
+    _shownPopups[appPopupInfo] = Completer<T?>();
 
     return m.showGeneralDialog<T>(
       context: useRootNavigator ? _rootRouterContext : _currentTabContextOrRootContext,
@@ -267,7 +269,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
           m.WillPopScope(
         onWillPop: () async {
           logD('Dialog $appPopupInfo dismissed');
-          _popups.remove(appPopupInfo);
+          _shownPopups.remove(appPopupInfo);
 
           return Future.value(true);
         },

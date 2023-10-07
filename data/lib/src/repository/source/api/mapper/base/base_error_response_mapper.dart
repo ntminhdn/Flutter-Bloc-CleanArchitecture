@@ -11,7 +11,7 @@ enum ErrorResponseMapperType {
   firebaseStorage,
 }
 
-abstract class BaseErrorResponseMapper<T> {
+abstract class BaseErrorResponseMapper<T extends Object> {
   const BaseErrorResponseMapper();
 
   factory BaseErrorResponseMapper.fromType(ErrorResponseMapperType type) {
@@ -35,19 +35,12 @@ abstract class BaseErrorResponseMapper<T> {
     try {
       if (errorResponse is! T) {
         throw RemoteException(
-          kind: RemoteExceptionKind.invalidErrorResponseMapperType,
-          rootException: 'Response is not $T',
+          kind: RemoteExceptionKind.decodeError,
+          rootException: 'Response ${errorResponse} is not $T',
         );
       }
 
       final serverError = mapToServerError(errorResponse);
-
-      if (serverError.isDefault) {
-        throw RemoteException(
-          kind: RemoteExceptionKind.invalidErrorResponse,
-          rootException: '$errorResponse is invalid, $serverError is empty',
-        );
-      }
 
       return serverError;
     } on RemoteException catch (_) {
