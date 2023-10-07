@@ -23,7 +23,4 @@ class ServerError with _$ServerError {
   static const defaultGeneralServerErrorId = '';
   static const defaultGeneralMessage = '';
   static const defaultErrors = <ServerErrorDetail>[];
-
-  bool get isDefault =>
-      this == const ServerError() || this == const ServerError(errors: [ServerErrorDetail()]);
 }
