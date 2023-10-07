@@ -17,6 +17,7 @@ void main() {
             },
           };
 
+          // ignore:variable_type_mismatch
           const expected = DataResponse<MockData2>(
             data: MockData2(
               mockData: MockData(
@@ -44,6 +45,7 @@ void main() {
           },
         };
 
+        // ignore:variable_type_mismatch
         const expected = DataResponse<MockData>(
           data: MockData(id: 1, email: 'a@gmail.com'),
         );
@@ -62,6 +64,7 @@ void main() {
           'data': 'a',
         };
 
+        // ignore:variable_type_mismatch
         const expected = DataResponse<String>(
           data: 'a',
         );
@@ -80,6 +83,7 @@ void main() {
           'data': 1,
         };
 
+        // ignore:variable_type_mismatch
         const expected = DataResponse<int>(
           data: 1,
         );
@@ -98,6 +102,7 @@ void main() {
           'data': null,
         };
 
+        // ignore:variable_type_mismatch
         const expected = DataResponse<MockData>();
 
         final result = DataJsonObjectResponseMapper<MockData>().map(
@@ -132,6 +137,7 @@ void main() {
               },
             };
 
+            // ignore:variable_type_mismatch
             const expected = DataResponse<MockData>();
 
             final result = DataJsonObjectResponseMapper<MockData>().map(
@@ -151,6 +157,7 @@ void main() {
             },
           };
 
+          // ignore:variable_type_mismatch
           const expected = DataResponse<MockData>(data: MockData());
 
           final result = DataJsonObjectResponseMapper<MockData>().map(
@@ -172,6 +179,8 @@ void main() {
               },
             };
 
+
+            // ignore:variable_type_mismatch
             const expected = DataResponse<MockData>(
               data: MockData(email: 'e@gmail.com'),
             );

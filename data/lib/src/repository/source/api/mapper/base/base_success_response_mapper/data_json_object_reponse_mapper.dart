@@ -1,10 +1,9 @@
-import 'package:injectable/injectable.dart';
 import 'package:shared/shared.dart';
 
 import '../../../../../../../data.dart';
 
-@Injectable()
-class DataJsonObjectResponseMapper<T> extends BaseSuccessResponseMapper<T, DataResponse<T>> {
+class DataJsonObjectResponseMapper<T extends Object>
+    extends BaseSuccessResponseMapper<T, DataResponse<T>> {
   @override
   // ignore: avoid-dynamic
   DataResponse<T>? mapToDataModel({

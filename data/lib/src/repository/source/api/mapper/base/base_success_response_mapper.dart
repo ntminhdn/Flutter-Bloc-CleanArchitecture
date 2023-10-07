@@ -1,4 +1,5 @@
 import 'package:shared/shared.dart';
+
 import '../../../../../../data.dart';
 
 enum SuccessResponseMapperType {
@@ -11,7 +12,7 @@ enum SuccessResponseMapperType {
   plain,
 }
 
-abstract class BaseSuccessResponseMapper<I, O> {
+abstract class BaseSuccessResponseMapper<I extends Object, O extends Object> {
   const BaseSuccessResponseMapper();
 
   factory BaseSuccessResponseMapper.fromType(SuccessResponseMapperType type) {

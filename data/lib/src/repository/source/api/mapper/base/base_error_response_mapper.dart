@@ -11,7 +11,7 @@ enum ErrorResponseMapperType {
   firebaseStorage,
 }
 
-abstract class BaseErrorResponseMapper<T> {
+abstract class BaseErrorResponseMapper<T extends Object> {
   const BaseErrorResponseMapper();
 
   factory BaseErrorResponseMapper.fromType(ErrorResponseMapperType type) {

@@ -254,6 +254,7 @@ void main() {
             decoder: (json) => MockData.fromJson(json as Map<String, dynamic>),
           );
 
+          // ignore: variable_type_mismatch
           const expected = DataListResponse(data: [
             MockData(id: 1, email: 'name1'),
             MockData(id: 2, email: 'name2'),
@@ -302,6 +303,7 @@ void main() {
             decoder: (json) => json as String,
           );
 
+          // ignore: variable_type_mismatch
           const expected = DataListResponse(data: ['name1', 'name2']);
 
           // assert
@@ -347,6 +349,7 @@ void main() {
             decoder: (json) => MockData.fromJson(json as Map<String, dynamic>),
           );
 
+          // ignore:variable_type_mismatch
           const expected = DataResponse(data: MockData(id: 1, email: 'name1'));
 
           // assert
@@ -392,6 +395,7 @@ void main() {
             decoder: (json) => json as String,
           );
 
+          // ignore:variable_type_mismatch
           const expected = DataResponse(data: 'name1');
 
           // assert

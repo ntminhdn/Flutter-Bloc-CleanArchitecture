@@ -16,7 +16,7 @@ class RestApiClient {
   final ErrorResponseMapperType errorResponseMapperType;
   final Dio dio;
 
-  Future<T?> request<D, T>({
+  Future<T?> request<D extends Object, T extends Object>({
     required RestMethod method,
     required String path,
     Map<String, dynamic>? queryParameters,

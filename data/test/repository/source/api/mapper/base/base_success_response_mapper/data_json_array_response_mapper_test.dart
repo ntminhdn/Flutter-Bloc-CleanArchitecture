@@ -19,6 +19,8 @@ void main() {
               },
             ],
           };
+
+          // ignore:variable_type_mismatch
           const expected = DataListResponse<MockData2>(
             data: [
               MockData2(
@@ -51,6 +53,7 @@ void main() {
           ],
         };
 
+        // ignore:variable_type_mismatch
         const expected = DataListResponse<MockData>(
           data: [
             MockData(
@@ -76,6 +79,7 @@ void main() {
           'data': ['valid string data'],
         };
 
+        // ignore:variable_type_mismatch
         const expected = DataListResponse<String>(
           data: ['valid string data'],
         );
@@ -96,6 +100,7 @@ void main() {
           'data': [1],
         };
 
+        // ignore:variable_type_mismatch
         const expected = DataListResponse<int>(
           data: [1],
         );
@@ -116,6 +121,7 @@ void main() {
           'data': null,
         };
 
+        // ignore:variable_type_mismatch
         const expected = DataListResponse<MockData>();
 
         // act
@@ -155,6 +161,7 @@ void main() {
               ],
             };
 
+            // ignore:variable_type_mismatch
             const expected = DataListResponse<MockData>();
 
             // act
@@ -181,6 +188,7 @@ void main() {
               ],
             };
 
+            // ignore:variable_type_mismatch
             const expected = DataListResponse<MockData>(data: [MockData()]);
 
             // act
@@ -207,6 +215,7 @@ void main() {
               ],
             };
 
+            // ignore:variable_type_mismatch
             const expected = DataListResponse<MockData>(data: [MockData(email: 'e@gmail.com')]);
 
             // act

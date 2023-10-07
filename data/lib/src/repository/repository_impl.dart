@@ -1,7 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared/shared.dart';
 
 import '../../data.dart';
 
@@ -76,6 +75,7 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<void> logout() async {
+    await _appApiService.logout();
     await _appPreferences.clearCurrentUserData();
   }
 
