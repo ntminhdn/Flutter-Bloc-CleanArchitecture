@@ -8,7 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependency_overrides:
-  analyzer: 5.13.0
+  analyzer: 6.2.0
 
 dependencies:
   data:
