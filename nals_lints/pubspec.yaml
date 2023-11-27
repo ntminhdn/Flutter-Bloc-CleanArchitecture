@@ -7,7 +7,7 @@ environment:
   sdk: ">=3.0.5 <4.0.0"
 
 dependency_overrides:
-  analyzer: 5.13.0
+  analyzer: 6.2.0
 
 dependencies:
   custom_lint_builder: 0.5.0
