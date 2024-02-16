@@ -86,7 +86,7 @@ class BigDecimal implements Comparable<BigDecimal> {
 
   String toStringAsPrecision(int precision) => decimal.toStringAsPrecision(precision);
 
-  BigDecimal pow(int exponent) => BigDecimal._(decimal.pow(exponent));
+  BigDecimal pow(int exponent) => BigDecimal._(decimal.pow(exponent).toDecimal());
   BigDecimal plus(BigDecimal other) => this + other;
   BigDecimal minus(BigDecimal other) => this - other;
   BigDecimal times(BigDecimal other) => this * other;
