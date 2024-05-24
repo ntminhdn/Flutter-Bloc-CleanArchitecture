@@ -4,9 +4,9 @@ LC_ALL=C
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 
-valid_branch_regex='^(feature|bugfix|improvement|release|hotfix)\/NFT-[0-9]+_.*$'
+valid_branch_regex='^(feature|bugfix|improvement|release|hotfix)\/[0-9]+_.*$'
 
-message="$local_branch is bad branch name. See example: feature/NFT-2_some_text"
+message="$local_branch is bad branch name. See example: feature/2_some_text"
 
 #if [[ $local_branch == "flutter_template" ]]
 #then
