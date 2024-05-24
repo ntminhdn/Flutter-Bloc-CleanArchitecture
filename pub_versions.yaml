@@ -81,7 +81,7 @@ json_annotation: 4.8.1
 json_serializable: 6.7.0
 local_auth: 1.1.9
 location: 4.4.0
-meta: 1.9.1
+meta: 11.12.0
 mime: 1.0.1
 mocktail: 0.3.0
 modal_bottom_sheet: 2.0.1

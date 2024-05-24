@@ -21,7 +21,7 @@ dependencies:
   flutter_cache_manager: 3.3.1
   flutter_udid: 3.0.0
   injectable: 2.3.2
-  intl: 0.18.1
+  intl: 0.19.0
   mime: 1.0.5
   package_info_plus: 5.0.1
   path_provider: 2.1.2
