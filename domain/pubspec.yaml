@@ -9,6 +9,7 @@ environment:
 
 dependency_overrides:
   analyzer: 6.2.0
+  dart_style: 2.3.6
 
 dependencies:
   async: 2.11.0
