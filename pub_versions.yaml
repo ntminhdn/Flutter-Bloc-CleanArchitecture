@@ -26,7 +26,7 @@ custom_lint_builder: 0.5.0
 source_gen: 1.4.0
 custom_pop_up_menu: 1.2.2
 dart_code_metrics: 5.7.5
-dart_style: 2.3.1
+dart_style: 2.3.6
 dartx: 1.1.0
 decimal: 2.1.0
 device_info_plus: 9.0.2
